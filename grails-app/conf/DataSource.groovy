@@ -14,7 +14,15 @@ environments {
     development {
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop','update'
+<<<<<<< HEAD
             url = "jdbc:h2:mem:create"
+=======
+            pooled = true
+            driverClassName = "com.mysql.jdbc.Driver"
+            username = "root"
+            password = "root"
+            url = "jdbc:mysql://localhost:3306/isi"
+>>>>>>> 72edbc316ad40c3a7f86dc37ef18cb458dccfc4f
         }
     }
     test {

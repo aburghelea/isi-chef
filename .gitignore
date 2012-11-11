@@ -1,10 +1,22 @@
-*.iws
-*Db.properties
-*Db.script
+.project
 .settings
-eclipse
-stacktrace.log
-target
-/plugins
-/web-app/plugins
-/web-app/WEB-INF/classes
+
+#java specific
+*.class
+
+#netbeans ignore personal stuff 
+nbproject/private/
+
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+*.iml
+.idea
+*~.nib
+
+build/
+target/
+adhoc/

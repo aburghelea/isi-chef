@@ -7,7 +7,8 @@ class BootStrap {
     def springSecurityService
 
     def init = { servletContext ->
-        def userRole = Role.findByAuthority('ROLE_USER') ?: new Role(authority: 'ROLE_USER').save(failOnError: true)
+        def cookRole = Role.findByAuthority('ROLE_COOK') ?: new Role(authority: 'ROLE_COOK').save(failOnError: true)
+        def waiterRole = Role.findByAuthority('ROLE_WAITER') ?: new Role(authority: 'ROLE_WAITER').save(failOnError: true)
         def adminRole = Role.findByAuthority('ROLE_ADMIN') ?: new Role(authority: 'ROLE_ADMIN').save(failOnError: true)
 
         def adminUser = User.findByUsername('admin') ?: new User(
@@ -16,20 +17,29 @@ class BootStrap {
                 enabled: true).save(failOnError: true)
 
         if (!adminUser.authorities.contains(adminRole)) {
-            UserRole.create adminUser, adminRole
+            UserRole.create adminUser, adminRole, true
         }
 
-        def simpleUser = User.findByUsername('user') ?: new User(
-                username: 'user',
-                password: 'user',
+        def cookUser = User.findByUsername('bucatar') ?: new User(
+                username: 'bucatar',
+                password: 'bucatar',
                 enabled: true).save(failOnError: true)
 
-        if (!adminUser.authorities.contains(userRole)) {
-            UserRole.create simpleUser, userRole
+        if (!cookUser.authorities.contains(cookRole)) {
+            UserRole.create cookUser, cookRole, true
         }
 
+        def waiterUser = User.findByUsername('ospatar') ?: new User(
+                username: 'ospatar',
+                password: 'ospatar',
+                enabled: true).save(failOnError: true)
 
+        if (!waiterUser.authorities.contains(waiterRole)) {
+            UserRole.create waiterUser, waiterRole, true
+        }
     }
+
+
     def destroy = {
     }
 }

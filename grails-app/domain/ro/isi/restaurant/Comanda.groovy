@@ -8,7 +8,7 @@ import ro.isi.auth.User
 
 class Comanda implements Serializable {
 
-    Long id
+//    Long id
     User waiter
     Masa masa
     User cook
@@ -30,7 +30,12 @@ class Comanda implements Serializable {
     static belongsTo = [Masa, User]
 
     static mapping = {
-        id generator: "assigned"
+        id generator: "increment"
         version false
+    }
+
+    static constraints = {
+        produses nullable: true
+        masa nullable: true
     }
 }

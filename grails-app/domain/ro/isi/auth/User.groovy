@@ -16,11 +16,11 @@ class User {
 		password blank: false
 	}
 
-	static mapping = {
-		password column: '`password`'
-	}
-
-	Set<Role> getAuthorities() {
+    static mapping = {
+        table '`user`'
+        password column: '`password`'
+    }
+    Set<Role> getAuthorities() {
 		UserRole.findAllByUser(this).collect { it.role } as Set
 	}
 

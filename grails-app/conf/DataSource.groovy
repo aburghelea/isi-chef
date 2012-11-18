@@ -28,7 +28,6 @@ environments {
             dbCreate = "update"
             driverClassName = "org.postgresql.Driver"
             dialect = org.hibernate.dialect.PostgreSQLDialect
-            pooled = true
 
             uri = new URI(System.env.DATABASE_URL?:"postgres://test:test@localhost/test")
 

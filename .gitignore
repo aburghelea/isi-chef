@@ -1,10 +1,5 @@
-.idea
-.project
-.settings
-
-caldecott.log
-isi-grailsPlugins.iml
-isi.iml
+*.log
+*iml
 
 #java specific
 *.class
@@ -25,3 +20,16 @@ nbproject/private/
 build/
 target/
 adhoc/
+
+*.iws
+*Db.properties
+*Db.script
+.settings
+.classpath
+.project
+eclipse
+/plugins
+/web-app/plugins
+/web-app/WEB-INF/classes
+web-app/WEB-INF/tld/c.tld
+web-app/WEB-INF/tld/fmt.tld

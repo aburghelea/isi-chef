@@ -12,7 +12,7 @@
 <body>
 
 <section id="create-comanda" class="first">
-
+       DDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 	<g:hasErrors bean="${comandaInstance}">
 	<div class="alert alert-error">
 		<g:renderErrors bean="${comandaInstance}" as="list" />

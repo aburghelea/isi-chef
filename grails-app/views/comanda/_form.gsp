@@ -11,9 +11,9 @@
 			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: comandaInstance, field: 'masa', 'error')} required">
-				<label for="masa" class="control-label"><g:message code="comanda.masa.label" default="Masa" /><span class="required-indicator">*</span></label>
+				<label for="masa" class="control-label"><g:message code="comanda.masa.label" default="Masa" /></label>
 				<div class="controls">
-					<g:select id="masa" name="masa.id" from="${ro.isi.restaurant.Masa.list()}" optionKey="id" required="" value="${comandaInstance?.masa?.id}" class="many-to-one"/>
+					<g:select id="masa" name="masa.id" from="${ro.isi.restaurant.Masa.list()}" optionKey="id" value="${comandaInstance?.masa?.id}" class="many-to-one"/>
 					<span class="help-inline">${hasErrors(bean: comandaInstance, field: 'masa', 'error')}</span>
 				</div>
 			</div>

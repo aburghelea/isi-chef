@@ -15,7 +15,7 @@
 	<link rel="apple-touch-icon"	href="assets/ico/apple-touch-icon.png">
     <link rel="apple-touch-icon"	href="assets/ico/apple-touch-icon-72x72.png"	sizes="72x72">
     <link rel="apple-touch-icon"	href="assets/ico/apple-touch-icon-114x114.png"	sizes="114x114">
-	
+	<r:require modules="application, bootstrap"/>
 	<g:if env="production">
     	<!-- Markup to include ONLY when in production: This is necessary for deploying to a PAAS 
     		 such as CloudFoundry (the Less compilation step needs too much time and the system will not start)

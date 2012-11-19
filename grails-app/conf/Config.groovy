@@ -120,3 +120,22 @@ environments {
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'ro.isi.auth.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'ro.isi.auth.UserRole'
 grails.plugins.springsecurity.authority.className = 'ro.isi.auth.Role'
+
+
+grails {
+    mail {
+        host = "smtp.gmail.com"
+        port = 465
+        username = "vali.biliu@gmail.com"
+        password = "isi-chef"
+        props = ["mail.smtp.auth":"true",
+                "mail.smtp.socketFactory.port":"465",
+                "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+                "mail.smtp.socketFactory.fallback":"false"]
+    }
+}
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'ro.isi.auth.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'ro.isi.auth.UserRole'
+grails.plugins.springsecurity.authority.className = 'ro.isi.auth.Role'

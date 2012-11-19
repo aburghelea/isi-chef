@@ -32,13 +32,13 @@ class LoginController {
 			redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
 		}
 		else {
-			redirect action: 'auth', params: params
+			redirect view: "/"
 		}
 	}
 
-	/**
-	 * Show the login page.
-	 */
+//	/**
+//	 * Show the login page.
+//	 */
 	def auth = {
 
 		def config = SpringSecurityUtils.securityConfig
@@ -78,7 +78,7 @@ class LoginController {
 	 */
 	def full = {
 		def config = SpringSecurityUtils.securityConfig
-		render view: 'auth', params: params,
+		render view: '/', params: params,
 			model: [hasCookie: authenticationTrustResolver.isRememberMe(SCH.context?.authentication),
 			        postUrl: "${request.contextPath}${config.apf.filterProcessesUrl}"]
 	}
@@ -114,7 +114,7 @@ class LoginController {
 		}
 		else {
 			flash.message = msg
-			redirect action: 'auth', params: params
+			redirect view: "/"
 		}
 	}
 

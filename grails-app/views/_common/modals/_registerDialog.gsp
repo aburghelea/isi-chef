@@ -1,5 +1,5 @@
 <div class="modal hide" id="RegisterModal">
-	<g:form controller="login" action="register" class="form-horizontal" method="post" name="register_form">
+	<g:form controller="register" action="register" class="form-horizontal" method="post" name="register_form">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">x</button>
 		<h3><g:message code="security.register.title"/></h3>

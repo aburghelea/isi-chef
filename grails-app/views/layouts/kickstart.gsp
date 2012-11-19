@@ -63,7 +63,7 @@
 
 	<!-- use different templates for HTML structure based on layout (e.g., grid or fluid; Default is grid) -->
 	<g:if test="${session.layout == 'fluid'}">
-		<g:render template="/layouts/content_${session.layout}"	plugin="SPECTRAwebPlugin"/>
+		<g:render template="/layouts/content_${session.layout}"	/>
 	</g:if>
 	<g:else>
 		<g:render template="/layouts/content_grid"/>
@@ -79,7 +79,7 @@
 
 	<!-- Insert a modal dialog for registering -->
 	<g:render template="/_common/modals/registerDialog" model="[item: item]"/>
-	
+
 <!-- Included Javascript files -->
 <g:if env="production">
    	<!-- Markup to include ONLY when in production: This might be necessary for deploying to a PAAS 

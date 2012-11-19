@@ -139,3 +139,5 @@ grails {
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'ro.isi.auth.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'ro.isi.auth.UserRole'
 grails.plugins.springsecurity.authority.className = 'ro.isi.auth.Role'
+
+grails.plugins.springsecurity.failureHandler.defaultFailureUrl = '/'

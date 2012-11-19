@@ -1,8 +1,5 @@
 package org.codehaus.groovy.grails.plugins.springsecurity.ui
 
-
-
-import org.junit.*
 import grails.test.mixin.*
 
 /**

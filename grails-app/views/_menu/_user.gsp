@@ -44,7 +44,7 @@
 			</a></li>
 
 			<li class="divider"></li>
-			<li class=""><a href="${createLink(uri: '/')}">
+			<li class=""><a href="${createLink(uri: '/j_spring_security_logout')}">
 				<i class="icon-off"></i>
 				<g:message code="security.signoff.label"/>
 			</a></li>

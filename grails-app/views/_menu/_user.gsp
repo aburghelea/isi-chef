@@ -20,10 +20,8 @@
                         <input style="float: left; margin-right: 10px;" type="checkbox"
                                name="name='${SpringSecurityUtils.securityConfig.rememberMe.parameter}" id="remember_me"
                                value="1">
-                    %{--<input type='checkbox' class='chk' name='${SpringSecurityUtils.securityConfig.rememberMe.parameter}' id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if>/>--}%
                         <label class="string optional" for="remember_me">Remember me</label>
-                    <input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
-                        %{--<g:submitToRemote class="btn btn-primary btn-block" id="sign-in" value="Sign In"/>--}%
+                        <input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
                     </g:form>
                 </li>
                 <li class="divider"></li>

@@ -3,10 +3,11 @@ package ro.isi.auth
 import org.codehaus.groovy.grails.plugins.springsecurity.NullSaltSource
 import org.codehaus.groovy.grails.plugins.springsecurity.ui.RegistrationCode
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import grails.converters.JSON
 
 class RegisterController extends grails.plugins.springsecurity.ui.RegisterController {
 
-    def register = {
+    def registerr = {
         def command = params
 //        if (command.hasErrors()) {
 //            render view: 'index', model: [command: command]
@@ -40,6 +41,6 @@ class RegisterController extends grails.plugins.springsecurity.ui.RegisterContro
             html body.toString()
         }
 
-        render view: 'index', model: [emailSent: true]
+        render([success: true, message: 'Ok'] as JSON)
     }
 }

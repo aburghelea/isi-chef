@@ -36,7 +36,7 @@
 		<link rel="stylesheet" href="${resource(dir: 'kickstart/css', file: 'kickstart.css')}" />
 	</g:if>
 	<g:else>
-		<r:require modules="jquery, ${session.skin ? session.skin : 'bootstrap'}, bootstrap_utils"/>
+		<r:require modules="application, bootstrap, jquery, ${session.skin ? session.skin : 'bootstrap'}, bootstrap_utils"/>
 	</g:else>
 
 	<r:layoutResources />

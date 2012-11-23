@@ -4,6 +4,7 @@ import org.codehaus.groovy.grails.commons.GrailsApplication
 modules = {
     application {
         resource url: 'js/application.js'
+        resource url: 'js/jquery.validate.min.js'
     }
 
     bootstrap {

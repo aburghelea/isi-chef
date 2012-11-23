@@ -36,9 +36,9 @@ class LoginController {
 		}
 	}
 
-//	/**
-//	 * Show the login page.
-//	 */
+	/**
+	 * Show the login page.
+	 */
 	def auth = {
 
 		def config = SpringSecurityUtils.securityConfig

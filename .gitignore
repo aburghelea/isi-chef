@@ -21,7 +21,7 @@ build/
 target/
 adhoc/
 
-*isi.ipr*
+isi.ipr
 *.iws
 *Db.properties
 *Db.script

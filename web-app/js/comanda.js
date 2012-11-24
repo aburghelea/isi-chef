@@ -5,6 +5,7 @@ var buildDataSource = function (uri) {
             read:uri
         },
         schema:{
+            'id' : {type: 'number'},
             'code':{type:'string'},
             'description':{type:'string'},
             'name':{type:'string'},
@@ -33,6 +34,12 @@ var buildTable = function (container, dataSource) {
                 width:'15%'
             },
             {
+                field:'code',
+                filterable:true,
+                title:"code",
+                width:'15%'
+            },
+            {
                 field:'description',
                 filterable:true,
                 title:'Description'
@@ -57,7 +64,8 @@ var buildTable = function (container, dataSource) {
                 width:'15%'
             },
             {
-                title:'Adauga la comanda'
+                title:'Adauga la comanda',
+                template: '#= addProductToOrderTemplate(id) #'
             }
         ]
     });
@@ -71,3 +79,7 @@ var buildTabPannel = function(container) {
     });
 };
 
+var addProductToOrderTemplate = function (productId) {
+    var link = $('<a name="add"></a>').html("Add").addClass("btn btn-small btn-success").attr('onClick', 'submitProductToSession('+productId+')');
+    return $('<div></div>').append($(link)).html();
+};

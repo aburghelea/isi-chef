@@ -1,6 +1,7 @@
 import ro.isi.auth.Role
 import ro.isi.auth.User
 import ro.isi.auth.UserRole
+import ro.isi.restaurant.Masa
 import ro.isi.restaurant.Produs
 
 class BootStrap {
@@ -11,7 +12,7 @@ class BootStrap {
 
         bootStrapUsers()
         bootStrapProducts()
-
+        bootStrapTables();
     }
 
     def destroy = {
@@ -63,5 +64,14 @@ class BootStrap {
                     type: 'COMESTIBIL').save(failOnError: true, flush: true);
         }
 
+    }
+
+    private def bootStrapTables = {
+        for (int i = 0; i < 20; i++) {
+            new Masa(
+                    number: i,
+                    description: "Masa - " + i
+            ).save(failOnError: true, flush: true);
+        }
     }
 }

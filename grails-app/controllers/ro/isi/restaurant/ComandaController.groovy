@@ -1,6 +1,8 @@
 package ro.isi.restaurant
 
 import org.springframework.dao.DataIntegrityViolationException
+import javax.servlet.http.HttpServletResponse
+import grails.converters.JSON
 
 /**
  * ComandaController
@@ -9,6 +11,8 @@ import org.springframework.dao.DataIntegrityViolationException
 class ComandaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+
+    ComandaService comandaService;
 
     def index() {
         redirect(action: "list", params: params)
@@ -103,5 +107,18 @@ class ComandaController {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'comanda.label', default: 'Comanda'), params.id])
             redirect(action: "show", id: params.id)
         }
+    }
+
+    def addProductToSession = {
+        if (session[params.tableId] == null || !(session[params.tableId] instanceof List))
+            session[params.tableId] = [];
+        def product = Produs.findById(params.productId);
+        if (product != null )
+            session[params.tableId].add product
+
+        println session[params.tableId]
+        response.setStatus HttpServletResponse.SC_OK
+        response.setContentType "application/json"
+        render ""
     }
 }

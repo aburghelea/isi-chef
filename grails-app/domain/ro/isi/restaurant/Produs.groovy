@@ -9,8 +9,9 @@ class Produs {
 	String code
 	String type
 
-	static hasMany = [comandas: Comanda]
+    List comandas
 
+	static hasMany = [comandas: Comanda]
     static belongsTo = [Comanda]
 
 	static mapping = {

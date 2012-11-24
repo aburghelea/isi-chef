@@ -9,12 +9,12 @@ class Masa {
 	                  rezervares: Rezervare]
 
 	static mapping = {
-		id generator: "assigned"
+		id generator: "increment"
 		version false
 	}
 
 	static constraints = {
-		number nullable: true
-		description nullable: true, maxSize: 45
+		number nullable: false
+		description nullable: false, maxSize: 45
 	}
 }

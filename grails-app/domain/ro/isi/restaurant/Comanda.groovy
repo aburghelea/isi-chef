@@ -8,10 +8,23 @@ import ro.isi.auth.User
 
 class Comanda implements Serializable {
 
-//    Long id
     User waiter
     Masa masa
     User cook
+
+    List produses
+    static hasMany = [produses: Produs]
+    static belongsTo = [Masa, User]
+
+    static mapping = {
+        id generator: "increment"
+        version false
+    }
+
+    static constraints = {
+        produses nullable: true
+        masa nullable: true
+    }
 
     int hashCode() {
         def builder = new HashCodeBuilder()
@@ -24,18 +37,5 @@ class Comanda implements Serializable {
         def builder = new EqualsBuilder()
         builder.append id, other.id
         builder.isEquals()
-    }
-
-    static hasMany = [produses: Produs]
-    static belongsTo = [Masa, User]
-
-    static mapping = {
-        id generator: "increment"
-        version false
-    }
-
-    static constraints = {
-        produses nullable: true
-        masa nullable: true
     }
 }

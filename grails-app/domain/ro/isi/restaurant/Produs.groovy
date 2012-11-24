@@ -14,7 +14,7 @@ class Produs {
     static belongsTo = [Comanda]
 
 	static mapping = {
-		id generator: "assigned"
+		id generator: "increment"
 		version false
 	}
 

@@ -1,6 +1,9 @@
 package ro.isi.restaurant
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
+
+import javax.servlet.http.HttpServletResponse
 
 /**
  * ProdusController
@@ -30,14 +33,14 @@ class ProdusController {
             return
         }
 
-		flash.message = message(code: 'default.created.message', args: [message(code: 'produs.label', default: 'Produs'), produsInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'produs.label', default: 'Produs'), produsInstance.id])
         redirect(action: "show", id: produsInstance.id)
     }
 
     def show() {
         def produsInstance = Produs.get(params.id)
         if (!produsInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'produs.label', default: 'Produs'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'produs.label', default: 'Produs'), params.id])
             redirect(action: "list")
             return
         }
@@ -68,8 +71,8 @@ class ProdusController {
             def version = params.version.toLong()
             if (produsInstance.version > version) {
                 produsInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'produs.label', default: 'Produs')] as Object[],
-                          "Another user has updated this Produs while you were editing")
+                        [message(code: 'produs.label', default: 'Produs')] as Object[],
+                        "Another user has updated this Produs while you were editing")
                 render(view: "edit", model: [produsInstance: produsInstance])
                 return
             }
@@ -82,26 +85,39 @@ class ProdusController {
             return
         }
 
-		flash.message = message(code: 'default.updated.message', args: [message(code: 'produs.label', default: 'Produs'), produsInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'produs.label', default: 'Produs'), produsInstance.id])
         redirect(action: "show", id: produsInstance.id)
     }
 
     def delete() {
         def produsInstance = Produs.get(params.id)
         if (!produsInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'produs.label', default: 'Produs'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'produs.label', default: 'Produs'), params.id])
             redirect(action: "list")
             return
         }
 
         try {
             produsInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: 'produs.label', default: 'Produs'), params.id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'produs.label', default: 'Produs'), params.id])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'produs.label', default: 'Produs'), params.id])
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'produs.label', default: 'Produs'), params.id])
             redirect(action: "show", id: params.id)
         }
+    }
+
+
+    def listJSON() {
+        response.setStatus HttpServletResponse.SC_OK
+        response.setContentType "application/json"
+        render Produs.list() as JSON
+    }
+
+    def listNone() {
+        response.setStatus HttpServletResponse.SC_OK
+        response.setContentType "application/json"
+        render ""
     }
 }

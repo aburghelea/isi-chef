@@ -1,12 +1,24 @@
 import ro.isi.auth.Role
 import ro.isi.auth.User
 import ro.isi.auth.UserRole
+import ro.isi.restaurant.Produs
 
 class BootStrap {
 
     def springSecurityService
 
     def init = { servletContext ->
+
+        bootStrapUsers()
+        bootStrapProducts()
+
+    }
+
+    def destroy = {
+    }
+
+
+    private def bootStrapUsers = {
         def cookRole = Role.findByAuthority('ROLE_COOK') ?: new Role(authority: 'ROLE_COOK').save(failOnError: true)
         def waiterRole = Role.findByAuthority('ROLE_WAITER') ?: new Role(authority: 'ROLE_WAITER').save(failOnError: true)
         def adminRole = Role.findByAuthority('ROLE_ADMIN') ?: new Role(authority: 'ROLE_ADMIN').save(failOnError: true)
@@ -39,7 +51,17 @@ class BootStrap {
         }
     }
 
+    private def bootStrapProducts = {
+        for (int i = 0; i < 20; i++) {
 
-    def destroy = {
+            def produs = new Produs(
+                    name: i + " Yummy",
+                    price: i * 100,
+                    description: "Produsul " + i,
+                    preparationTime: i * 13,
+                    code: i * Math.sqrt(i),
+                    type: 'COMESTIBIL').save(failOnError: true, flush: true);
+        }
+
     }
 }

@@ -1,4 +1,4 @@
-<%@ page import="ro.isi.restaurant.Comanda" %>
+<%@ page import="grails.converters.JSON; ro.isi.restaurant.Comanda" %>
 
 
 <div class="control-group fieldcontain ${hasErrors(bean: comandaInstance, field: 'waiter', 'error')} required">
@@ -32,8 +32,7 @@
         <g:select id="masa" name="masa.id" from="${ro.isi.restaurant.Masa.list()}" optionKey="id"
                   optionValue="${{it.number + ": " + it.description?.substring(0, Math.min(10, it.description?.length())) }}"
                   value="${comandaInstance?.masa?.id}" class="many-to-one"
-                onchange="resetProducts()"
-        />
+                  onchange="resetProducts()"/>
         <span class="help-inline">${hasErrors(bean: comandaInstance, field: 'masa', 'error')}</span>
     </div>
 </div>
@@ -41,18 +40,13 @@
 <div class="control-group fieldcontain ${hasErrors(bean: comandaInstance, field: 'produses', 'error')} ">
     <label for="products" class="control-label"><g:message code="comanda.product.label" default="Products"/></label>
 
-    %{--<div class="controls">--}%
-        %{--<g:select name="produses" from="${ro.isi.restaurant.Produs.list()}" multiple="multiple" optionKey="id" size="5" value="${comandaInstance?.produses*.id}" class="many-to-many"/>--}%
-        %{--<span class="help-inline">${hasErrors(bean: comandaInstance, field: 'produses', 'error')}</span>--}%
-    %{--</div>--}%
-
-    <div class="" id='hiddenProducts'>
+    <div class="hidden" id='hiddenProducts'>
     </div>
 
     <div class="controls">
         <ul class="nav nav-tabs" id="products_nav">
             <li class="active"><a href="#products_tab">Add</a></li>
-            <li><a href="#products_added_tab">Ordered</a></li>
+            <li><a href="#products_added_tab" onclick="populateProductsIfNull(${comandaInstance.produses.collect {it.id} as JSON})">Ordered</a></li>
         </ul>
     </div>
 
@@ -70,45 +64,18 @@
     </div>
 </div>
 
+%{--"${comandaInstance.produses as grails.converters.deep.JSON}"--}%
+
 <div id="test"></div>
 <g:javascript src="comanda.js"/>
 <r:script>
-    var productsForNow = [];
-    var resetProducts = function() {
-        productsForNow = [];
-    };
     $(document).ready(function () {
         buildTabPannel($('#products_nav a'));
 
-        var allProductsDataSource = buildDataSource("${createLink(controller: 'produs', action: 'listJSON')}");
-        buildTable($("#products"), allProductsDataSource);
+        allProductsDataSource = buildDataSource("${createLink(controller: 'produs', action: 'listJSON')}");
+        buildKendoGrid($("#products"), allProductsDataSource, true);
 
-        var addedProductsDataSource = buildDataSource("${createLink(controller: 'produs', action: 'listNone')}");
-        buildTable($("#products_added"), addedProductsDataSource);
-
+        addedProductsDataSource = buildLocalDataSource(productsForNow);
+        buildKendoGrid($("#products_added"), addedProductsDataSource);
     });
-
-    var submitProductToSession = function(productId) {
-        productsForNow.push(productId);
-        console.log(productsForNow);
-        $('#hiddenProducts').empty();
-        $.each(productsForNow, function(index, value){
-
-            $('<input>')/*.attr('type', 'hidden')*/.attr('name', 'produses['+index+'].id').attr('value',value).appendTo($('#hiddenProducts'));
-
-        });
-
-
-
-        %{--$.ajax ({--}%
-            %{--type : "POST",--}%
-            %{--url : "${createLink(controller: 'comanda', action: 'addProductToSession')}",--}%
-            %{--data : {tableId: $('#masa :selected').val(), productId: productId},--}%
-            %{--success : function () {console.log('Added');},--}%
-            %{--error : function() {alert('Could not add the product');}--}%
-        %{--});--}%
-
-    };
-
-
 </r:script>

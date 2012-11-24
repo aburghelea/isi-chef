@@ -112,7 +112,19 @@ class ProdusController {
     def listJSON() {
         response.setStatus HttpServletResponse.SC_OK
         response.setContentType "application/json"
-        render Produs.list() as JSON
+        def result = Produs.list().collect() {
+            Produs it ->
+            [
+                    code: it.code,
+                    description: it.description,
+                    id: it.id,
+                    name: it.name,
+                    preparationTime: it.preparationTime,
+                    price: it.price,
+                    type: it.type,
+            ]
+        }
+        render result as JSON
     }
 
     def listNone() {

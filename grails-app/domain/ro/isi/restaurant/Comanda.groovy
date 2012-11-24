@@ -38,4 +38,9 @@ class Comanda implements Serializable {
         builder.append id, other.id
         builder.isEquals()
     }
+
+    @Override
+    public String toString() {
+        return id;
+    }
 }

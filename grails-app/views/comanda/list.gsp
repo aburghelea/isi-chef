@@ -22,6 +22,8 @@
 				<th><g:message code="comanda.masa.label" default="Masa" /></th>
 			
 				<th><g:message code="comanda.waiter.label" default="Waiter" /></th>
+
+                <th><g:message code="comanda.operations.label" default="Operations"/> </th>
 			
 			</tr>
 		</thead>
@@ -29,12 +31,12 @@
 		<g:each in="${comandaInstanceList}" status="i" var="comandaInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
-				<td><g:link action="show" id="${comandaInstance.id}">${fieldValue(bean: comandaInstance, field: "cook")}</g:link></td>
+				<td>${fieldValue(bean: comandaInstance, field: "cook")}</td>
 			
 				<td>${fieldValue(bean: comandaInstance, field: "masa")}</td>
 			
 				<td>${fieldValue(bean: comandaInstance, field: "waiter")}</td>
-			
+			    <td><g:link class="btn btn-small btn-info" action="show" id="${comandaInstance.id}">${message(code: 'comada.operations.show', default: 'Show')}</g:link></td>
 			</tr>
 		</g:each>
 		</tbody>

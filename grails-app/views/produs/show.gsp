@@ -58,20 +58,7 @@
 				<td valign="top" class="value">${fieldValue(bean: produsInstance, field: "type")}</td>
 				
 			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="produs.comandas.label" default="Comandas" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${produsInstance.comandas}" var="c">
-						<li><g:link controller="comanda" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
-				
-			</tr>
-		
+
 		</tbody>
 	</table>
 </section>

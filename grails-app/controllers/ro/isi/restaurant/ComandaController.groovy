@@ -1,8 +1,12 @@
 package ro.isi.restaurant
 
+import org.springframework.security.core.context.SecurityContextHolder
+
+import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
+
 import javax.servlet.http.HttpServletResponse
-import grails.converters.JSON
+import ro.isi.auth.Roles
 
 /**
  * ComandaController
@@ -23,8 +27,13 @@ class ComandaController {
         [comandaInstanceList: Comanda.list(params), comandaInstanceTotal: Comanda.count()]
     }
 
+    @Secured([Roles.ROLE_WAITER])
     def create() {
-        [comandaInstance: new Comanda(params)]
+        def comanda = new Comanda(params)
+
+        comanda.waiter = comandaService.getAuthenticatedWaiter()
+        println comanda.waiter
+        [comandaInstance: comanda]
     }
 
     def save() {

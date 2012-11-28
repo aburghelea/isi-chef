@@ -6,33 +6,37 @@
             class="required-indicator">*</span></label>
 
     <div class="controls">
-        <g:select id="waiter" name="waiter.id" from="${ro.isi.auth.User.list()}" optionKey="id" required=""
-                  value="${comandaInstance?.waiter?.id}" class="many-to-one"/>
+        <g:select id="waiter" name="waiter.id" from="${ro.isi.auth.User.list()}"
+                  optionKey="id"
+                  required="true"
+                  optionValue="username"
+                  value="${comandaInstance?.waiter?.id}" class="many-to-one"
+                  noSelection="['': 'No waiter assigned']"/>
         <span class="help-inline">${hasErrors(bean: comandaInstance, field: 'waiter', 'error')}</span>
     </div>
-
 </div>
 
-<div class="control-group fieldcontain ${hasErrors(bean: comandaInstance, field: 'cook', 'error')} required">
-    <label for="cook" class="control-label"><g:message code="comanda.cook.label" default="Cook"/><span
-            class="required-indicator">*</span></label>
+%{--<div class="control-group fieldcontain ${hasErrors(bean: comandaInstance, field: 'cook', 'error')} required">--}%
+%{--<label for="cook" class="control-label"><g:message code="comanda.cook.label" default="Cook"/><span--}%
+%{--class="required-indicator">*</span></label>--}%
 
-    <div class="controls">
-        <g:select id="cook" name="cook.id" from="${ro.isi.auth.User.list()}" optionKey="id" required=""
-                  value="${comandaInstance?.cook?.id}" class="many-to-one"/>
-        <span class="help-inline">${hasErrors(bean: comandaInstance, field: 'cook', 'error')}</span>
-    </div>
-</div>
+%{--<div class="controls">--}%
+%{--<g:select id="cook" name="cook.id" from="${ro.isi.auth.User.list()}" optionKey="id" required=""--}%
+%{--value="${comandaInstance?.cook?.id}" class="many-to-one"--}%
+%{--noSelection="['': 'No cook assigned']"/>--}%
+%{--<span class="help-inline">${hasErrors(bean: comandaInstance, field: 'cook', 'error')}</span>--}%
+%{--</div>--}%
+%{--</div>--}%
 
 <div class="control-group fieldcontain ${hasErrors(bean: comandaInstance, field: 'masa', 'error')} required">
-    <label for="masa" class="control-label"><g:message code="comanda.masa.label" default="Masa"/><span
+    <label for="masa" class="control-label"><g:message code="comanda.masa.label" default="Table"/><span
             class="required-indicator">*</span></label>
 
     <div class="controls">
         <g:select id="masa" name="masa.id" from="${ro.isi.restaurant.Masa.list()}" optionKey="id"
                   optionValue="${{it.number + ": " + it.description?.substring(0, Math.min(10, it.description?.length())) }}"
                   value="${comandaInstance?.masa?.id}" class="many-to-one"
-                  onchange="resetProducts()"/>
+                  noSelection="['': 'Select the table']"/>
         <span class="help-inline">${hasErrors(bean: comandaInstance, field: 'masa', 'error')}</span>
     </div>
 </div>
@@ -46,7 +50,9 @@
     <div class="controls">
         <ul class="nav nav-tabs" id="products_nav">
             <li class="active"><a href="#products_tab">Add</a></li>
-            <li><a href="#products_added_tab" onclick="populateProductsIfNull(${comandaInstance.produses.collect {it.id} as JSON})">Ordered</a></li>
+            <li><a href="#products_added_tab"
+                   onclick="populateProductsIfNull(${comandaInstance.produses.collect {it.id} as JSON})">Ordered</a>
+            </li>
         </ul>
     </div>
 

@@ -147,3 +147,9 @@ var populateProductsIfNull = function (data) {
         refreshTable($("#products_added"));
     }
 };
+
+var resetProducts = function() {
+    productsForNow = [];
+    $("#products_added").data("kendoGrid").dataSource.data(productsForNow);
+    refreshTable();
+};

@@ -22,8 +22,10 @@ class Comanda implements Serializable {
     }
 
     static constraints = {
-        produses nullable: true
-        masa nullable: true
+        produses nullable: false
+        masa nullable: false
+        waiter nullable: false
+        cook nullable: true
     }
 
     int hashCode() {

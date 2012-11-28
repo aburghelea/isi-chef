@@ -140,4 +140,20 @@ grails.plugins.springsecurity.userLookup.userDomainClassName = 'ro.isi.auth.User
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'ro.isi.auth.UserRole'
 grails.plugins.springsecurity.authority.className = 'ro.isi.auth.Role'
 
-grails.plugins.springsecurity.failureHandler.defaultFailureUrl = '/'
+grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/'
+grails.plugins.springsecurity.auth.loginFormUrl = '/'
+//grails.plugins.springsecurity.failureHandler.defaultFailureUrl = '/'
+
+grails.plugins.springsecurity.securityConfigType = "Annotation"
+grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+        '/js/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/css/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/images/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/static/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/register/*' : ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/login/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/home': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/index': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+]

@@ -37,10 +37,10 @@
     </g:if>
     <g:else>
         <r:require
-                modules="application, jquery, ${session.skin ? session.skin : 'bootstrap'}, bootstrap_utils"/>
+                modules="application, jquery, ${session.skin ? session.skin : 'bootstrap'}, bootstrap_utils "/>
     </g:else>
 
-    <r:require modules="kendo-ui, kendo-silver" />
+    <r:require modules="kendo-ui, kendo-bootstrap" />
     <r:layoutResources/>
     <g:layoutHead/>
 

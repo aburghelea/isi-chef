@@ -63,6 +63,16 @@ modules = {
                 attrs: [media: 'screen, projection']
     }
 
+    'kendo-bootstrap' {
+        resource id: 'kendo-common-theme',
+                url: [plugin: 'kendoUi', dir: 'kendo-ui/styles', file: 'kendo.common.min.css'],
+                attrs: [media: 'screen, projection']
+
+        resource id: 'kendo-theme',
+                url: 'css/kendo.bootstrap.css',
+                attrs: [media: 'screen, projection']
+    }
+
     'kendo-ui' {
         dependsOn 'jquery'
         resource id: 'kendo-ui',

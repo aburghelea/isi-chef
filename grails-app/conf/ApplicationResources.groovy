@@ -7,6 +7,11 @@ modules = {
         resource url: 'js/jquery.validate.min.js'
     }
 
+    kendoBootStrap {
+        resource url: 'css/kendo.bootstrap.css'
+        resource url: 'less/bootstrap/kendo.bootstrap.less'
+    }
+
     bootstrap {
 
         if (GrailsUtil.getEnvironment().equals(GrailsApplication.ENV_PRODUCTION)) {

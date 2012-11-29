@@ -2,6 +2,25 @@ var allProductsDataSource;
 var addedProductsDataSource;
 var productsForNow = [];
 
+
+var opts = {
+    lines: 7, // The number of lines to draw
+    length: 2, // The length of each line
+    width: 2, // The line thickness
+    radius: 4, // The radius of the inner circle
+    corners: 0, // Corner roundness (0..1)
+    rotate: 16, // The rotation offset
+    color: '#000', // #rgb or #rrggbb
+    speed: 1.3, // Rounds per second
+    trail: 42, // Afterglow percentage
+    shadow: false, // Whether to render a shadow
+    hwaccel: false, // Whether to use hardware acceleration
+    className: 'spinner', // The CSS class to assign to the spinner
+    zIndex: 2e9, // The z-index (defaults to 2000000000)
+    top: 'auto', // Top position relative to parent in px
+    left: 'auto' // Left position relative to parent in px
+};
+
 var Produs = kendo.data.Model.define({
     id:'id',
     fields:{
@@ -86,8 +105,9 @@ var addProductToOrderTemplate = function (productId) {
         .html("Add")
         .addClass("btn btn-small btn-success")
         .attr('onClick', 'addProductToOrder(' + productId + ')');
+    var okSign = '<i id="ok'+productId+'" class="icon-ok" style="display: none;"></i>';
 
-    return $('<div></div>').append($(link)).html();
+    return $('<div></div>').append($(link)).append(okSign).html();
 };
 
 //noinspection JSUnusedGlobalSymbols
@@ -110,7 +130,7 @@ var refreshTable = function (gridContainer) {
 };
 
 var addProductToOrder = function (productId) {
-
+    $("#ok"+productId).show();
     productsForNow.push(allProductsDataSource.get(productId).data);
 
     $('#hiddenProducts').empty();
@@ -118,6 +138,9 @@ var addProductToOrder = function (productId) {
         $('<input/>').attr('type', 'hidden').attr('name', 'produses[' + index + '].id').attr('value', value.id).appendTo($('#hiddenProducts'));
     });
     updateAddedDataSource();
+
+    $("#ok"+productId).fadeOut("slow");
+
 };
 
 var updateAddedDataSource = function () {
@@ -148,7 +171,7 @@ var populateProductsIfNull = function (data) {
     }
 };
 
-var resetProducts = function() {
+var resetProducts = function () {
     productsForNow = [];
     $("#products_added").data("kendoGrid").dataSource.data(productsForNow);
     refreshTable();

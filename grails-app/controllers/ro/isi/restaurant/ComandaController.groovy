@@ -1,11 +1,10 @@
 package ro.isi.restaurant
 
-import org.springframework.security.core.context.SecurityContextHolder
-
 import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
 import javax.servlet.http.HttpServletResponse
+
 import ro.isi.auth.Roles
 
 /**
@@ -30,9 +29,8 @@ class ComandaController {
     @Secured([Roles.ROLE_WAITER])
     def create() {
         def comanda = new Comanda(params)
-
         comanda.waiter = comandaService.getAuthenticatedWaiter()
-        println comanda.waiter
+
         [comandaInstance: comanda]
     }
 
@@ -43,14 +41,14 @@ class ComandaController {
             return
         }
 
-		flash.message = message(code: 'default.created.message', args: [message(code: 'comanda.label', default: 'Comanda'), comandaInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'comanda.label', default: 'Comanda'), comandaInstance.id])
         redirect(action: "show", id: comandaInstance.id)
     }
 
     def show() {
         def comandaInstance = Comanda.get(params.id)
         if (!comandaInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'comanda.label', default: 'Comanda'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'comanda.label', default: 'Comanda'), params.id])
             redirect(action: "list")
             return
         }
@@ -81,8 +79,8 @@ class ComandaController {
             def version = params.version.toLong()
             if (comandaInstance.version > version) {
                 comandaInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'comanda.label', default: 'Comanda')] as Object[],
-                          "Another user has updated this Comanda while you were editing")
+                        [message(code: 'comanda.label', default: 'Comanda')] as Object[],
+                        "Another user has updated this Comanda while you were editing")
                 render(view: "edit", model: [comandaInstance: comandaInstance])
                 return
             }
@@ -95,25 +93,25 @@ class ComandaController {
             return
         }
 
-		flash.message = message(code: 'default.updated.message', args: [message(code: 'comanda.label', default: 'Comanda'), comandaInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'comanda.label', default: 'Comanda'), comandaInstance.id])
         redirect(action: "show", id: comandaInstance.id)
     }
 
     def delete() {
         def comandaInstance = Comanda.get(params.id)
         if (!comandaInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'comanda.label', default: 'Comanda'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'comanda.label', default: 'Comanda'), params.id])
             redirect(action: "list")
             return
         }
 
         try {
             comandaInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: 'comanda.label', default: 'Comanda'), params.id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'comanda.label', default: 'Comanda'), params.id])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'comanda.label', default: 'Comanda'), params.id])
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'comanda.label', default: 'Comanda'), params.id])
             redirect(action: "show", id: params.id)
         }
     }
@@ -122,10 +120,9 @@ class ComandaController {
         if (session[params.tableId] == null || !(session[params.tableId] instanceof List))
             session[params.tableId] = [];
         def product = Produs.findById(params.productId);
-        if (product != null )
+        if (product != null)
             session[params.tableId].add product
 
-        println session[params.tableId]
         response.setStatus HttpServletResponse.SC_OK
         response.setContentType "application/json"
         render ""

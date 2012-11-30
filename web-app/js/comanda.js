@@ -2,25 +2,6 @@ var allProductsDataSource;
 var addedProductsDataSource;
 var productsForNow = [];
 
-
-var opts = {
-    lines: 7, // The number of lines to draw
-    length: 2, // The length of each line
-    width: 2, // The line thickness
-    radius: 4, // The radius of the inner circle
-    corners: 0, // Corner roundness (0..1)
-    rotate: 16, // The rotation offset
-    color: '#000', // #rgb or #rrggbb
-    speed: 1.3, // Rounds per second
-    trail: 42, // Afterglow percentage
-    shadow: false, // Whether to render a shadow
-    hwaccel: false, // Whether to use hardware acceleration
-    className: 'spinner', // The CSS class to assign to the spinner
-    zIndex: 2e9, // The z-index (defaults to 2000000000)
-    top: 'auto', // Top position relative to parent in px
-    left: 'auto' // Left position relative to parent in px
-};
-
 var Produs = kendo.data.Model.define({
     id:'id',
     fields:{
@@ -42,7 +23,6 @@ var buildLocalDataSource = function (data) {
 };
 
 var buildDataSource = function (uri) {
-
     return new kendo.data.DataSource({
         type:"application/json",
         transport:{
@@ -56,7 +36,6 @@ var buildDataSource = function (uri) {
 };
 
 var buildKendoGrid = function (container, dataSource, toDelete) {
-    a = typeof a !== 'undefined' ? a : false;
     $(container).kendoGrid({
         dataSource:dataSource,
         sortable:true,
@@ -89,7 +68,6 @@ var buildKendoGrid = function (container, dataSource, toDelete) {
             }
         ]
     });
-
 };
 
 var buildTabPannel = function (container) {
@@ -99,15 +77,31 @@ var buildTabPannel = function (container) {
     });
 };
 
+var refreshTable = function (gridContainer) {
+    $(gridContainer).data("kendoGrid").dataSource.read();
+    $(gridContainer).data("kendoGrid").refresh();
+};
+
+var updateAddedDataSource = function () {
+    $("#products_added").data("kendoGrid").dataSource.data(productsForNow);
+    refreshTable($("#products_added"));
+};
+
+var operationTemplate = function (toDelete) {
+    return toDelete == true ? '#= addProductToOrderTemplate(id) #' : '#= removeProductFromOrderTemplate(id) #';
+};
+
 //noinspection JSUnusedGlobalSymbols
 var addProductToOrderTemplate = function (productId) {
     var link = $('<a name="add"></a>')
         .html("Add")
-        .addClass("btn btn-small btn-success")
+        .addClass("btn btn-small btn-info")
         .attr('onClick', 'addProductToOrder(' + productId + ')');
-    var okSign = '<i id="ok'+productId+'" class="icon-ok" style="display: none;"></i>';
-
-    return $('<div></div>').append($(link)).append(okSign).html();
+    var badge = '<span id="badge' + productId + '" class="badge badge-warn">0</span>';
+    return $('<div class="row"></div>')
+        .append($("<div class='span1'></div> ").append(link))
+        .append($("<div class='span1'></div> ").append(badge))
+        .html();
 };
 
 //noinspection JSUnusedGlobalSymbols
@@ -116,45 +110,43 @@ var removeProductFromOrderTemplate = function (productId) {
         .html("Remove")
         .addClass("btn btn-small btn-danger")
         .attr('onClick', 'removeProductFromOrder(' + productId + ')');
-
     return $('<div></div>').append($(link)).html();
 };
 
-var operationTemplate = function (toDelete) {
-    return toDelete == true ? '#= addProductToOrderTemplate(id) #' : '#= removeProductFromOrderTemplate(id) #';
-};
-
-var refreshTable = function (gridContainer) {
-    $(gridContainer).data("kendoGrid").dataSource.read();
-    $(gridContainer).data("kendoGrid").refresh();
-};
-
 var addProductToOrder = function (productId) {
-    $("#ok"+productId).show();
-    productsForNow.push(allProductsDataSource.get(productId).data);
+    $("#ok" + productId).show();
 
-    $('#hiddenProducts').empty();
-    $.each(productsForNow, function (index, value) {
-        $('<input/>').attr('type', 'hidden').attr('name', 'produses[' + index + '].id').attr('value', value.id).appendTo($('#hiddenProducts'));
-    });
+    productsForNow.push(allProductsDataSource.get(productId).data);
+    updateBadge(productId);
     updateAddedDataSource();
 
-    $("#ok"+productId).fadeOut("slow");
-
-};
-
-var updateAddedDataSource = function () {
-    $("#products_added").data("kendoGrid").dataSource.data(productsForNow);
-    refreshTable($("#products_added"));
+    $("#ok" + productId).fadeOut("slow");
 };
 
 var removeProductFromOrder = function (productId) {
     var element = allProductsDataSource.get(productId).data;
-    alert(productsForNow.indexOf(element));
     productsForNow.splice(productsForNow.indexOf(element), 1);
+    updateBadge(productId, false);
+    updateAddedDataSource();
+};
 
-    $("#products_added").data("kendoGrid").dataSource.data(productsForNow);
-    refreshTable($("#products_added"));
+//noinspection JSUnusedGlobalSymbols
+var updateFormParameters = function () {
+    $.each(productsForNow, function (index, value) {
+        $('<input/>')
+            .attr('type', 'hidden')
+            .attr('name', 'produses[' + index + '].id')
+            .attr('value', value.id)
+            .appendTo($('#hiddenProducts'));
+    });
+                  $('#hiddenProducts').empty();
+};
+
+var updateBadge = function (productId, increment) {
+    increment = increment == false ? -1 : +1;
+    var badge = $("#badge" + productId);
+    var value = parseInt($(badge).html()) + increment;
+    $(badge).html(value);
 };
 
 var populateProductsForNow = function (data) {
@@ -163,16 +155,17 @@ var populateProductsForNow = function (data) {
     });
 };
 
+//noinspection JSUnusedGlobalSymbols
 var populateProductsIfNull = function (data) {
     if (productsForNow.length <= 0) {
         populateProductsForNow(data);
         $("#products_added").data("kendoGrid").dataSource.data(productsForNow);
-        refreshTable($("#products_added"));
+        updateAddedDataSource();
     }
 };
 
+//noinspection JSUnusedGlobalSymbols
 var resetProducts = function () {
     productsForNow = [];
-    $("#products_added").data("kendoGrid").dataSource.data(productsForNow);
-    refreshTable();
+    updateAddedDataSource();
 };

@@ -28,6 +28,8 @@
         <!-- Skin specific styles: main focus are Bootstrap variants (e.g., using Less) -->
         <link rel="stylesheet" href="${resource(dir: skin + '/css', file: skin + '.css')}"/>
         <link rel="stylesheet" href="${resource(dir: skin + '/css', file: skin + '-responsive.css')}"/>
+        <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}"/>
+
 
         <!-- Bootstrap extensions / adaptations -->
     <%-- <link rel="stylesheet" href="${resource(dir: 'FontAwesome/css', file:'font-awesome.css')}"> --%>

@@ -24,7 +24,6 @@ var updateIndicators = function(data){
 
     if (parseInt(oldData) < parseInt(data)) {
         notifyNewOrder();
-        debugger;
     }
 };
 

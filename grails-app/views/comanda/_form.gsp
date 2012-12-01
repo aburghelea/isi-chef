@@ -70,9 +70,6 @@
     </div>
 </div>
 
-%{--"${comandaInstance.produses as grails.converters.deep.JSON}"--}%
-
-<div id="test"></div>
 <g:javascript src="comanda.js"/>
 <r:script>
     $(document).ready(function () {
@@ -83,5 +80,6 @@
 
         addedProductsDataSource = buildLocalDataSource(productsForNow);
         buildKendoGrid($("#products_added"), addedProductsDataSource);
+
     });
 </r:script>

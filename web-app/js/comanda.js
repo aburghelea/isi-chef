@@ -119,6 +119,7 @@ var addProductToOrder = function (productId) {
     productsForNow.push(allProductsDataSource.get(productId).data);
     updateBadge(productId);
     updateAddedDataSource();
+    updateFormParameters();
 
     $("#ok" + productId).fadeOut("slow");
 };
@@ -126,12 +127,14 @@ var addProductToOrder = function (productId) {
 var removeProductFromOrder = function (productId) {
     var element = allProductsDataSource.get(productId).data;
     productsForNow.splice(productsForNow.indexOf(element), 1);
+    updateFormParameters();
     updateBadge(productId, false);
     updateAddedDataSource();
 };
 
-//noinspection JSUnusedGlobalSymbols
 var updateFormParameters = function () {
+    $('#hiddenProducts').empty();
+    console.log(productsForNow);
     $.each(productsForNow, function (index, value) {
         $('<input/>')
             .attr('type', 'hidden')
@@ -139,7 +142,6 @@ var updateFormParameters = function () {
             .attr('value', value.id)
             .appendTo($('#hiddenProducts'));
     });
-                  $('#hiddenProducts').empty();
 };
 
 var updateBadge = function (productId, increment) {

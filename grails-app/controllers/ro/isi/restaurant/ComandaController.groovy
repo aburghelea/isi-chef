@@ -6,6 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException
 import javax.servlet.http.HttpServletResponse
 
 import ro.isi.auth.Roles
+import grails.converters.JSON
 
 /**
  * ComandaController
@@ -18,6 +19,7 @@ class ComandaController {
     ComandaService comandaService;
 
     def index() {
+
         redirect(action: "list", params: params)
     }
 
@@ -116,15 +118,24 @@ class ComandaController {
         }
     }
 
-    def addProductToSession = {
-        if (session[params.tableId] == null || !(session[params.tableId] instanceof List))
-            session[params.tableId] = [];
-        def product = Produs.findById(params.productId);
-        if (product != null)
-            session[params.tableId].add product
+//    def addProductToSession = {
+//        if (session[params.tableId] == null || !(session[params.tableId] instanceof List))
+//            session[params.tableId] = [];
+//        def product = Produs.findById(params.productId);
+//        if (product != null)
+//            session[params.tableId].add product
+//
+//        response.setStatus HttpServletResponse.SC_OK
+//        response.setContentType "application/json"
+//        render ""
+//    }
+
+    def takenOrders = {
+        def takenOrders = comandaService.getTakenOrdersCount();
 
         response.setStatus HttpServletResponse.SC_OK
         response.setContentType "application/json"
-        render ""
+        render takenOrders
     }
+
 }

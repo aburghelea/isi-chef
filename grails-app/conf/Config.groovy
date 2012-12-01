@@ -32,7 +32,7 @@ grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
 //grails.urlmapping.cache.maxsize = 1000
 
 // What URL patterns should be processed by the resources plugin
-grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
+grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*', '/audio/*']
 
 
 // The default codec used to encode data with ${}
@@ -157,3 +157,5 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
         '/home': ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/index': ['IS_AUTHENTICATED_ANONYMOUSLY'],
 ]
+
+ro.isi.auth.refreshTime = 3000 // 3sec

@@ -71,15 +71,16 @@
 </div>
 
 <g:javascript src="comanda.js"/>
+
 <r:script>
     $(document).ready(function () {
         buildTabPannel($('#products_nav a'));
 
         allProductsDataSource = buildDataSource("${createLink(controller: 'produs', action: 'listJSON')}");
-        buildKendoGrid($("#products"), allProductsDataSource, true);
+        buildProdusKendoGrid($("#products"), allProductsDataSource, true);
 
         addedProductsDataSource = buildLocalDataSource(productsForNow);
-        buildKendoGrid($("#products_added"), addedProductsDataSource);
+        buildProdusKendoGrid($("#products_added"), addedProductsDataSource);
 
     });
 </r:script>

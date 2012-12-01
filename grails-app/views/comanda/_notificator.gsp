@@ -20,10 +20,10 @@
          * in functie de rolul utilizatorului logat in aplicatie
          */
                 <sec:ifAllGranted roles="${Roles.ROLE_COOK}">
-        var counterUrl = '${createLink(controller: 'comanda', action: 'takenOrders')}';
+        var counterUrl = '${createLink(controller: 'comanda', action: 'takenOrdersCounter')}';
         </sec:ifAllGranted>
         <sec:ifAllGranted roles="${Roles.ROLE_WAITER}">
-        var counterUrl = '${createLink(controller: 'comanda', action: 'preparedOrders')}';
+        var counterUrl = '${createLink(controller: 'comanda', action: 'preparedOrdersCount')}';
         </sec:ifAllGranted>
     </script>
 

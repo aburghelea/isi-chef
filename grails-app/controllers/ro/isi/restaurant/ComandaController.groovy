@@ -1,11 +1,11 @@
 package ro.isi.restaurant
 
+import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
+import ro.isi.auth.Roles
 
 import javax.servlet.http.HttpServletResponse
-
-import ro.isi.auth.Roles
 
 /**
  * ComandaController
@@ -119,18 +119,38 @@ class ComandaController {
         }
     }
 
-    def takenOrders = {
+    @Secured([Roles.ROLE_COOK])
+    def listTakenOrders() {
+        println "========> ";
+    }
+
+    def takenOrdersCounter = {
         def takenOrders = comandaService.getTakenOrdersCount();
 
         response.setStatus HttpServletResponse.SC_OK
         render takenOrders
     }
 
-    def preparedOrders = {
+    def preparedOrdersCount = {
         def preparedOrders = comandaService.getPreparedOrdersCount();
 
         response.setStatus HttpServletResponse.SC_OK
         render preparedOrders
     }
 
+
+    def listTakenOrdersAsJson() {
+        response.setStatus HttpServletResponse.SC_OK
+        response.setContentType "application/json"
+
+        render comandaService.getTakenOrders() as JSON
+    }
+
+    def assignOrder() {
+
+        comandaService.assignOrder(params.orderId)
+        params.id = params.orderId
+        params.remove('orderId')
+        redirect action: 'show', params: params;
+    }
 }

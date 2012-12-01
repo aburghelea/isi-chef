@@ -112,6 +112,7 @@ class ProdusController {
     def listJSON() {
         response.setStatus HttpServletResponse.SC_OK
         response.setContentType "application/json"
+
         def result = Produs.list().collect() {
             Produs it ->
             [
@@ -125,11 +126,5 @@ class ProdusController {
             ]
         }
         render result as JSON
-    }
-
-    def listNone() {
-        response.setStatus HttpServletResponse.SC_OK
-        response.setContentType "application/json"
-        render ""
     }
 }

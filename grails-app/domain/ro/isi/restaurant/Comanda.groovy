@@ -46,4 +46,14 @@ class Comanda implements Serializable {
     public String toString() {
         return id;
     }
+
+    def getPreparationTime() {
+        def preparationTime = 0;
+        produses.each {
+            Produs it -> preparationTime += it.preparationTime;
+            println preparationTime;
+        }
+
+        return preparationTime;
+    }
 }

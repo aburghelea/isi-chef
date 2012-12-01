@@ -22,6 +22,16 @@ class ComandaService {
         return null;
     }
 
+    def getAuthenticatedCook = {
+        def waiter = userService.getAuthenticatedUser()
+
+        for (def role : waiter.authorities) {
+            if (role?.authority?.equals(Roles.ROLE_COOK))
+                return User.findById(waiter.id)
+        }
+        return null;
+    }
+
     def getTakenOrdersCount() {
         def takenOrders = Comanda.createCriteria().count() {
             or {
@@ -35,5 +45,36 @@ class ComandaService {
     def getPreparedOrdersCount() {
         return "UNIMPLEMENTED"
 
+    }
+
+
+    def getTakenOrders() {
+        def takenOrders = Comanda.createCriteria().list() {
+            or {
+                eq 'status', ComandaStatus.TAKEN
+                isNull('cook')
+            }
+        }
+
+        takenOrders = takenOrders.collect {
+            Comanda it ->
+            [
+                    id: it.id,
+                    waiter: it.waiter?.username,
+                    status: it.status?.toString(),
+                    preparationTime: it.getPreparationTime(),
+                    masa: it.masa?.number
+            ]
+
+        }
+        return takenOrders;
+    }
+
+    def assignOrder(def orderId) {
+        def comanda = Comanda.findById(orderId)
+        comanda.cook = getAuthenticatedCook();
+        comanda.status = ComandaStatus.PREPARING;
+
+        comanda.save(failOnError: true, flush: true)
     }
 }

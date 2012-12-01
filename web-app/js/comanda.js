@@ -14,6 +14,24 @@ var Produs = kendo.data.Model.define({
     }
 });
 
+
+var Comanda = kendo.data.Model.define({
+    id:'id',
+    fields:{
+        waiter:{type:'string'},
+        status:{type:'string'},
+        preparatitonTime:{type:'number'},
+        masa:{type:'string'}
+    }
+});
+var buildTakenCommandsDataSource = function (data) {
+    return new kendo.data.DataSource({
+        data:data,
+        schema:{model:Comanda},
+        pageSize:10
+    });
+};
+
 var buildLocalDataSource = function (data) {
     return new kendo.data.DataSource({
         data:data,
@@ -35,7 +53,46 @@ var buildDataSource = function (uri) {
     });
 };
 
-var buildKendoGrid = function (container, dataSource, toDelete) {
+var buildTakenOrdersKendoGrid = function (container, dataSource) {
+    $(container).kendoGrid({
+        dataSource:dataSource,
+        sortable:true,
+        filterable:true,
+        pageable:{
+            refresh:true,
+            pageSizes:true
+        },
+        columns:[
+            {
+                field:'waiter', filterable:true, title:"Waiter"
+            },
+            {
+                field:'status', filterable:true, title:"Status"
+            },
+            {
+                field:'preparationTime', filterable:true, title:"Prep. Time"
+            },
+            {
+                field:'masa', filterable:true, title:"Table"
+            },
+            {
+                title:'Operations', template:"#= assignForm(id)#", width:'10%'
+            }
+        ]
+    });
+};
+
+
+var assignForm = function(comandaId) {
+    var form = '<form  style="margin: 0;" action="'+assignUrl+'" >'+
+        '<input type="hidden" name=orderId value="'+comandaId+'">' +
+        '<input class="btn btn-primary btn-block" type="submit" value="Assign to me">'+
+        '</form>'  ;
+
+    return form;
+};
+
+var buildProdusKendoGrid = function (container, dataSource, toDelete) {
     $(container).kendoGrid({
         dataSource:dataSource,
         sortable:true,

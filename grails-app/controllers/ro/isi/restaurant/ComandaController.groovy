@@ -6,7 +6,6 @@ import org.springframework.dao.DataIntegrityViolationException
 import javax.servlet.http.HttpServletResponse
 
 import ro.isi.auth.Roles
-import grails.converters.JSON
 
 /**
  * ComandaController
@@ -38,6 +37,8 @@ class ComandaController {
 
     def save() {
         def comandaInstance = new Comanda(params)
+        comandaInstance.status = ComandaStatus.TAKEN;
+
         if (!comandaInstance.save(flush: true)) {
             render(view: "create", model: [comandaInstance: comandaInstance])
             return
@@ -118,24 +119,18 @@ class ComandaController {
         }
     }
 
-//    def addProductToSession = {
-//        if (session[params.tableId] == null || !(session[params.tableId] instanceof List))
-//            session[params.tableId] = [];
-//        def product = Produs.findById(params.productId);
-//        if (product != null)
-//            session[params.tableId].add product
-//
-//        response.setStatus HttpServletResponse.SC_OK
-//        response.setContentType "application/json"
-//        render ""
-//    }
-
     def takenOrders = {
         def takenOrders = comandaService.getTakenOrdersCount();
 
         response.setStatus HttpServletResponse.SC_OK
-        response.setContentType "application/json"
         render takenOrders
+    }
+
+    def preparedOrders = {
+        def preparedOrders = comandaService.getPreparedOrdersCount();
+
+        response.setStatus HttpServletResponse.SC_OK
+        render preparedOrders
     }
 
 }

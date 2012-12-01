@@ -11,6 +11,7 @@ class Comanda implements Serializable {
     User waiter
     Masa masa
     User cook
+    ComandaStatus status
 
     List produses
     static hasMany = [produses: Produs]

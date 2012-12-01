@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    console.log(counterUrl);
     getOrdersCount();
     setInterval('getOrdersCount()', refreshInterval);
 });
@@ -6,13 +7,28 @@ $(document).ready(function () {
 var getOrdersCount = function () {
     $.ajax({
         type:'GET',
-        url: counterUrl,
+        url:counterUrl,
         success:function (data, textStatus) {
-            $('#ordersIndicator').html(data);
+            updateIndicators(data);
             console.log('bine');
         },
         error:function (XMLHttpRequest, textStatus, errorThrown) {
             console.log('rau');
         }
     });
+};
+
+var updateIndicators = function(data){
+    var oldData = $('#ordersIndicator').html();
+    $('#ordersIndicator').html(data);
+
+    if (parseInt(oldData) < parseInt(data)) {
+        notifyNewOrder();
+        debugger;
+    }
+};
+
+function notifyNewOrder() {
+    var audio = new Audio(soundEffect);
+    audio.play();
 }

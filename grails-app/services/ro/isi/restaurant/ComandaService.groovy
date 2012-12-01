@@ -24,8 +24,16 @@ class ComandaService {
 
     def getTakenOrdersCount() {
         def takenOrders = Comanda.createCriteria().count() {
-            isNull('cook')
+            or {
+                isNull('cook')
+                eq 'status', ComandaStatus.TAKEN
+            }
         }
         return takenOrders;
+    }
+
+    def getPreparedOrdersCount() {
+        return "UNIMPLEMENTED"
+
     }
 }

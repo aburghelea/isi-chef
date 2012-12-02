@@ -15,23 +15,26 @@
     <meta name="layout" content="kickstart"/>
     <g:set var="entityName" value="${message(code: 'comanda.label', default: 'Comanda')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
+
+    <script>
+        var assignUrl = "${createLink(controller: 'comanda', action: 'assignOrder')}";
+        $(document).ready(function () {
+            var takenComandsDataSource = buildDataSource("${createLink(controller: 'comanda', action: 'listTakenOrdersAsJson')}");
+            buildTakenOrdersKendoGrid($("#products"), takenComandsDataSource);
+        });
+    </script>
 </head>
 
 <body>
+<g:if test="${comandaInstance}">
+    <g:render template="show" model="[comandaInstance: comandaInstance]"/>
+</g:if>
+<g:else>
+    <div id="products"></div>
 
-<div id="products"></div>
+</g:else>
 
 <g:javascript src="comanda.js"/>
-
-<r:script>
-
-    var assignUrl = "${createLink(controller: 'comanda', action: 'assignOrder')}";
-
-    $(document).ready(function () {
-        var takenComandsDataSource = buildDataSource("${createLink(controller: 'comanda', action: 'listTakenOrdersAsJson')}");
-        buildTakenOrdersKendoGrid($("#products"), takenComandsDataSource);
-    });
-</r:script>
 
 </body>
 

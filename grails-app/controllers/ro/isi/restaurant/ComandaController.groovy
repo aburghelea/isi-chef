@@ -121,7 +121,7 @@ class ComandaController {
 
     @Secured([Roles.ROLE_COOK])
     def listTakenOrders() {
-        println "========> ";
+        [comandaInstance: comandaService.getOrderAssignedToCurrentCook()]
     }
 
     def takenOrdersCounter = {
@@ -148,9 +148,9 @@ class ComandaController {
 
     def assignOrder() {
 
-        comandaService.assignOrder(params.orderId)
-        params.id = params.orderId
-        params.remove('orderId')
-        redirect action: 'show', params: params;
+        def alreadyAssignedCommand = comandaService.assignOrder params.orderId
+        if (alreadyAssignedCommand)
+            flash.message = message(code: 'default.order.exists.message', args: [message(code: 'comanda.label', default: 'Comanda')])
+        redirect action: 'listTakenOrders', params: params
     }
 }

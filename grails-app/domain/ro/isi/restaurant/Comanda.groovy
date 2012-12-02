@@ -51,7 +51,6 @@ class Comanda implements Serializable {
         def preparationTime = 0;
         produses.each {
             Produs it -> preparationTime += it.preparationTime;
-            println preparationTime;
         }
 
         return preparationTime;

@@ -70,11 +70,29 @@ class ComandaService {
         return takenOrders;
     }
 
+    /**
+     * Sets the cook for an order
+     * @param orderId The order to be assigned
+     * @return Null if assignement was successful or the already assigned command otherwise
+     */
     def assignOrder(def orderId) {
-        def comanda = Comanda.findById(orderId)
+        def comanda = getOrderAssignedToCurrentCook()
+        if (comanda)
+            return false;
+
+        comanda = Comanda.findById(orderId)
         comanda.cook = getAuthenticatedCook();
         comanda.status = ComandaStatus.PREPARING;
-
         comanda.save(failOnError: true, flush: true)
+
+        return true;
+    }
+
+    def getOrderAssignedToCurrentCook() {
+        def comanda = Comanda.findAllByCookAndStatus(getAuthenticatedCook(), ComandaStatus.PREPARING);
+        if (comanda?.size() > 0)
+            return comanda.first();
+
+        return null
     }
 }

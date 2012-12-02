@@ -20,6 +20,8 @@ nbproject/private/
 build/
 target/
 adhoc/
+out/ 
+production/
 
 isi.ipr
 *.iws

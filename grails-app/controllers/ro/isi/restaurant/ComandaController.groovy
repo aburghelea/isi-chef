@@ -150,7 +150,14 @@ class ComandaController {
 
         def alreadyAssignedCommand = comandaService.assignOrder params.orderId
         if (alreadyAssignedCommand)
-            flash.message = message(code: 'default.order.exists.message', args: [message(code: 'comanda.label', default: 'Comanda')])
+            flash.message = message(code: 'order.exists.message', args: [message(code: 'comanda.label', default: 'Comanda')])
         redirect action: 'listTakenOrders', params: params
+    }
+
+    def markAsPrepared() {
+        comandaService.markAsPrepared params.id
+
+        flash.message = message(code: 'order.prepared.message', default: "CONTACT ADMINISTRATOR")
+        redirect action: "listTakenOrders"
     }
 }

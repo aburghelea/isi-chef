@@ -43,6 +43,9 @@
                         <li>
                             Price: ${p?.price?.encodeAsHTML()}
                         </li>
+                        <li>
+                            Type: ${p?.type?.encodeAsHTML()}
+                        </li>
                     </ul>
                 </g:each>
 
@@ -53,7 +56,7 @@
             <td valign="top" class="name"><g:message code="comanda.cook.label" default="Cook"/></td>
 
             <td valign="top" class="value"><g:link controller="user" action="show"
-                                                   id="${comandaInstance?.cook?.id}">${comandaInstance?.cook?.encodeAsHTML()}</g:link></td>
+                                                   id="${comandaInstance?.cook?.id}">${comandaInstance?.cook?.username?.encodeAsHTML()}</g:link></td>
 
         </tr>
 

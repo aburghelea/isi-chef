@@ -43,7 +43,14 @@ class ComandaService {
     }
 
     def getPreparedOrdersCount() {
-        return "UNIMPLEMENTED"
+        def preparedOrdersCount = Comanda.createCriteria().count() {
+            and {
+                eq 'waiter', getAuthenticatedWaiter()
+                eq 'status', ComandaStatus.PREPARED
+            }
+        }
+
+        return preparedOrdersCount
 
     }
 
@@ -94,5 +101,12 @@ class ComandaService {
             return comanda.first();
 
         return null
+    }
+
+    def markAsPrepared(def orderId) {
+        def comanda = Comanda.get(orderId);
+
+        comanda?.status = ComandaStatus.PREPARED;
+        comanda?.save(failOnError: true, flush: true)
     }
 }

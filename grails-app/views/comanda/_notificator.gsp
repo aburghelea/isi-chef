@@ -2,10 +2,10 @@
 <sec:ifAnyGranted roles="${Roles.ROLE_WAITER},${Roles.ROLE_COOK}">
     <ul class="nav pull-right">
         <li class="">
-            <a href="#">
+            <div class="brand">
 
                 <span id="ordersIndicator" style="display: block" class="badge badge-important"></span>
-            </a>
+            </div>
         </li>
     </ul>
 

@@ -1,6 +1,7 @@
 package org.codehaus.groovy.grails.plugins.springsecurity.ui
 
 import grails.test.mixin.*
+import grails.plugins.springsecurity.ui.RegistrationCodeController
 
 /**
  * RegistrationCodeControllerTests

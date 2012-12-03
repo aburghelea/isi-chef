@@ -1,7 +1,7 @@
 <html>
 
 <head>
-	<title><g:message code="default.contact.title"/></title>
+	<title><g:message code="Contact"/></title>
 	<meta name="layout" content="kickstart" />
 </head>
 
@@ -9,21 +9,18 @@
 
 	<section id="intro">
 		<p class="lead">
-			For ongoing information about ${meta(name:'app.name')}, please read our company 
-			<a href="http://wordpress.com/signup/">blog</a>. Also, feel free to
-			contact us with service questions, partnership proposals, or media
-			inquiries.
+		Pentru orice alte informaţii, vă stăm la dispoziţie!
 		</p>
 	</section>
 
 	<section id="address">
 	<div class="row">
 		<div class="span4">
-			<h1><g:message code="default.contact.address"/></h1>
+			<h1><g:message code="Adresa :"/></h1>
 				<address>
 					<strong>${meta(name:'app.name')}, Inc.</strong><br>
-					 123 Future Ave<br>
-					 San Francisco, CA 94107<br>
+					 Strada Stavropoleos 5<br>
+					 Sector 6, Bucuresti.<br>
 					 <br>
 				</address>
 				<address>

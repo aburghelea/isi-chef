@@ -19,8 +19,8 @@ var getOrdersCount = function () {
 };
 
 var updateIndicators = function(data){
-    var oldData = $('#ordersIndicator').html();
-    $('#ordersIndicator').html(data);
+    var oldData = $('span[name="ordersIndicator"]').html();
+    $('span[name="ordersIndicator"]').html(data);
 
     if (parseInt(oldData) < parseInt(data)) {
         notifyNewOrder();

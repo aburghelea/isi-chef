@@ -24,6 +24,8 @@ var Comanda = kendo.data.Model.define({
         masa:{type:'string'}
     }
 });
+
+//noinspection JSUnusedGlobalSymbols
 var buildTakenCommandsDataSource = function (data) {
     return new kendo.data.DataSource({
         data:data,
@@ -53,7 +55,7 @@ var buildDataSource = function (uri) {
     });
 };
 
-var buildTakenOrdersKendoGrid = function (container, dataSource) {
+var buildOrdersKendoGrid = function (container, dataSource, prepared) {
     $(container).kendoGrid({
         dataSource:dataSource,
         sortable:true,
@@ -67,6 +69,9 @@ var buildTakenOrdersKendoGrid = function (container, dataSource) {
                 field:'waiter', filterable:true, title:"Waiter"
             },
             {
+                field:'cook', filterable:true, title:"Cook"
+            },
+            {
                 field:'status', filterable:true, title:"Status"
             },
             {
@@ -76,20 +81,10 @@ var buildTakenOrdersKendoGrid = function (container, dataSource) {
                 field:'masa', filterable:true, title:"Table"
             },
             {
-                title:'Operations', template:"#= assignForm(id)#", width:'10%'
+                title:'Operations', template:orderProductTemplate(prepared), width:'10%'
             }
         ]
     });
-};
-
-
-var assignForm = function(comandaId) {
-    var form = '<form  style="margin: 0;" action="'+assignUrl+'" >'+
-        '<input type="hidden" name=orderId value="'+comandaId+'">' +
-        '<input class="btn btn-primary btn-block" type="submit" value="Assign to me">'+
-        '</form>'  ;
-
-    return form;
 };
 
 var buildProdusKendoGrid = function (container, dataSource, toDelete) {
@@ -121,7 +116,7 @@ var buildProdusKendoGrid = function (container, dataSource, toDelete) {
                 field:'type', filterable:true, title:'Category', width:'15%'
             },
             {
-                title:'Operations', template:operationTemplate(toDelete), width:'10%'
+                title:'Operations', template:productOperationTemplate(toDelete), width:'10%'
             }
         ]
     });
@@ -144,7 +139,7 @@ var updateAddedDataSource = function () {
     refreshTable($("#products_added"));
 };
 
-var operationTemplate = function (toDelete) {
+var productOperationTemplate = function (toDelete) {
     return toDelete == true ? '#= addProductToOrderTemplate(id) #' : '#= removeProductFromOrderTemplate(id) #';
 };
 
@@ -200,6 +195,34 @@ var updateFormParameters = function () {
             .appendTo($('#hiddenProducts'));
     });
 };
+
+var orderProductTemplate = function(prepared) {
+    return prepared == false ? "#= assignOrderTemplate(id) #" : "#= deliverOrderTemplate(id) #";
+};
+//noinspection JSUnusedGlobalSymbols
+var assignOrderTemplate = function (comandaId) {
+//    var $form = $('<form></form>').attr('style',"margin: 0;").attr('action',assignUrl);
+//    $('<input>').attr('type','hidden').attr('name','orderId').val(comandaId).appendTo($form);
+//    $('<input>').addClass('btn btn-primary btn-block').attr('type','submit').val('Assign to me').appendTo($form);
+//
+//    return $('<div></div>').append($form).html();
+
+    return orderFormTemplate(comandaId, assign) ;
+};
+
+var deliverOrderTemplate = function(comandaId) {
+    return orderFormTemplate(comandaId, deliverUrl, 'Livreaza') ;
+};
+
+var orderFormTemplate = function(comandaId, url, caption){
+    caption = caption == undefined ? 'Assign to me' : caption;
+
+    var $form = $('<form></form>').attr('style',"margin: 0;").attr('action',url);
+    $('<input>').attr('type','hidden').attr('name','orderId').val(comandaId).appendTo($form);
+    $('<input>').addClass('btn btn-primary btn-block').attr('type','submit').val(caption).appendTo($form);
+
+    return $('<div></div>').append($form).html();
+}
 
 var updateBadge = function (productId, increment) {
     increment = increment == false ? -1 : +1;

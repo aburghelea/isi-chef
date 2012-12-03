@@ -124,6 +124,11 @@ class ComandaController {
         [comandaInstance: comandaService.getOrderAssignedToCurrentCook()]
     }
 
+    @Secured([Roles.ROLE_WAITER])
+    def listPreparedOrders() {
+
+    }
+
     def takenOrdersCounter = {
         def takenOrders = comandaService.getTakenOrdersCount();
 
@@ -146,12 +151,29 @@ class ComandaController {
         render comandaService.getTakenOrders() as JSON
     }
 
+    def listPreparedOrdersAsJson() {
+        response.setStatus HttpServletResponse.SC_OK
+        response.setContentType "application/json"
+
+        render comandaService.getPreparedOrders() as JSON
+    }
+
     def assignOrder() {
 
         def alreadyAssignedCommand = comandaService.assignOrder params.orderId
         if (alreadyAssignedCommand)
             flash.message = message(code: 'order.exists.message', args: [message(code: 'comanda.label', default: 'Comanda')])
         redirect action: 'listTakenOrders', params: params
+    }
+
+    def deliver() {
+
+        def delivered = comandaService.deliverOrder params.orderId
+        if (delivered)
+            flash.message = message(code: 'order.delivered.message', args: [params.orderId])
+        else
+            flash.message = message(code: 'order.not.delivered.message', args: [params.orderId])
+        redirect action: 'listPreparedOrders', params: params
     }
 
     def markAsPrepared() {

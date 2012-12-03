@@ -56,21 +56,40 @@ class ComandaService {
 
 
     def getTakenOrders() {
-        def takenOrders = Comanda.createCriteria().list() {
+        Closure takenFilter = {
             or {
-                eq 'status', ComandaStatus.TAKEN
+                eq 'status', ComandaStatus.TAKEN;
                 isNull('cook')
             }
         }
+
+        return getOrders(takenFilter)
+    }
+
+    def getPreparedOrders() {
+
+        Closure prepared = {
+            and {
+                eq 'status', ComandaStatus.PREPARED;
+                eq 'waiter', getAuthenticatedWaiter()
+            }
+        }
+
+        return getOrders(prepared)
+    }
+
+    private def getOrders(def restrictions) {
+        def takenOrders = Comanda.createCriteria().list restrictions
 
         takenOrders = takenOrders.collect {
             Comanda it ->
             [
                     id: it.id,
-                    waiter: it.waiter?.username,
-                    status: it.status?.toString(),
+                    waiter: it.waiter?.username != null ? it.waiter?.username : '',
+                    cook: it.cook?.username != null ? it.cook?.username : '',
+                    status: it.status?.toString() != null ? it.status?.toString() : '',
                     preparationTime: it.getPreparationTime(),
-                    masa: it.masa?.number
+                    masa: it.masa?.number != null ? it.masa?.number : '-'
             ]
 
         }
@@ -90,6 +109,16 @@ class ComandaService {
         comanda = Comanda.findById(orderId)
         comanda.cook = getAuthenticatedCook();
         comanda.status = ComandaStatus.PREPARING;
+        comanda.save(failOnError: true, flush: true)
+
+        return true;
+    }
+
+    def deliverOrder(def orderId) {
+        def comanda = Comanda.findById(orderId)
+        if (comanda.status != ComandaStatus.PREPARED)
+            return false;
+        comanda.status = ComandaStatus.DELIVERED;
         comanda.save(failOnError: true, flush: true)
 
         return true;

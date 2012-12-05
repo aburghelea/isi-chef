@@ -11,7 +11,8 @@ import grails.test.mixin.*
  */
 @TestFor(MasaController)
 @Mock(Masa)
-class MasaControllerTests {
+class
+MasaControllerTests {
 
 
     def populateValidParams(params) {

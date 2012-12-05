@@ -62,7 +62,7 @@ class BootStrap {
                     name: i + " Yummy",
                     price: i * 100,
                     description: "Produsul " + i,
-                    preparationTime: i * 13,
+                    preparationTime: i * 13 + 5,
                     code: i * Math.sqrt(i),
                     type: 'COMESTIBIL').save(failOnError: true, flush: true);
         }
@@ -70,24 +70,24 @@ class BootStrap {
     }
 
     private def bootStrapTables = {
-        for (int i = 0; i < 20; i++) {
+        for (long i = 0; i < 20; i++) {
             new Masa(
                     number: i,
                     description: "Masa - " + i
             ).save(failOnError: true, flush: true);
         }
-    }
+}
 
-    private def bootStrapOrders = {
-        def waiter = User.findByUsername("ospatar");
+private def bootStrapOrders = {
+    def waiter = User.findByUsername("ospatar");
 
-        for (int i = 0; i < 20; i++) {
-            new Comanda(
-                    waiter: waiter,
-                    produses: [Produs.findById(1)],
-                    masa: Masa.findById(1),
-                    status: ComandaStatus.TAKEN
-            ).save(failOnError: true, flush: true);
-        }
+    for (int i = 0; i < 20; i++) {
+        new Comanda(
+                waiter: waiter,
+                produses: [Produs.findById(3)],
+                masa: Masa.findById(1),
+                status: ComandaStatus.TAKEN
+        ).save(failOnError: true, flush: true);
     }
+}
 }

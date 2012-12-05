@@ -1,7 +1,7 @@
 <html>
 
 <head>
-	<title><g:message code="Contact"/></title>
+	<title><g:message code="default.contact.message" default ="Contact" /></title>
 	<meta name="layout" content="kickstart" />
 </head>
 
@@ -16,9 +16,9 @@
 	<section id="address">
 	<div class="row">
 		<div class="span4">
-			<h1><g:message code="Adresa :"/></h1>
+			<h1><g:message code="default.address.message" default="Adresa :"/></h1>
 				<address>
-					<strong>${meta(name:'app.name')}, Inc.</strong><br>
+					<strong>isi-Chef</strong><br>
 					 Strada Stavropoleos 5<br>
 					 Sector 6, Bucuresti.<br>
 					 <br>
@@ -47,10 +47,20 @@
 							<strong>Email :</strong>
 						</span>
 						<span class="span3">
-					    	<a href="mailto:info@${meta(name:'app.name')}.com">cougarftg@gmail.com</a>
+					    	<a href="mailto:info@${meta(name:'app.name')}.com">iceman.ftg@gmail.com</a>
 						</span>
 					</div>
 				</address>
+								<address>
+                					<div class="row">
+                						<span class="span1">
+                							<strong>Echipa :</strong>
+                						</span>
+                						<span class="span3">
+                					    	Burghelea Alexandru <br>Lapadus Razvan <br>Manea Razvan <br>Stoenescu Radu <br>Bocearov Irina </br>
+                						</span>
+                					</div>
+                				</address>
 			</div>
 			
 			<div class="span8">

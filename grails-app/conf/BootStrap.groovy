@@ -70,7 +70,7 @@ class BootStrap {
     }
 
     private def bootStrapTables = {
-        for (int i = 0; i < 20; i++) {
+        for (long i = 0; i < 20; i++) {
             new Masa(
                     number: i,
                     description: "Masa - " + i

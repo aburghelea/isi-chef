@@ -18,7 +18,7 @@
     <g:javascript src="comanda.js"/>
     <script>
         var assignUrl = "${createLink(controller: 'comanda', action: 'assignOrder')}";
-        var deliverUrl = "${createLink(controller: 'comanda', action: 'deliverOrder')}";
+        var deliverUrl = "${createLink(controller: 'comanda', action: 'deliver')}";
         $(document).ready(function () {
             var preparedOrders = buildDataSource("${createLink(controller: 'comanda', action: 'listPreparedOrdersAsJson')}");
             buildOrdersKendoGrid($("#products"), preparedOrders, true);

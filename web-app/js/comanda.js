@@ -19,9 +19,10 @@ var Comanda = kendo.data.Model.define({
     id:'id',
     fields:{
         waiter:{type:'string'},
+        cook:{type:'string'},
         status:{type:'string'},
         preparatitonTime:{type:'number'},
-        masa:{type:'string'}
+        masa:{type:'number'}
     }
 });
 
@@ -29,7 +30,17 @@ var Comanda = kendo.data.Model.define({
 var buildTakenCommandsDataSource = function (data) {
     return new kendo.data.DataSource({
         data:data,
-        schema:{model:Comanda},
+        schema:{
+            model:{
+                fields:{
+                    waiter:{type:'string'},
+                    cook:{type:'string'},
+                    status:{type:'string'},
+                    preparatitonTime:{type:'number'},
+                    masa:{type:'table'}
+                }
+            }
+        },
         pageSize:10
     });
 };
@@ -56,6 +67,7 @@ var buildDataSource = function (uri) {
 };
 
 var buildOrdersKendoGrid = function (container, dataSource, prepared) {
+    console.log(dataSource);
     $(container).kendoGrid({
         dataSource:dataSource,
         sortable:true,
@@ -66,22 +78,22 @@ var buildOrdersKendoGrid = function (container, dataSource, prepared) {
         },
         columns:[
             {
-                field:'waiter', filterable:true, title:"Waiter"
+                field:'waiter', filterable:false, title:"Waiter"
             },
             {
-                field:'cook', filterable:true, title:"Cook"
+                field:'cook', title:"Cook", filterable:false
             },
             {
-                field:'status', filterable:true, title:"Status"
+                field:'status', title:"Status"
             },
             {
                 field:'preparationTime', filterable:true, title:"Prep. Time"
             },
             {
-                field:'masa', filterable:true, title:"Table"
+                field:'table', filterable:true, title:"Table"
             },
             {
-                title:'Operations', template:orderProductTemplate(prepared), width:'10%'
+                title:'Operations', template:orderProductTemplate(prepared), width:'10%', filterable:false, sortable:false
             }
         ]
     });
@@ -196,33 +208,28 @@ var updateFormParameters = function () {
     });
 };
 
-var orderProductTemplate = function(prepared) {
+var orderProductTemplate = function (prepared) {
     return prepared == false ? "#= assignOrderTemplate(id) #" : "#= deliverOrderTemplate(id) #";
 };
 //noinspection JSUnusedGlobalSymbols
 var assignOrderTemplate = function (comandaId) {
-//    var $form = $('<form></form>').attr('style',"margin: 0;").attr('action',assignUrl);
-//    $('<input>').attr('type','hidden').attr('name','orderId').val(comandaId).appendTo($form);
-//    $('<input>').addClass('btn btn-primary btn-block').attr('type','submit').val('Assign to me').appendTo($form);
-//
-//    return $('<div></div>').append($form).html();
-
-    return orderFormTemplate(comandaId, assign) ;
+    return orderFormTemplate(comandaId, assignUrl);
 };
 
-var deliverOrderTemplate = function(comandaId) {
-    return orderFormTemplate(comandaId, deliverUrl, 'Livreaza') ;
+//noinspection JSUnusedGlobalSymbols
+var deliverOrderTemplate = function (comandaId) {
+    return orderFormTemplate(comandaId, deliverUrl, 'Livreaza');
 };
 
-var orderFormTemplate = function(comandaId, url, caption){
+var orderFormTemplate = function (comandaId, url, caption) {
     caption = caption == undefined ? 'Assign to me' : caption;
 
-    var $form = $('<form></form>').attr('style',"margin: 0;").attr('action',url);
-    $('<input>').attr('type','hidden').attr('name','orderId').val(comandaId).appendTo($form);
-    $('<input>').addClass('btn btn-primary btn-block').attr('type','submit').val(caption).appendTo($form);
+    var $form = $('<form></form>').attr('style', "margin: 0;").attr('action', url);
+    $('<input>').attr('type', 'hidden').attr('name', 'orderId').val(comandaId).appendTo($form);
+    $('<input>').addClass('btn btn-primary btn-block').attr('type', 'submit').val(caption).appendTo($form);
 
     return $('<div></div>').append($form).html();
-}
+};
 
 var updateBadge = function (productId, increment) {
     increment = increment == false ? -1 : +1;

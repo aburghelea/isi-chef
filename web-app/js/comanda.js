@@ -19,28 +19,15 @@ var Comanda = kendo.data.Model.define({
     id:'id',
     fields:{
         waiter:{type:'string'},
-        cook:{type:'string'},
         status:{type:'string'},
         preparatitonTime:{type:'number'},
-        masa:{type:'number'}
+        masa:{type:'string'}
     }
 });
-
-//noinspection JSUnusedGlobalSymbols
 var buildTakenCommandsDataSource = function (data) {
     return new kendo.data.DataSource({
         data:data,
-        schema:{
-            model:{
-                fields:{
-                    waiter:{type:'string'},
-                    cook:{type:'string'},
-                    status:{type:'string'},
-                    preparatitonTime:{type:'number'},
-                    masa:{type:'table'}
-                }
-            }
-        },
+        schema:{model:Comanda},
         pageSize:10
     });
 };
@@ -66,8 +53,7 @@ var buildDataSource = function (uri) {
     });
 };
 
-var buildOrdersKendoGrid = function (container, dataSource, prepared) {
-    console.log(dataSource);
+var buildTakenOrdersKendoGrid = function (container, dataSource) {
     $(container).kendoGrid({
         dataSource:dataSource,
         sortable:true,
@@ -78,25 +64,32 @@ var buildOrdersKendoGrid = function (container, dataSource, prepared) {
         },
         columns:[
             {
-                field:'waiter', filterable:false, title:"Waiter"
+                field:'waiter', filterable:true, title:"Waiter"
             },
             {
-                field:'cook', title:"Cook", filterable:false
-            },
-            {
-                field:'status', title:"Status"
+                field:'status', filterable:true, title:"Status"
             },
             {
                 field:'preparationTime', filterable:true, title:"Prep. Time"
             },
             {
-                field:'table', filterable:true, title:"Table"
+                field:'masa', filterable:true, title:"Table"
             },
             {
-                title:'Operations', template:orderProductTemplate(prepared), width:'10%', filterable:false, sortable:false
+                title:'Operations', template:"#= assignForm(id)#", width:'10%'
             }
         ]
     });
+};
+
+
+var assignForm = function(comandaId) {
+    var form = '<form  style="margin: 0;" action="'+assignUrl+'" >'+
+        '<input type="hidden" name=orderId value="'+comandaId+'">' +
+        '<input class="btn btn-primary btn-block" type="submit" value="Assign to me">'+
+        '</form>'  ;
+
+    return form;
 };
 
 var buildProdusKendoGrid = function (container, dataSource, toDelete) {
@@ -128,7 +121,7 @@ var buildProdusKendoGrid = function (container, dataSource, toDelete) {
                 field:'type', filterable:true, title:'Category', width:'15%'
             },
             {
-                title:'Operations', template:productOperationTemplate(toDelete), width:'10%'
+                title:'Operations', template:operationTemplate(toDelete), width:'10%'
             }
         ]
     });
@@ -151,7 +144,7 @@ var updateAddedDataSource = function () {
     refreshTable($("#products_added"));
 };
 
-var productOperationTemplate = function (toDelete) {
+var operationTemplate = function (toDelete) {
     return toDelete == true ? '#= addProductToOrderTemplate(id) #' : '#= removeProductFromOrderTemplate(id) #';
 };
 
@@ -206,29 +199,6 @@ var updateFormParameters = function () {
             .attr('value', value.id)
             .appendTo($('#hiddenProducts'));
     });
-};
-
-var orderProductTemplate = function (prepared) {
-    return prepared == false ? "#= assignOrderTemplate(id) #" : "#= deliverOrderTemplate(id) #";
-};
-//noinspection JSUnusedGlobalSymbols
-var assignOrderTemplate = function (comandaId) {
-    return orderFormTemplate(comandaId, assignUrl);
-};
-
-//noinspection JSUnusedGlobalSymbols
-var deliverOrderTemplate = function (comandaId) {
-    return orderFormTemplate(comandaId, deliverUrl, 'Livreaza');
-};
-
-var orderFormTemplate = function (comandaId, url, caption) {
-    caption = caption == undefined ? 'Assign to me' : caption;
-
-    var $form = $('<form></form>').attr('style', "margin: 0;").attr('action', url);
-    $('<input>').attr('type', 'hidden').attr('name', 'orderId').val(comandaId).appendTo($form);
-    $('<input>').addClass('btn btn-primary btn-block').attr('type', 'submit').val(caption).appendTo($form);
-
-    return $('<div></div>').append($form).html();
 };
 
 var updateBadge = function (productId, increment) {

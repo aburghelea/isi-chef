@@ -14,25 +14,26 @@
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
-grails.mime.types = [html: ['text/html', 'application/xhtml+xml'],
-        xml: ['text/xml', 'application/xml'],
-        text: 'text/plain',
-        js: 'text/javascript',
-        rss: 'application/rss+xml',
-        atom: 'application/atom+xml',
-        css: 'text/css',
-        csv: 'text/csv',
-        all: '*/*',
-        json: ['application/json', 'text/json'],
-        form: 'application/x-www-form-urlencoded',
-        multipartForm: 'multipart/form-data'
-]
+grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
+                      xml: ['text/xml', 'application/xml'],
+                      text: 'text/plain',
+                      js: 'text/javascript',
+                      rss: 'application/rss+xml',
+                      atom: 'application/atom+xml',
+                      css: 'text/css',
+                      csv: 'text/csv',
+                      all: '*/*',
+                      json: ['application/json','text/json'],
+                      form: 'application/x-www-form-urlencoded',
+                      multipartForm: 'multipart/form-data'
+                    ]
 
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.cache.maxsize = 1000
 
 // What URL patterns should be processed by the resources plugin
 grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*', '/audio/*']
+
 
 // The default codec used to encode data with ${}
 grails.views.default.codec = "none" // none, html, base64
@@ -50,7 +51,7 @@ grails.enable.native2ascii = true
 // packages to include in Spring bean scanning
 grails.spring.bean.packages = []
 // whether to disable processing of multi part requests
-grails.web.disable.multipart = false
+grails.web.disable.multipart=false
 
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
@@ -75,44 +76,44 @@ log4j = {
     // appender:
     //
     appenders {
-        console name: 'stdout', layout: pattern(conversionPattern: '%c{2} %m%n')
+        console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     }
 
-    error 'org.codehaus.groovy.grails.web.servlet',  //  controllers
-            'org.codehaus.groovy.grails.web.pages', //  GSP
-            'org.codehaus.groovy.grails.web.sitemesh', //  layouts
-            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-            'org.codehaus.groovy.grails.web.mapping', // URL mapping
-            'org.codehaus.groovy.grails.commons', // core / classloading
-            'org.codehaus.groovy.grails.plugins', // plugins
-            'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
-            'org.springframework',
-            'org.hibernate',
-            'net.sf.ehcache.hibernate'
+    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
+           'org.codehaus.groovy.grails.web.pages', //  GSP
+           'org.codehaus.groovy.grails.web.sitemesh', //  layouts
+           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+           'org.codehaus.groovy.grails.web.mapping', // URL mapping
+           'org.codehaus.groovy.grails.commons', // core / classloading
+           'org.codehaus.groovy.grails.plugins', // plugins
+           'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
+           'org.springframework',
+           'org.hibernate',
+           'net.sf.ehcache.hibernate'
 }
 
 environments {
-    development {
-        grails.config.defaults.locations = [KickstartResources]
-    }
-    test {
-        grails.config.defaults.locations = [KickstartResources]
-    }
-    production {
-        // Do not compile less resources in production as some PAAS like CloudFoundry will not work
-    }
+	development {
+		grails.config.defaults.locations = [KickstartResources]
+	}
+	test {
+		grails.config.defaults.locations = [KickstartResources]
+	}
+	production {
+		// Do not compile less resources in production as some PAAS like CloudFoundry will not work
+	}
 }
 
 environments {
-    development {
-        grails.config.defaults.locations = [KickstartResources]
-    }
-    test {
-        grails.config.defaults.locations = [KickstartResources]
-    }
-    production {
-        // Do not compile less resources in production as some PAAS like CloudFoundry will not work
-    }
+	development {
+		grails.config.defaults.locations = [KickstartResources]
+	}
+	test {
+		grails.config.defaults.locations = [KickstartResources]
+	}
+	production {
+		// Do not compile less resources in production as some PAAS like CloudFoundry will not work
+	}
 }
 
 // Added by the Spring Security Core plugin:
@@ -127,10 +128,10 @@ grails {
         port = 465
         username = "vali.biliu@gmail.com"
         password = "isi-chef"
-        props = ["mail.smtp.auth": "true",
-                "mail.smtp.socketFactory.port": "465",
-                "mail.smtp.socketFactory.class": "javax.net.ssl.SSLSocketFactory",
-                "mail.smtp.socketFactory.fallback": "false"]
+        props = ["mail.smtp.auth":"true",
+                "mail.smtp.socketFactory.port":"465",
+                "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+                "mail.smtp.socketFactory.fallback":"false"]
     }
 }
 
@@ -149,7 +150,7 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
         '/css/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/images/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/static/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/register/*': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/register/*' : ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/login/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/': ['IS_AUTHENTICATED_ANONYMOUSLY'],
@@ -157,5 +158,4 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
         '/index': ['IS_AUTHENTICATED_ANONYMOUSLY'],
 ]
 
-ro.isi.auth.refreshTime = 30000 // 30sec
-ro.isi.auth.redirectTime = 3000 // 3sec
+ro.isi.auth.refreshTime = 30000 // 3sec

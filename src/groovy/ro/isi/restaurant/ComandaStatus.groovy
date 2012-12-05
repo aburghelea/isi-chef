@@ -9,6 +9,6 @@ enum ComandaStatus {
     TAKEN,
     PREPARING,
     PREPARED,
-    DELIVERED,
+    SERVED,
     PAID
 }

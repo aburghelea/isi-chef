@@ -9,55 +9,60 @@
 
 	<section id="intro">
 		<p class="lead">
-		Pentru orice alte informaţii, vă stăm la dispoziţie!
+		<g:message code="default.intro.message" default ="Pentru orice alte informaţii, vă stăm la dispoziţie!" />
 		</p>
 	</section>
 
 	<section id="address">
 	<div class="row">
 		<div class="span4">
-			<h1><g:message code="default.address.message" default="Adresa :"/></h1>
+			<h1><g:message code="default.address.title.message" default="Adresa :"/></h1>
 				<address>
-					<strong>isi-Chef</strong><br>
-					 Strada Stavropoleos 5<br>
-					 Sector 6, Bucuresti.<br>
+					<strong><g:message code="default.restaurant.name.message" default ="isi-Chef" /></strong><br>
+					 <g:message code="default.address.street.message" default ="Strada Stavropoleos 5" /><br>
+					 <g:message code="default.address.region.message" default ="Sector 6, Bucuresti." /><br>
 					 <br>
 				</address>
 				<address>
 					<div class="row">
 						<span class="span1">
-							<strong><abbr title="Telefon">Telefon :</abbr></strong>
+							<strong><abbr title="Telefon :"><g:message code="default.phone.title.message" default ="Telefon :" /></abbr></strong>
 						</span>
 						<span class="span3">
-							0743.061.489
+							<g:message code="default.phone.number.message" default ="0743.061.489" />
 						</span>
 					</div>
 					<div class="row">
 						<span class="span1">
-							<strong><abbr title="Fax">Fax :</abbr></strong>
+							<strong><abbr title="Fax"><g:message code="default.fax.title.message" default ="Fax :" /></abbr></strong>
 						</span>
 						<span class="span3">
-					    021 313.75.60
+					    <g:message code="default.fax.number.message" default ="021 313.75.60" />
 						</span>
 					</div>
 				</address>
 				<address>
 					<div class="row">
 						<span class="span1">
-							<strong>Email :</strong>
+							<strong><g:message code="default.email.title.message" default ="Email :" /></strong>
 						</span>
 						<span class="span3">
-					    	<a href="mailto:info@${meta(name:'app.name')}.com">iceman.ftg@gmail.com</a>
+					    	<a href="mailto:iceman.ftg@gmail.com"><g:message code="default.email.address.message" default ="iceman.ftg@gmail.com" /></a>
 						</span>
 					</div>
 				</address>
 								<address>
                 					<div class="row">
                 						<span class="span1">
-                							<strong>Echipa :</strong>
+                							<strong><g:message code="default.team.title.message" default ="Echipa:" /></strong>
                 						</span>
                 						<span class="span3">
-                					    	Burghelea Alexandru <br>Lapadus Razvan <br>Manea Razvan <br>Stoenescu Radu <br>Bocearov Irina </br>
+                					    	<g:message code="default.team.member1.message" default ="Burghelea Alexandru"/><br>
+                					    	<g:message code="default.team.member2.message" default ="Manea Razvan"/><br>
+                					    	<g:message code="default.team.member3.message" default ="Lapadus Razvan"/><br>
+                					    	<g:message code="default.team.member4.message" default ="Stoenescu Radu"/><br>
+                					    	<g:message code="default.team.member5.message" default ="Bocearov Irina"/><br>
+                					    	</br>
                 						</span>
                 					</div>
                 				</address>

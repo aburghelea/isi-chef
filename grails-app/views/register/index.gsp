@@ -2,7 +2,7 @@
 
 <head>
 	<meta name='layout' content='register'/>
-	<title><g:message code='spring.security.ui.register.title'/></title>
+	<title><g:message code='spring.security.ui.register.title' default="Register"/></title>
 </head>
 
 <body>
@@ -16,7 +16,7 @@
 
 	<g:if test='${emailSent}'>
 	<br/>
-	<g:message code='spring.security.ui.register.sent'/>
+	<g:message code='spring.security.ui.register.sent' default="Sent"/>
 	</g:if>
 	<g:else>
 

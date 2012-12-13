@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'rezervare.label', default: 'Rezervare')}" />
-	<title><g:message code="default.create.label" args="[entityName]" /></title>
+	<title><g:message code="default.create.label" args="[entityName]" default="Create ${entityName}" /></title>
 </head>
 
 <body>
@@ -25,7 +25,7 @@
 		</fieldset>
 		<div class="form-actions">
 			<g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-            <button class="btn" type="reset">Cancel</button>
+            <button class="btn" type="reset">${message(code: 'default.button.cancel.label', default: 'Cancel')}</button>
 		</div>
 	</g:form>
 	

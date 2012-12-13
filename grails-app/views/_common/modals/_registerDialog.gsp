@@ -5,7 +5,7 @@
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">x</button>
 
-            <h3><g:message code="security.register.title"/></h3>
+            <h3><g:message code="security.register.title" default="Register"/></h3>
         </div>
 
         <div class="modal-body">
@@ -60,8 +60,8 @@
         </div>
 
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary"><g:message code="security.register.label"/></button>
-            <g:submitToRemote class="btn btn-primary"><g:message code="security.register.label"/></g:submitToRemote>
+            <button type="submit" class="btn btn-primary"><g:message code="security.register.label" default="Register"/></button>
+            <g:submitToRemote class="btn btn-primary"><g:message code="security.register.label" default="Register"/></g:submitToRemote>
         </div>
     </g:formRemote>
 </div>

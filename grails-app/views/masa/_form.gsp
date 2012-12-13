@@ -27,7 +27,7 @@
     <li><g:link controller="comanda" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
 </g:each>
 <li class="add">
-<g:link controller="comanda" action="create" params="['masa.id': masaInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'comanda.label', default: 'Comanda')])}</g:link>
+<g:link controller="comanda" action="create" params="['masa.id': masaInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'comanda.label', default: 'Comanda')],default: 'Add '+message(code: 'comanda.label', default: 'Comanda'))}</g:link>
 </li>
 </ul>
 
@@ -44,7 +44,7 @@
     <li><g:link controller="rezervare" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
 </g:each>
 <li class="add">
-<g:link controller="rezervare" action="create" params="['masa.id': masaInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'rezervare.label', default: 'Rezervare')])}</g:link>
+<g:link controller="rezervare" action="create" params="['masa.id': masaInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'rezervare.label', default: 'Rezervare')], default: 'Add '+message(code: 'rezervare.label', default: 'Rezervare'))}</g:link>
 </li>
 </ul>
 

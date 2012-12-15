@@ -20,7 +20,7 @@
         var assignUrl = "${createLink(controller: 'comanda', action: 'assignOrder')}";
         $(document).ready(function () {
             var takenComandsDataSource = buildDataSource("${createLink(controller: 'comanda', action: 'listTakenOrdersAsJson')}");
-            buildTakenOrdersKendoGrid($("#products"), takenComandsDataSource);
+            buildOrdersKendoGrid($("#products"), takenComandsDataSource,false );
         });
     </script>
 </head>

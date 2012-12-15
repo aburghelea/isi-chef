@@ -14,22 +14,30 @@ class ComandaService {
 
     def getAuthenticatedWaiter = {
         def waiter = userService.getAuthenticatedUser()
-
-        for (def role : waiter.authorities) {
-            if (role?.authority?.equals(Roles.ROLE_WAITER))
-                return User.findById(waiter.id)
-        }
-        return null;
+        def user = null;
+        try {
+            for (def role : waiter.authorities) {
+                if (role?.authority?.equals(Roles.ROLE_WAITER)) {
+                    user = User.findById(waiter.id)
+                    break;
+                }
+            }
+        } catch (Exception ignored) { }
+        return user;
     }
 
     def getAuthenticatedCook = {
         def waiter = userService.getAuthenticatedUser()
-
-        for (def role : waiter.authorities) {
-            if (role?.authority?.equals(Roles.ROLE_COOK))
-                return User.findById(waiter.id)
-        }
-        return null;
+        def user = null;
+        try {
+            for (def role : waiter.authorities) {
+                if (role?.authority?.equals(Roles.ROLE_COOK)) {
+                    user = User.findById(waiter.id)
+                    break;
+                }
+            }
+        } catch (Exception ignored) { }
+        return user;
     }
 
     def getTakenOrdersCount() {
@@ -56,32 +64,43 @@ class ComandaService {
 
 
     def getTakenOrders() {
-        def takenOrders = Comanda.createCriteria().list() {
+        Closure takenFilter = {
             or {
-                eq 'status', ComandaStatus.TAKEN
+                eq 'status', ComandaStatus.TAKEN;
                 isNull('cook')
             }
         }
 
+        return getOrders(takenFilter)
+    }
+
+    def getPreparedOrders() {
+        Closure prepared = {
+            and {
+                eq 'status', ComandaStatus.PREPARED;
+                eq 'waiter', getAuthenticatedWaiter()
+            }
+        }
+
+        return getOrders(prepared)
+    }
+
+    private def getOrders(def restrictions) {
+        def takenOrders = Comanda.createCriteria().list restrictions
         takenOrders = takenOrders.collect {
             Comanda it ->
             [
                     id: it.id,
-                    waiter: it.waiter?.username,
-                    status: it.status?.toString(),
+                    waiter: it.waiter?.username != null ? it.waiter?.username : '',
+                    cook: it.cook?.username != null ? it.cook?.username : '',
+                    table: it.masa?.getNumber() + 1L,
                     preparationTime: it.getPreparationTime(),
-                    masa: it.masa?.number
+                    status: it.status?.toString() != null ? it.status?.toString() : ''
             ]
-
         }
         return takenOrders;
     }
 
-    /**
-     * Sets the cook for an order
-     * @param orderId The order to be assigned
-     * @return Null if assignement was successful or the already assigned command otherwise
-     */
     def assignOrder(def orderId) {
         def comanda = getOrderAssignedToCurrentCook()
         if (comanda)
@@ -90,6 +109,16 @@ class ComandaService {
         comanda = Comanda.findById(orderId)
         comanda.cook = getAuthenticatedCook();
         comanda.status = ComandaStatus.PREPARING;
+        comanda.save(failOnError: true, flush: true)
+
+        return true;
+    }
+
+    def deliverOrder(def orderId) {
+        def comanda = Comanda.findById(orderId)
+        if (comanda.status != ComandaStatus.PREPARED)
+            return false;
+        comanda.status = ComandaStatus.DELIVERED;
         comanda.save(failOnError: true, flush: true)
 
         return true;

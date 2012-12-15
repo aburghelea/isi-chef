@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<title><g:message code='spring.security.ui.resetPassword.title'/></title>
+<title><g:message code='spring.security.ui.resetPassword.title' default="Reset Password"/></title>
 <meta name='layout' content='register'/>
 </head>
 
@@ -17,7 +17,7 @@
 	<div class="sign-in">
 
 	<br/>
-	<h4><g:message code='spring.security.ui.resetPassword.description'/></h4>
+	<h4><g:message code='spring.security.ui.resetPassword.description' default="Description"/></h4>
 
 	<table>
 		<s2ui:passwordFieldRow name='password' labelCode='resetPasswordCommand.password.label' bean="${command}"

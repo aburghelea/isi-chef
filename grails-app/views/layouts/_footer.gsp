@@ -2,31 +2,31 @@
 	<div class="container">
 		<div class="row">
 			<div class="span2">
-				<h4>Product</h4>
+				<h4><g:message code="default.product.label" default="Product"/></h4>
 				<ul class="unstyled">
 					<li>
-						<a href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a>
+						<a href="${createLink(uri: '/')}"><g:message code="default.home.label" default="Home"/></a>
 					</li>
 					<li>
-						<a href="${createLink(uri: '/')}"><g:message code="default.tour.label"/></a>
+						<a href="${createLink(uri: '/')}"><g:message code="default.tour.label" default="Feature Tour"/></a>
 					</li>
 					<li>
-						<a href="${createLink(uri: '/')}"><g:message code="default.pricing.label"/></a>
+						<a href="${createLink(uri: '/')}"><g:message code="default.pricing.label" default="Pricing"/></a>
 					</li>
 					<li>
-						<a href="${createLink(uri: '/')}"><g:message code="default.faq.label"/></a>
+						<a href="${createLink(uri: '/')}"><g:message code="default.faq.label" default="FAQ"/></a>
 					</li>
 				</ul>
 			</div>
 			<div class="span2">
 				<h4>Company</h4>
 				<ul class="unstyled">
-					<li><a href="${createLink(uri: '/about')}"><g:message code="default.about.label"/></a></li>
-					<li><a href="${createLink(uri: '/contact')}"><g:message code="default.contact.label"/></a></li>
+					<li><a href="${createLink(uri: '/about')}"><g:message code="default.about.label" default="About"/></a></li>
+					<li><a href="${createLink(uri: '/contact')}"><g:message code="default.contact.label" default="Contact"/></a></li>
 				</ul>
 			</div>
 			<div class="span8">
-				<h4> Information </h4>
+				<h4> <g:message code="default.information.label" default="Information"/> </h4>
 				<p>Designed and built with Twitter's <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>. 
 				Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>. 
 				Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>

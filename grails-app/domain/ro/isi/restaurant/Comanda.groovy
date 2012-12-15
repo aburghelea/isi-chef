@@ -14,6 +14,7 @@ class Comanda implements Serializable {
     ComandaStatus status
 
     List produses
+
     static hasMany = [produses: Produs]
     static belongsTo = [Masa, User]
 

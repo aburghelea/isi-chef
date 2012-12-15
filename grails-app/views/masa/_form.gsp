@@ -19,7 +19,7 @@
 			</div>
 
 			<div class="control-group fieldcontain ${hasErrors(bean: masaInstance, field: 'comandas', 'error')} ">
-				<label for="comandas" class="control-label"><g:message code="masa.comandas.label" default="Comandas" /></label>
+				<label for="comandas" class="control-label"><g:message code="comandas.label" default="Comandas" /></label>
 				<div class="controls">
 					
 <ul class="one-to-many">

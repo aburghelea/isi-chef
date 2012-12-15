@@ -2,10 +2,16 @@
 <sec:ifAnyGranted roles="${Roles.ROLE_WAITER},${Roles.ROLE_COOK}">
     <ul class="nav pull-right">
         <li class="">
-            <div class="brand">
-
-                <span id="ordersIndicator" style="display: block" class="badge badge-important"></span>
-            </div>
+            <sec:ifAllGranted roles="${Roles.ROLE_COOK}">
+                <g:link controller="comanda" action="listTakenOrders">
+                    <span id="ordersIndicator" class="badge badge-important"></span>
+                </g:link>
+            </sec:ifAllGranted>
+            <sec:ifAllGranted roles="${Roles.ROLE_WAITER}">
+                <g:link controller="comanda" action="listPreparedOrders">
+                    <span id="ordersIndicator" class="badge badge-important"></span>
+                </g:link>
+            </sec:ifAllGranted>
         </li>
     </ul>
 
@@ -19,6 +25,8 @@
          * Seteaza variabila contentUrl (linkul de unde sa citeasca nummarul de notifcari)
          * in functie de rolul utilizatorului logat in aplicatie
          */
+
+
                 <sec:ifAllGranted roles="${Roles.ROLE_COOK}">
         var counterUrl = '${createLink(controller: 'comanda', action: 'takenOrdersCounter')}';
         </sec:ifAllGranted>

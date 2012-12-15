@@ -20,15 +20,15 @@
                         <input style="float: left; margin-right: 10px;" type="checkbox"
                                name="name='${SpringSecurityUtils.securityConfig.rememberMe.parameter}" id="remember_me"
                                value="1">
-                        <label class="string optional" for="remember_me">"${message(code: 'user.remember.label', default:'Remember me')}"</label>
-                        <input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
-                    </g:form>
-                </li>
-                <li class="divider"></li>
-                <li class="button-container">
-                    <!-- NOTE: the renderDialog MUST be placed outside the NavBar (at least for Bootstrap 2.1.1): see bottom of main.gsp -->
-                    <g:render template="/_common/modals/registerTextLink"/>
-                </li>
+            <label class="string optional" for="remember_me">"${message(code: 'user.remember.label', default:'Remember me')}"</label>
+            <input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
+        </g:form>
+            </li>
+            <li class="divider"></li>
+            <li class="button-container">
+                <!-- NOTE: the renderDialog MUST be placed outside the NavBar (at least for Bootstrap 2.1.1): see bottom of main.gsp -->
+                <g:render template="/_common/modals/registerTextLink"/>
+            </li>
             </ul>
 
         </sec:ifNotLoggedIn>

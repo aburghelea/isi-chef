@@ -32,7 +32,7 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="masa.comandas.label" default="Comandas" /></td>
+				<td valign="top" class="name"><g:message code="comandas.label" default="Comandas" /></td>
 				
 				<td valign="top" style="text-align: left;" class="value">
 					<ul>

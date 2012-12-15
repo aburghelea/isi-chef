@@ -9,7 +9,7 @@
 		<ul class="dropdown-menu dropdown-menu-dark">
 
 			<!-- assuming that the default locale is English -->
-			<li><a class="js-language-link" title="English" data-lang-code="en" href="${currentURL+'?lang=en'}">
+			<li><a class="js-language-link" title="${message(code: 'default.english.label', default:'English')}" data-lang-code="en" href="${currentURL+'?lang=en'}">
 				<img class="" src="${resource(dir: 'images/flags',file: 'en.png')}"/>
 				<g:message code="language.en" default="en"/> ${currentlURL }
 			</a></li>

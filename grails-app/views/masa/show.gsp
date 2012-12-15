@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'masa.label', default: 'Masa')}" />
-	<title><g:message code="default.show.label" args="[entityName]" /></title>
+	<title><g:message code="default.show.label" args="[entityName]" default="Show ${entityName}" /></title>
 </head>
 
 <body>
@@ -32,7 +32,7 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="masa.comandas.label" default="Comandas" /></td>
+				<td valign="top" class="name"><g:message code="comandas.label" default="Comandas" /></td>
 				
 				<td valign="top" style="text-align: left;" class="value">
 					<ul>

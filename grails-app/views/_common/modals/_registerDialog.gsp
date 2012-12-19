@@ -11,7 +11,7 @@
         <div class="modal-body">
             <div class="control-group">
                 <label class="control-label"
-                       for="username">${message(code: 'security.firstname.label', default: 'Firstname')}</label>
+                       for="username"><g:message code="security.firstname.label" default="Firstname"/></label>
 
                 <div class="controls">
                     <input type="text" class="span3 input-xlarge" name="username" id="username"
@@ -21,7 +21,7 @@
 
             <div class="control-group">
                 <label class="control-label"
-                       for="email">${message(code: 'security.email.label', default: 'Email')}</label>
+                       for="email"><g:message code="security.email.label" default="Email"/></label>
 
                 <div class="controls">
                     <input type="text" class="span3" name="email" id="email"
@@ -31,7 +31,7 @@
 
             <div class="control-group">
                 <label class="control-label"
-                       for="password">${message(code: 'security.password.label', default: 'Password')}</label>
+                       for="password"><g:message code="security.password.label" default="Password"/></label>
 
                 <div class="controls">
                     <input type="password" class="span3" name="password" id="password"
@@ -41,7 +41,7 @@
 
             <div class="control-group">
                 <label class="control-label"
-                       for="password2">${message(code: 'security.password.confirm.label', default: 'Confirm')}</label>
+                       for="password2"><g:message code="security.password.confirm.label" default="Confirm"/></label>
 
                 <div class="controls">
                     <input type="password" class="span3" name="password2" id="password2"
@@ -49,11 +49,11 @@
                 </div>
             </div>
             %{--<div class="control-group">--}%
-            %{--<%--			<label class="control-label" for="agreement">${message(code: 'security.agreement.label', default: 'I have read and agree with the Terms of Use.')}</label>--%>--}%
+            %{--<%--			<label class="control-label" for="agreement"><g:message code="security.agreement.label" default="I have read and agree with the Terms of Use."/></label>--%>--}%
             %{--<div class="controls">--}%
             %{--<label class="checkbox" for="agreement">--}%
             %{--<input type="checkbox" value="" name="agreement" id="agreement" >--}%
-            %{--${message(code: 'security.agreement.label', default: 'I have read and agree with the Terms of Use.')}--}%
+            %{--<g:message code="security.agreement.label" default="I have read and agree with the Terms of Use."/>--}%
             %{--</label>--}%
             %{--</div>--}%
             %{--</div>--}%

@@ -11,7 +11,7 @@
 		<header id="Header" class="jumbotron masthead">
 			<div class="inner">
 				<div class="container">
-					<h1 class="title">${message(code: 'default.tech.info.title', default: 'Technical Info about ')} ${meta(name:'app.name')}</h1>
+					<h1 class="title"><g:message code="default.tech.info.title" default="Technical Info about ${meta(name:'app.name')}"/></h1>
 					<p class="lead"><g:message code="default.tech.info.message" args="[meta(name:'app.name')]"
                                                default="This page presents some information about the ${meta(name:'app.name')} system."/></p>
 				</div>

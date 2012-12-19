@@ -5,7 +5,7 @@
 		</a>
 		<ul class="dropdown-menu">
 			<li class="controller">
-				<a tabindex="-1" href="#"><b>"${message(code: 'default.visual.style.label', default:'Visual Style')}"Visual Style</b></a>
+				<a tabindex="-1" href="#"><b><g:message code="default.visual.style.label" default="Visual Style"/></b></a>
 			</li>
 			<li class="dropdown-submenu">
 				<a href="#" class="dropdown-toggle">
@@ -25,7 +25,7 @@
 			</li>
 			<li class="dropdown-submenu">
 				<a href="#" class="dropdown-toggle">
-					<span class="js-current-language">${message(code: 'default.skin.label', default: 'Skin')}</span>
+					<span class="js-current-language"><g:message code="default.skin.label" default="Skin"/></span>
 				</a>
 				<ul class="dropdown-menu dropdown-menu-dark">
 					<li>

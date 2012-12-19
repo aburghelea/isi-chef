@@ -12,6 +12,7 @@ class Comanda implements Serializable {
     Masa masa
     User cook
     ComandaStatus status
+    Boolean drinksServerd = false
 
     List produses
 

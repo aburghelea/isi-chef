@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    console.log(counterUrl);
     getOrdersCount();
     setInterval('getOrdersCount()', refreshInterval);
 });
@@ -10,10 +9,8 @@ var getOrdersCount = function () {
         url:counterUrl,
         success:function (data, textStatus) {
             updateIndicators(data);
-            console.log('bine');
         },
         error:function (XMLHttpRequest, textStatus, errorThrown) {
-            console.log('rau');
         }
     });
 };

@@ -3,13 +3,23 @@
     <ul class="nav pull-right">
         <li class="">
             <sec:ifAllGranted roles="${Roles.ROLE_COOK}">
+                <g:message code="comandas.label" default="Orders"/>:
                 <g:link controller="comanda" action="listTakenOrders">
                     <span id="ordersIndicator" class="badge badge-important"></span>
                 </g:link>
             </sec:ifAllGranted>
             <sec:ifAllGranted roles="${Roles.ROLE_WAITER}">
-                <g:link controller="comanda" action="listPreparedOrders">
+                <g:link controller="comanda" action="listTakenOrders">
+                    <g:message code="comandas.label" default="Orders"/>:
                     <span id="ordersIndicator" class="badge badge-important"></span>
+                </g:link>
+            </sec:ifAllGranted>
+        </li>
+        <li>
+            <sec:ifAllGranted roles="${Roles.ROLE_WAITER}">
+                <g:link controller="comanda" action="listPreparedOrders">
+                    <g:message code="drinks.label" default="Drinks"/>:
+                    <span id="ordersIndicator" class="badge badge-success">10</span>
                 </g:link>
             </sec:ifAllGranted>
         </li>

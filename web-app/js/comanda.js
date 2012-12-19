@@ -68,7 +68,6 @@ var buildDataSource = function (uri) {
 };
 
 var buildOrdersKendoGrid = function (container, dataSource, prepared) {
-    console.log(dataSource);
     $(container).kendoGrid({
         dataSource:dataSource,
         sortable:true,
@@ -199,7 +198,6 @@ var removeProductFromOrder = function (productId) {
 
 var updateFormParameters = function () {
     $('#hiddenProducts').empty();
-    console.log(productsForNow);
     $.each(productsForNow, function (index, value) {
         $('<input/>')
             .attr('type', 'hidden')

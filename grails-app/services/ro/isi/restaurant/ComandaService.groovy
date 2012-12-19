@@ -93,7 +93,7 @@ class ComandaService {
                     id: it.id,
                     waiter: it.waiter?.username != null ? it.waiter?.username : '',
                     cook: it.cook?.username != null ? it.cook?.username : '',
-                    table: it.masa?.getNumber() + 1L,
+                    table: it.masa?.getNumber(),
                     preparationTime: it.getPreparationTime(),
                     status: it.status?.toString() != null ? it.status?.toString() : ''
             ]

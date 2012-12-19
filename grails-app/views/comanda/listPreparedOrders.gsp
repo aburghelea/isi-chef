@@ -8,7 +8,7 @@
 
 
 <%@ page import="ro.isi.restaurant.Comanda" %>
-<!doctype html>
+<!doctype html>                      ¶
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -22,14 +22,13 @@
         $(document).ready(function () {
             var preparedOrders = buildDataSource("${createLink(controller: 'comanda', action: 'listPreparedOrdersAsJson')}");
             buildOrdersKendoGrid($("#products"), preparedOrders, true);
-//            buildTakenOrdersKendoGrid($("#products"), preparedOrders);
         });
     </script>
 </head>
 
 <body>
 
-<div id="products"></div>
+<div id="products"/>
 
 </body>
 

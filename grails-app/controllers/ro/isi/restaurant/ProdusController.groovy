@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse
  * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
  */
 class ProdusController {
-
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -115,15 +114,15 @@ class ProdusController {
 
         def result = Produs.list().collect() {
             Produs it ->
-            [
-                    code: it.code,
-                    description: it.description,
-                    id: it.id,
-                    name: it.name,
-                    preparationTime: it.preparationTime,
-                    price: it.price,
-                    type: it.type,
-            ]
+                [
+                        code: it.code,
+                        description: it.description,
+                        id: it.id,
+                        name: it.name,
+                        preparationTime: it.preparationTime,
+                        price: it.price,
+                        type: it.type,
+                ]
         }
         render result as JSON
     }

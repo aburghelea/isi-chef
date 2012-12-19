@@ -35,16 +35,25 @@
                 <td>${fieldValue(bean: comandaInstance, field: "masa")}</td>
 
                 <td>${fieldValue(bean: comandaInstance, field: "waiter")}</td>
-                <td><g:link class="btn btn-small btn-info" action="show"
-                            id="${comandaInstance.id}">${message(code: 'comada.operations.show', default: 'Show')}</g:link></td>
+                <td>
+                    <g:link class="btn btn-small btn-info" action="show" id="${comandaInstance.id}">
+                        ${message(code: 'comada.operations.show', default: 'Show')}</g:link>
+                    <g:if test="${drinks == true}">
+                        <g:link class="btn btn-small btn-reverse" action="deliverDrink" id="${comandaInstance.id}">
+                            ${message(code: 'comada.operations.deliverDrink', default: 'Deliver')}</g:link>
+                    </g:if>
+                </td>
+
             </tr>
         </g:each>
         </tbody>
     </table>
+    <g:if test="${drinks == true}">
+        <div class="pagination">
+            <bs:paginate total="${comandaInstanceTotal}"/>
+        </div>
 
-    <div class="pagination">
-        <bs:paginate total="${comandaInstanceTotal}"/>
-    </div>
+    </g:if>
 </section>
 
 </body>

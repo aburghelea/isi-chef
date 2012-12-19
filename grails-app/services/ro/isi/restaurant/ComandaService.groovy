@@ -22,7 +22,7 @@ class ComandaService {
                     break;
                 }
             }
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {}
         return user;
     }
 
@@ -36,8 +36,15 @@ class ComandaService {
                     break;
                 }
             }
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {}
         return user;
+    }
+
+    def getUnservedDrinksCount() {
+        def unservedDrinks = Comanda.createCriteria().count() {
+            eq 'drinksServerd', false
+        }
+        return unservedDrinks;
     }
 
     def getTakenOrdersCount() {
@@ -89,14 +96,14 @@ class ComandaService {
         def takenOrders = Comanda.createCriteria().list restrictions
         takenOrders = takenOrders.collect {
             Comanda it ->
-            [
-                    id: it.id,
-                    waiter: it.waiter?.username != null ? it.waiter?.username : '',
-                    cook: it.cook?.username != null ? it.cook?.username : '',
-                    table: it.masa?.getNumber(),
-                    preparationTime: it.getPreparationTime(),
-                    status: it.status?.toString() != null ? it.status?.toString() : ''
-            ]
+                [
+                        id: it.id,
+                        waiter: it.waiter?.username != null ? it.waiter?.username : '',
+                        cook: it.cook?.username != null ? it.cook?.username : '',
+                        table: it.masa?.getNumber(),
+                        preparationTime: it.getPreparationTime(),
+                        status: it.status?.toString() != null ? it.status?.toString() : ''
+                ]
         }
         return takenOrders;
     }
@@ -124,6 +131,13 @@ class ComandaService {
         return true;
     }
 
+    def deliverDrink(def orderId) {
+        def comanda = Comanda.findById(orderId)
+        comanda.drinksServerd = true;
+        comanda.save(failOnError: true, flush: true)
+
+        return true;
+    }
     def getOrderAssignedToCurrentCook() {
         def comanda = Comanda.findAllByCookAndStatus(getAuthenticatedCook(), ComandaStatus.PREPARING);
         if (comanda?.size() > 0)

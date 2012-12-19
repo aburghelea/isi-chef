@@ -20,7 +20,7 @@
                         <input style="float: left; margin-right: 10px;" type="checkbox"
                                name="name='${SpringSecurityUtils.securityConfig.rememberMe.parameter}" id="remember_me"
                                value="1">
-            <label class="string optional" for="remember_me">"${message(code: 'user.remember.label', default:'Remember me')}"</label>
+            <label class="string optional" for="remember_me"><g:message code="user.remember.label" default="Remember me"/></label>
             <input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
         </g:form>
             </li>

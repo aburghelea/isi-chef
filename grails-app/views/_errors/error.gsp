@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Grails Runtime Exception</title>
+		<title><g:message code="default.error.runtime.exception" default="Grails Runtime Exception"/></title>
 		<meta name="layout" content="kickstart" />
 	</head>
 

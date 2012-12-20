@@ -13,19 +13,7 @@ class ComandaService {
     def userService
     def produsService
 
-    def getAuthenticatedWaiter = {
-        def waiter = userService.getAuthenticatedUser()
-        def user = null;
-        try {
-            for (def role : waiter.authorities) {
-                if (role?.authority?.equals(Roles.ROLE_WAITER)) {
-                    user = User.findById(waiter.id)
-                    break;
-                }
-            }
-        } catch (Exception ignored) {}
-        return user;
-    }
+
 
     def getAuthenticatedCook = {
         def waiter = userService.getAuthenticatedUser()
@@ -61,7 +49,7 @@ class ComandaService {
     def getPreparedOrdersCount() {
         def preparedOrdersCount = Comanda.createCriteria().count() {
             and {
-                eq 'waiter', getAuthenticatedWaiter()
+                eq 'waiter', userService.getAuthenticatedWaiter()
                 eq 'status', ComandaStatus.PREPARED
             }
         }
@@ -86,7 +74,7 @@ class ComandaService {
         Closure prepared = {
             and {
                 eq 'status', ComandaStatus.PREPARED;
-                eq 'waiter', getAuthenticatedWaiter()
+                eq 'waiter', userServicegetAuthenticatedWaiter()
             }
         }
 

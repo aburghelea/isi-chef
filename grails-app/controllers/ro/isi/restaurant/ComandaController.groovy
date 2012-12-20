@@ -4,6 +4,7 @@ import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import ro.isi.auth.Roles
+import ro.isi.auth.UserService
 
 import javax.servlet.http.HttpServletResponse
 
@@ -16,6 +17,7 @@ class ComandaController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     ComandaService comandaService;
+    UserService userService;
 
     def index() {
 
@@ -33,9 +35,9 @@ class ComandaController {
     @Secured([Roles.ROLE_WAITER])
     def create() {
         def comanda = new Comanda(params)
-        comanda.waiter = comandaService.getAuthenticatedWaiter()
+        comanda.waiter = userService.getAuthenticatedWaiter()
 
-        [comandaInstance: comanda]
+        [comandaInstance: comanda, waiters: userService.getWaiters()]
     }
 
     def save() {
@@ -71,7 +73,7 @@ class ComandaController {
             return
         }
 
-        [comandaInstance: comandaInstance]
+        [comandaInstance: comandaInstance, waiters: userService.getWaiters()]
     }
 
     def update() {

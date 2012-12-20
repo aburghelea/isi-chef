@@ -6,7 +6,7 @@
             class="required-indicator">*</span></label>
 
     <div class="controls">
-        <g:select id="waiter" name="waiter.id" from="${ro.isi.auth.User.list()}"
+        <g:select id="waiter" name="waiter.id" from="${waiters}"
                   optionKey="id"
                   required="true"
                   optionValue="username"

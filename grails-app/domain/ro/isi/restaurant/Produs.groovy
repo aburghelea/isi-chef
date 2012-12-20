@@ -6,6 +6,7 @@ class Produs {
     Long price
     String description
     Long preparationTime
+    Long stock = 0L
     String code
     String type
 
@@ -26,5 +27,6 @@ class Produs {
         preparationTime nullable: true
         code nullable: true, maxSize: 45
         type nullable: true, maxSize: 45
+        stock nullable: false, min: 0L
     }
 }

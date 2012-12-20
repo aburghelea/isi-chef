@@ -64,6 +64,7 @@ class BootStrap {
                     description: "Produsul " + i,
                     preparationTime: i * 13,
                     code: i * Math.sqrt(i),
+                    stock: i+1,
                     type: 'COMESTIBIL').save(failOnError: true, flush: true);
         }
 

@@ -36,12 +36,23 @@
 
                 <td>${fieldValue(bean: comandaInstance, field: "waiter")}</td>
                 <td>
-                    <g:link class="btn btn-small btn-info" action="show" id="${comandaInstance.id}">
-                        ${message(code: 'comada.operations.show', default: 'Show')}</g:link>
+                    <div class="left">
+                        <g:link class="btn btn-small btn-info" action="show" id="${comandaInstance.id}">
+                            ${message(code: 'comada.operations.show', default: 'Show')}
+                        </g:link>
+                    </div>
                     <g:if test="${drinks == true}">
-                        <g:link class="btn btn-small btn-reverse" action="deliverDrink" id="${comandaInstance.id}">
-                            ${message(code: 'comada.operations.deliverDrink', default: 'Deliver')}</g:link>
+                        %{--<div style="margin: 0 0 0 10px;">--}%
+                        <div class="left">
+                        <g:form controller="comanda" action="deliverDrink" style="margin: 0px">
+                            <input type="hidden" name="orderId" value="${comandaInstance.id}">
+                            <g:submitButton name="submit" class="btn btn-small btn-inverse"
+                                            value="${message(code: 'comada.operations.deliverDrink', default: 'Deliver drink')}"/>
+
+                        </g:form>
+                        </div>
                     </g:if>
+
                 </td>
 
             </tr>

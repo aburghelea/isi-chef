@@ -9,7 +9,7 @@
                 </g:link>
             </sec:ifAllGranted>
             <sec:ifAllGranted roles="${Roles.ROLE_WAITER}">
-                <g:link controller="comanda" action="listTakenOrders">
+                <g:link controller="comanda" action="listPreparedOrders">
                     <g:message code="comandas.label" default="Orders"/>:
                     <span id="ordersIndicator" class="badge badge-important"></span>
                 </g:link>

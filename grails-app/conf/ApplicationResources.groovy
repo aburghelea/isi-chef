@@ -5,6 +5,7 @@ modules = {
     application {
         resource url: 'js/application.js'
         resource url: 'js/jquery.validate.min.js'
+        resource url: 'css/custom.css'
     }
 
     kendoBootStrap {

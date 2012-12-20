@@ -11,6 +11,7 @@ class ComandaService {
 
     static transactional = true
     def userService
+    def produsService
 
     def getAuthenticatedWaiter = {
         def waiter = userService.getAuthenticatedUser()
@@ -151,5 +152,9 @@ class ComandaService {
 
         comanda?.status = ComandaStatus.PREPARED;
         comanda?.save(failOnError: true, flush: true)
+    }
+
+    def decrementStoks(Comanda comanda) {
+        produsService.decrementStocks(comanda.produses)
     }
 }

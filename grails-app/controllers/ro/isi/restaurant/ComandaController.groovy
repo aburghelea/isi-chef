@@ -43,6 +43,7 @@ class ComandaController {
         comandaInstance.status = ComandaStatus.TAKEN;
 
         if (!comandaInstance.save(flush: true)) {
+            comandaService.decrementStoks(comandaInstance)
             render(view: "create", model: [comandaInstance: comandaInstance])
             return
         }

@@ -16,18 +16,6 @@
     </div>
 </div>
 
-%{--<div class="control-group fieldcontain ${hasErrors(bean: comandaInstance, field: 'cook', 'error')} required">--}%
-%{--<label for="cook" class="control-label"><g:message code="comanda.cook.label" default="Cook"/><span--}%
-%{--class="required-indicator">*</span></label>--}%
-
-%{--<div class="controls">--}%
-%{--<g:select id="cook" name="cook.id" from="${ro.isi.auth.User.list()}" optionKey="id" required=""--}%
-%{--value="${comandaInstance?.cook?.id}" class="many-to-one"--}%
-%{--noSelection="['': 'No cook assigned']"/>--}%
-%{--<span class="help-inline">${hasErrors(bean: comandaInstance, field: 'cook', 'error')}</span>--}%
-%{--</div>--}%
-%{--</div>--}%
-
 <div class="control-group fieldcontain ${hasErrors(bean: comandaInstance, field: 'masa', 'error')} required">
     <label for="masa" class="control-label">
         <g:message code="comanda.masa.label" default="Table"/>
@@ -93,6 +81,11 @@
 
         addedProductsDataSource = buildLocalDataSource(productsForNow);
         buildProdusKendoGrid($("#products_added"), addedProductsDataSource);
+
+//        $('a[name="add"]').live('click', function () {
+//            alert("gig");
+//        refreshTable('#products');
+//    });
 
     });
 </r:script>

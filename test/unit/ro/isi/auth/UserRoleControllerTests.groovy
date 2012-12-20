@@ -1,9 +1,7 @@
 package ro.isi.auth
 
-
-
-import org.junit.*
-import grails.test.mixin.*
+import grails.test.mixin.Mock
+import grails.test.mixin.TestFor
 
 /**
  * UserRoleControllerTests
@@ -15,9 +13,9 @@ class UserRoleControllerTests {
 
 
     def populateValidParams(params) {
-      assert params != null
-      // TODO: Populate valid properties like...
-      //params["name"] = 'someValidName'
+        assert params != null
+        // TODO: Populate valid properties like...
+        //params["name"] = 'someValidName'
     }
 
     void testIndex() {
@@ -34,9 +32,9 @@ class UserRoleControllerTests {
     }
 
     void testCreate() {
-       def model = controller.create()
+        def model = controller.create()
 
-       assert model.userRoleInstance != null
+        assert model.userRoleInstance != null
     }
 
     void testSave() {

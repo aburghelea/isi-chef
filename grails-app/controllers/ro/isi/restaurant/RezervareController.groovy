@@ -30,14 +30,14 @@ class RezervareController {
             return
         }
 
-		flash.message = message(code: 'default.created.message', args: [message(code: 'rezervare.label', default: 'Rezervare'), rezervareInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'rezervare.label', default: 'Rezervare'), rezervareInstance.id])
         redirect(action: "show", id: rezervareInstance.id)
     }
 
     def show() {
         def rezervareInstance = Rezervare.get(params.id)
         if (!rezervareInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'rezervare.label', default: 'Rezervare'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'rezervare.label', default: 'Rezervare'), params.id])
             redirect(action: "list")
             return
         }
@@ -68,8 +68,8 @@ class RezervareController {
             def version = params.version.toLong()
             if (rezervareInstance.version > version) {
                 rezervareInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'rezervare.label', default: 'Rezervare')] as Object[],
-                          "Another user has updated this Rezervare while you were editing")
+                        [message(code: 'rezervare.label', default: 'Rezervare')] as Object[],
+                        "Another user has updated this Rezervare while you were editing")
                 render(view: "edit", model: [rezervareInstance: rezervareInstance])
                 return
             }
@@ -82,25 +82,25 @@ class RezervareController {
             return
         }
 
-		flash.message = message(code: 'default.updated.message', args: [message(code: 'rezervare.label', default: 'Rezervare'), rezervareInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'rezervare.label', default: 'Rezervare'), rezervareInstance.id])
         redirect(action: "show", id: rezervareInstance.id)
     }
 
     def delete() {
         def rezervareInstance = Rezervare.get(params.id)
         if (!rezervareInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'rezervare.label', default: 'Rezervare'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'rezervare.label', default: 'Rezervare'), params.id])
             redirect(action: "list")
             return
         }
 
         try {
             rezervareInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: 'rezervare.label', default: 'Rezervare'), params.id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'rezervare.label', default: 'Rezervare'), params.id])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'rezervare.label', default: 'Rezervare'), params.id])
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'rezervare.label', default: 'Rezervare'), params.id])
             redirect(action: "show", id: params.id)
         }
     }

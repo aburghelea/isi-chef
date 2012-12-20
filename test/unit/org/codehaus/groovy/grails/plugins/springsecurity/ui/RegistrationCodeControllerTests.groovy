@@ -1,7 +1,8 @@
 package org.codehaus.groovy.grails.plugins.springsecurity.ui
 
-import grails.test.mixin.*
 import grails.plugins.springsecurity.ui.RegistrationCodeController
+import grails.test.mixin.Mock
+import grails.test.mixin.TestFor
 
 /**
  * RegistrationCodeControllerTests
@@ -13,9 +14,9 @@ class RegistrationCodeControllerTests {
 
 
     def populateValidParams(params) {
-      assert params != null
-      // TODO: Populate valid properties like...
-      //params["name"] = 'someValidName'
+        assert params != null
+        // TODO: Populate valid properties like...
+        //params["name"] = 'someValidName'
     }
 
     void testIndex() {
@@ -32,9 +33,9 @@ class RegistrationCodeControllerTests {
     }
 
     void testCreate() {
-       def model = controller.create()
+        def model = controller.create()
 
-       assert model.registrationCodeInstance != null
+        assert model.registrationCodeInstance != null
     }
 
     void testSave() {

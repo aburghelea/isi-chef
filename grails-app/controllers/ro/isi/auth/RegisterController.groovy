@@ -1,9 +1,9 @@
 package ro.isi.auth
 
-import org.codehaus.groovy.grails.plugins.springsecurity.NullSaltSource
-import org.codehaus.groovy.grails.plugins.springsecurity.ui.RegistrationCode
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import grails.converters.JSON
+import org.codehaus.groovy.grails.plugins.springsecurity.NullSaltSource
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import org.codehaus.groovy.grails.plugins.springsecurity.ui.RegistrationCode
 
 class RegisterController extends grails.plugins.springsecurity.ui.RegisterController {
 

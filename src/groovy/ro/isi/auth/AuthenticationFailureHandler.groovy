@@ -1,6 +1,5 @@
 package ro.isi.auth
 
-import org.apache.catalina.authenticator.SavedRequest
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler
 
@@ -30,8 +29,7 @@ class AuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler
             saveException(request, exception);
             logger.debug("Redirecting to " + redirectUrl);
             redirectStrategy.sendRedirect(request, response, redirectUrl);
-        } else
-        {
+        } else {
             super.onAuthenticationFailure(request, response, exception);
         }
     }

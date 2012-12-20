@@ -30,14 +30,14 @@ class UserRoleController {
             return
         }
 
-		flash.message = message(code: 'default.created.message', args: [message(code: 'userRole.label', default: 'UserRole'), userRoleInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'userRole.label', default: 'UserRole'), userRoleInstance.id])
         redirect(action: "show", id: userRoleInstance.id)
     }
 
     def show() {
         def userRoleInstance = UserRole.get(params.id)
         if (!userRoleInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'userRole.label', default: 'UserRole'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'userRole.label', default: 'UserRole'), params.id])
             redirect(action: "list")
             return
         }
@@ -68,8 +68,8 @@ class UserRoleController {
             def version = params.version.toLong()
             if (userRoleInstance.version > version) {
                 userRoleInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'userRole.label', default: 'UserRole')] as Object[],
-                          "Another user has updated this UserRole while you were editing")
+                        [message(code: 'userRole.label', default: 'UserRole')] as Object[],
+                        "Another user has updated this UserRole while you were editing")
                 render(view: "edit", model: [userRoleInstance: userRoleInstance])
                 return
             }
@@ -82,25 +82,25 @@ class UserRoleController {
             return
         }
 
-		flash.message = message(code: 'default.updated.message', args: [message(code: 'userRole.label', default: 'UserRole'), userRoleInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'userRole.label', default: 'UserRole'), userRoleInstance.id])
         redirect(action: "show", id: userRoleInstance.id)
     }
 
     def delete() {
         def userRoleInstance = UserRole.get(params.id)
         if (!userRoleInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'userRole.label', default: 'UserRole'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'userRole.label', default: 'UserRole'), params.id])
             redirect(action: "list")
             return
         }
 
         try {
             userRoleInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: 'userRole.label', default: 'UserRole'), params.id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'userRole.label', default: 'UserRole'), params.id])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'userRole.label', default: 'UserRole'), params.id])
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'userRole.label', default: 'UserRole'), params.id])
             redirect(action: "show", id: params.id)
         }
     }

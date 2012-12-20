@@ -7,12 +7,12 @@ $(document).ready(function () {
 
 var getOrdersCount = function () {
     $.ajax({
-        type:'GET',
-        url:counterUrl,
-        success:function (data, textStatus) {
-            updateIndicators(data,'#ordersIndicator', true);
+        type: 'GET',
+        url: counterUrl,
+        success: function (data, textStatus) {
+            updateIndicators(data, '#ordersIndicator', true);
         },
-        error:function (XMLHttpRequest, textStatus, errorThrown) {
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
         }
     });
 };
@@ -22,17 +22,17 @@ var getDrinksCount = function () {
     if (drinksUrl == undefined)
         return;
     $.ajax({
-        type:'GET',
-        url:drinksUrl,
-        success:function (data, textStatus) {
-            updateIndicators(data,'#drinksIndicator', false);
+        type: 'GET',
+        url: drinksUrl,
+        success: function (data, textStatus) {
+            updateIndicators(data, '#drinksIndicator', false);
         },
-        error:function (XMLHttpRequest, textStatus, errorThrown) {
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
         }
     });
 };
 
-var updateIndicators = function(data, selector, sound){
+var updateIndicators = function (data, selector, sound) {
     var oldData = $(selector).html();
     $(selector).html(data);
 
@@ -42,8 +42,8 @@ var updateIndicators = function(data, selector, sound){
 };
 
 function notifyNewOrder(sound) {
-    if (sound == true){
-    var audio = new Audio(soundEffect);
-    audio.play();
+    if (sound == true) {
+        var audio = new Audio(soundEffect);
+        audio.play();
     }
 }

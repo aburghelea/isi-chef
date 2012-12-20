@@ -30,14 +30,14 @@ class RoleController {
             return
         }
 
-		flash.message = message(code: 'default.created.message', args: [message(code: 'role.label', default: 'Role'), roleInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'role.label', default: 'Role'), roleInstance.id])
         redirect(action: "show", id: roleInstance.id)
     }
 
     def show() {
         def roleInstance = Role.get(params.id)
         if (!roleInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'role.label', default: 'Role'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'role.label', default: 'Role'), params.id])
             redirect(action: "list")
             return
         }
@@ -68,8 +68,8 @@ class RoleController {
             def version = params.version.toLong()
             if (roleInstance.version > version) {
                 roleInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'role.label', default: 'Role')] as Object[],
-                          "Another user has updated this Role while you were editing")
+                        [message(code: 'role.label', default: 'Role')] as Object[],
+                        "Another user has updated this Role while you were editing")
                 render(view: "edit", model: [roleInstance: roleInstance])
                 return
             }
@@ -82,25 +82,25 @@ class RoleController {
             return
         }
 
-		flash.message = message(code: 'default.updated.message', args: [message(code: 'role.label', default: 'Role'), roleInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'role.label', default: 'Role'), roleInstance.id])
         redirect(action: "show", id: roleInstance.id)
     }
 
     def delete() {
         def roleInstance = Role.get(params.id)
         if (!roleInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'role.label', default: 'Role'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'role.label', default: 'Role'), params.id])
             redirect(action: "list")
             return
         }
 
         try {
             roleInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: 'role.label', default: 'Role'), params.id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'role.label', default: 'Role'), params.id])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'role.label', default: 'Role'), params.id])
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'role.label', default: 'Role'), params.id])
             redirect(action: "show", id: params.id)
         }
     }

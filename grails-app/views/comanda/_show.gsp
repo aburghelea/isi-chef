@@ -25,9 +25,9 @@
 
         </tr>
         <tr class="prop">
-            <td valign="top" class="name"><g:message code="comanda.drinks.label" default="Drinks served?"/> </td>
+            <td valign="top" class="name"><g:message code="comanda.drinks.label" default="Drinks served?"/></td>
             <td valign="top" class="value">
-                <g:formatBoolean boolean="${comandaInstance?.drinksServerd}" />
+                <g:formatBoolean boolean="${comandaInstance?.drinksServerd}"/>
             </td>
         </tr>
 

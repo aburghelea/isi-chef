@@ -20,7 +20,7 @@
         var assignUrl = "${createLink(controller: 'comanda', action: 'assignOrder')}";
         $(document).ready(function () {
             var takenComandsDataSource = buildDataSource("${createLink(controller: 'comanda', action: 'listTakenOrdersAsJson')}");
-            buildOrdersKendoGrid($("#products"), takenComandsDataSource,false );
+            buildOrdersKendoGrid($("#products"), takenComandsDataSource, false);
         });
     </script>
 </head>
@@ -28,14 +28,14 @@
 <body>
 <g:if test="${comandaInstance}">
     <g:render template="show" model="[comandaInstance: comandaInstance]"/>
-        <div class="form-actions">
-            <g:form action="markAsPrepared" style="margin: 0">
-                <input type="hidden" name="id" value="${comandaInstance?.id}"/>
-                <input type="submit" class="btn btn-inverse"
-                       value="${message(code: "prepare.finalize.label", default: "Finalizeaza preparare")}">
+    <div class="form-actions">
+        <g:form action="markAsPrepared" style="margin: 0">
+            <input type="hidden" name="id" value="${comandaInstance?.id}"/>
+            <input type="submit" class="btn btn-inverse"
+                   value="${message(code: "prepare.finalize.label", default: "Finalizeaza preparare")}">
 
-            </g:form>
-        </div>
+        </g:form>
+    </div>
 
 </g:if>
 <g:else>

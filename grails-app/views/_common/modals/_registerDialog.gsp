@@ -60,8 +60,10 @@
         </div>
 
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary"><g:message code="security.register.label" default="Register"/></button>
-            <g:submitToRemote class="btn btn-primary"><g:message code="security.register.label" default="Register"/></g:submitToRemote>
+            <button type="submit" class="btn btn-primary"><g:message code="security.register.label"
+                                                                     default="Register"/></button>
+            <g:submitToRemote class="btn btn-primary"><g:message code="security.register.label"
+                                                                 default="Register"/></g:submitToRemote>
         </div>
     </g:formRemote>
 </div>
@@ -69,27 +71,27 @@
 <r:script>
     $(document).ready(function () {
         $('#register_form').validate({
-            rules:{
-                username:{
-                    required:true,
-                    minSize:5
+            rules: {
+                username: {
+                    required: true,
+                    minSize: 5
                 },
-                email:{
-                    email:true,
-                    required:true
+                email: {
+                    email: true,
+                    required: true
                 },
-                password:{
-                    required:true
+                password: {
+                    required: true
                 },
-                password2:{
-                    required:true
+                password2: {
+                    required: true
 
                 }
             },
-            highlight:function (label) {
+            highlight: function (label) {
                 $(label).closest('.control-group').addClass('alert alert-error');
             },
-            success:function (label) {
+            success: function (label) {
                 label.addClass('valid').closest('.control-group').addClass('successClass');
             }
         });

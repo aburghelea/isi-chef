@@ -3,33 +3,35 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="layout" content="kickstart" />
-	<g:set var="entityName" value="${message(code: 'comanda.label', default: 'Comanda')}" />
-	<title><g:message code="default.create.label" args="[entityName]" /></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="layout" content="kickstart"/>
+    <g:set var="entityName" value="${message(code: 'comanda.label', default: 'Comanda')}"/>
+    <title><g:message code="default.create.label" args="[entityName]"/></title>
 </head>
 
 <body>
 
 <section id="create-comanda" class="first">
-	<g:hasErrors bean="${comandaInstance}">
-	<div class="alert alert-error">
-		<g:renderErrors bean="${comandaInstance}" as="list" />
-	</div>
-	</g:hasErrors>
-	
-	<g:form action="save" class="form-horizontal" >
-		<fieldset class="form">
-			<g:render template="form"/>
-		</fieldset>
-		<div class="form-actions">
-			<g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+    <g:hasErrors bean="${comandaInstance}">
+        <div class="alert alert-error">
+            <g:renderErrors bean="${comandaInstance}" as="list"/>
+        </div>
+    </g:hasErrors>
+
+    <g:form action="save" class="form-horizontal">
+        <fieldset class="form">
+            <g:render template="form"/>
+        </fieldset>
+
+        <div class="form-actions">
+            <g:submitButton name="create" class="btn btn-primary"
+                            value="${message(code: 'default.button.create.label', default: 'Create')}"/>
             <button class="btn" type="reset">Cancel</button>
-		</div>
-	</g:form>
-	
+        </div>
+    </g:form>
+
 </section>
-		
+
 </body>
 
 </html>

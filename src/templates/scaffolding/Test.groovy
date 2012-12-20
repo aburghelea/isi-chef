@@ -1,21 +1,24 @@
-<%=packageName ? "package ${packageName}\n\n" : ''%>
+< %= packageName ? " package  $ { packageName } \n\n ": '' % >
 
-import org.junit.*
-import grails.test.mixin.*
+
+import grails.test.mixin.Mock
+import grails.test.mixin.TestFor
 
 /**
  * ${className}ControllerTests
  * A unit test class is used to test individual methods or blocks of code without considering the surrounding infrastructure
  */
-@TestFor(${className}Controller)
-@Mock(${className})
-class ${className}ControllerTests {
+@TestFor($ { className } Controller )
+@Mock($ { className })
+class $ {
+    className
+} ControllerTests {
 
 
     def populateValidParams(params) {
-      assert params != null
-      // TODO: Populate valid properties like...
-      //params["name"] = 'someValidName'
+        assert params != null
+        // TODO: Populate valid properties like...
+        //params["name"] = 'someValidName'
     }
 
     void testIndex() {
@@ -27,20 +30,24 @@ class ${className}ControllerTests {
 
         def model = controller.list()
 
-        assert model.${propertyName}InstanceList.size() == 0
-        assert model.${propertyName}InstanceTotal == 0
+        assert model.$ { propertyName }
+        InstanceList.size() == 0
+        assert model.$ { propertyName }
+        InstanceTotal == 0
     }
 
     void testCreate() {
-       def model = controller.create()
+        def model = controller.create()
 
-       assert model.${propertyName}Instance != null
+        assert model.$ { propertyName }
+        Instance != null
     }
 
     void testSave() {
         controller.save()
 
-        assert model.${propertyName}Instance != null
+        assert model.$ { propertyName }
+        Instance != null
         assert view == '/${propertyName}/create'
 
         response.reset()
@@ -50,7 +57,7 @@ class ${className}ControllerTests {
 
         assert response.redirectedUrl == '/${propertyName}/show/1'
         assert controller.flash.message != null
-        assert ${className}.count() == 1
+        assert $ { className }.count() == 1
     }
 
     void testShow() {
@@ -61,15 +68,17 @@ class ${className}ControllerTests {
 
 
         populateValidParams(params)
-        def ${propertyName} = new ${className}(params)
+        def $
+        { propertyName } = new $ { className }(params)
 
-        assert ${propertyName}.save() != null
+        assert $ { propertyName }.save() != null
 
-        params.id = ${propertyName}.id
+        params.id = $ { propertyName }.id
 
         def model = controller.show()
 
-        assert model.${propertyName}Instance == ${propertyName}
+        assert model.$ { propertyName }
+        Instance == $ { propertyName }
     }
 
     void testEdit() {
@@ -80,15 +89,17 @@ class ${className}ControllerTests {
 
 
         populateValidParams(params)
-        def ${propertyName} = new ${className}(params)
+        def $
+        { propertyName } = new $ { className }(params)
 
-        assert ${propertyName}.save() != null
+        assert $ { propertyName }.save() != null
 
-        params.id = ${propertyName}.id
+        params.id = $ { propertyName }.id
 
         def model = controller.edit()
 
-        assert model.${propertyName}Instance == ${propertyName}
+        assert model.$ { propertyName }
+        Instance == $ { propertyName }
     }
 
     void testUpdate() {
@@ -101,20 +112,22 @@ class ${className}ControllerTests {
 
 
         populateValidParams(params)
-        def ${propertyName} = new ${className}(params)
+        def $
+        { propertyName } = new $ { className }(params)
 
-        assert ${propertyName}.save() != null
+        assert $ { propertyName }.save() != null
 
         // test invalid parameters in update
-        params.id = ${propertyName}.id
+        params.id = $ { propertyName }.id
         //TODO: add invalid values to params object
 
         controller.update()
 
         assert view == "/${propertyName}/edit"
-        assert model.${propertyName}Instance != null
+        assert model.$ { propertyName }
+        Instance != null
 
-        ${propertyName}.clearErrors()
+        $ { propertyName }.clearErrors()
 
         populateValidParams(params)
         controller.update()
@@ -124,16 +137,18 @@ class ${className}ControllerTests {
 
         //test outdated version number
         response.reset()
-        ${propertyName}.clearErrors()
+        $ { propertyName }.clearErrors()
 
         populateValidParams(params)
-        params.id = ${propertyName}.id
+        params.id = $ { propertyName }.id
         params.version = -1
         controller.update()
 
         assert view == "/${propertyName}/edit"
-        assert model.${propertyName}Instance != null
-        assert model.${propertyName}Instance.errors.getFieldError('version')
+        assert model.$ { propertyName }
+        Instance != null
+        assert model.$ { propertyName }
+        Instance.errors.getFieldError('version')
         assert flash.message != null
     }
 
@@ -145,17 +160,18 @@ class ${className}ControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def ${propertyName} = new ${className}(params)
+        def $
+        { propertyName } = new $ { className }(params)
 
-        assert ${propertyName}.save() != null
-        assert ${className}.count() == 1
+        assert $ { propertyName }.save() != null
+        assert $ { className }.count() == 1
 
-        params.id = ${propertyName}.id
+        params.id = $ { propertyName }.id
 
         controller.delete()
 
-        assert ${className}.count() == 0
-        assert ${className}.get(${propertyName}.id) == null
+        assert $ { className }.count() == 0
+        assert $ { className }.get($ { propertyName }.id) == null
         assert response.redirectedUrl == '/${propertyName}/list'
     }
 }

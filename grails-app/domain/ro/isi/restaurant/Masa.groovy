@@ -2,19 +2,19 @@ package ro.isi.restaurant
 
 class Masa {
 
-	Integer number
-	String description
+    Integer number
+    String description
 
-	static hasMany = [comandas: Comanda,
-	                  rezervares: Rezervare]
+    static hasMany = [comandas: Comanda,
+            rezervares: Rezervare]
 
-	static mapping = {
-		id generator: "increment"
-		version false
-	}
+    static mapping = {
+        id generator: "increment"
+        version false
+    }
 
-	static constraints = {
-		number nullable: false
-		description nullable: false, maxSize: 45
-	}
+    static constraints = {
+        number nullable: false
+        description nullable: false, maxSize: 45
+    }
 }

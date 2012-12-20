@@ -1,9 +1,7 @@
 package ro.isi.restaurant
 
-
-
-import org.junit.*
-import grails.test.mixin.*
+import grails.test.mixin.Mock
+import grails.test.mixin.TestFor
 
 /**
  * ProdusControllerTests
@@ -15,9 +13,9 @@ class ProdusControllerTests {
 
 
     def populateValidParams(params) {
-      assert params != null
-      // TODO: Populate valid properties like...
-      //params["name"] = 'someValidName'
+        assert params != null
+        // TODO: Populate valid properties like...
+        //params["name"] = 'someValidName'
     }
 
     void testIndex() {
@@ -34,9 +32,9 @@ class ProdusControllerTests {
     }
 
     void testCreate() {
-       def model = controller.create()
+        def model = controller.create()
 
-       assert model.produsInstance != null
+        assert model.produsInstance != null
     }
 
     void testSave() {

@@ -138,6 +138,7 @@ class ComandaService {
 
         return true;
     }
+
     def getOrderAssignedToCurrentCook() {
         def comanda = Comanda.findAllByCookAndStatus(getAuthenticatedCook(), ComandaStatus.PREPARING);
         if (comanda?.size() > 0)

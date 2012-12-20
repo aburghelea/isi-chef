@@ -42,7 +42,7 @@
                 modules="application, jquery, ${session.skin ? session.skin : 'bootstrap'}, bootstrap_utils "/>
     </g:else>
 
-    <r:require modules="kendo-ui, kendo-bootstrap" />
+    <r:require modules="kendo-ui, kendo-bootstrap"/>
     <r:layoutResources/>
     <g:layoutHead/>
 

@@ -26,7 +26,7 @@ class ComandaController {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
 
         def drinks = params.drinks != "false" ? true : false
-        def list = drinks == false ? Comanda.list(params) : Comanda.findAll(params, {drinksServerd ==  false})
+        def list = drinks == false ? Comanda.list(params) : Comanda.findAll(params, { drinksServerd == false })
         [comandaInstanceList: list, comandaInstanceTotal: list.size(), drinks: drinks]
     }
 

@@ -8,11 +8,13 @@ import ro.isi.auth.User
 
 class Comanda implements Serializable {
 
+    Date dateCreated
+    Date lastUpdated
     User waiter
     Masa masa
     User cook
     ComandaStatus status
-
+    Boolean drinksServerd = false
     List produses
 
     static hasMany = [produses: Produs]
@@ -21,6 +23,7 @@ class Comanda implements Serializable {
     static mapping = {
         id generator: "increment"
         version false
+        autoTimestamp true
     }
 
     static constraints = {

@@ -10,6 +10,7 @@ var Produs = kendo.data.Model.define({
         name:{type:'string'},
         price:{type:'number'},
         '"type"':{type:'string'},
+        table:{type:'number'},
         preparationTime:{type:'number'}
     }
 });
@@ -22,7 +23,7 @@ var Comanda = kendo.data.Model.define({
         cook:{type:'string'},
         status:{type:'string'},
         preparatitonTime:{type:'number'},
-        masa:{type:'number'}
+        table:{type:'number'}
     }
 });
 
@@ -67,7 +68,6 @@ var buildDataSource = function (uri) {
 };
 
 var buildOrdersKendoGrid = function (container, dataSource, prepared) {
-    console.log(dataSource);
     $(container).kendoGrid({
         dataSource:dataSource,
         sortable:true,
@@ -198,7 +198,6 @@ var removeProductFromOrder = function (productId) {
 
 var updateFormParameters = function () {
     $('#hiddenProducts').empty();
-    console.log(productsForNow);
     $.each(productsForNow, function (index, value) {
         $('<input/>')
             .attr('type', 'hidden')

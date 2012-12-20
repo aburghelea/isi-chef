@@ -24,7 +24,10 @@ class ComandaController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [comandaInstanceList: Comanda.list(params), comandaInstanceTotal: Comanda.count()]
+
+        def drinks = params.drinks != "false" ? true : false
+        def list = drinks == false ? Comanda.list(params) : Comanda.findAll(params, {drinksServerd ==  false})
+        [comandaInstanceList: list, comandaInstanceTotal: list.size(), drinks: drinks]
     }
 
     @Secured([Roles.ROLE_WAITER])
@@ -129,7 +132,7 @@ class ComandaController {
 
     }
 
-    def takenOrdersCounter = {
+    def takenOrdersCount = {
         def takenOrders = comandaService.getTakenOrdersCount();
 
         response.setStatus HttpServletResponse.SC_OK
@@ -143,6 +146,12 @@ class ComandaController {
         render preparedOrders
     }
 
+    def unservedDrinksCount = {
+        def preparedOrders = comandaService.getUnservedDrinksCount();
+
+        response.setStatus HttpServletResponse.SC_OK
+        render preparedOrders
+    }
 
     def listTakenOrdersAsJson() {
         response.setStatus HttpServletResponse.SC_OK
@@ -182,5 +191,11 @@ class ComandaController {
         else
             flash.message = message(code: 'order.not.delivered.message', args: [params.orderId])
         redirect action: 'listPreparedOrders', params: params
+    }
+
+    def deliverDrink() {
+        def delivered = comandaService.deliverDrink params.orderId
+
+        redirect action: 'list', params: params
     }
 }

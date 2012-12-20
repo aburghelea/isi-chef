@@ -35,16 +35,36 @@
                 <td>${fieldValue(bean: comandaInstance, field: "masa")}</td>
 
                 <td>${fieldValue(bean: comandaInstance, field: "waiter")}</td>
-                <td><g:link class="btn btn-small btn-info" action="show"
-                            id="${comandaInstance.id}">${message(code: 'comada.operations.show', default: 'Show')}</g:link></td>
+                <td>
+                    <div class="left">
+                        <g:link class="btn btn-small btn-info" action="show" id="${comandaInstance.id}">
+                            ${message(code: 'comada.operations.show', default: 'Show')}
+                        </g:link>
+                    </div>
+                    <g:if test="${drinks == true}">
+                        %{--<div style="margin: 0 0 0 10px;">--}%
+                        <div class="left">
+                        <g:form controller="comanda" action="deliverDrink" style="margin: 0px">
+                            <input type="hidden" name="orderId" value="${comandaInstance.id}">
+                            <g:submitButton name="submit" class="btn btn-small btn-inverse"
+                                            value="${message(code: 'comada.operations.deliverDrink', default: 'Deliver drink')}"/>
+
+                        </g:form>
+                        </div>
+                    </g:if>
+
+                </td>
+
             </tr>
         </g:each>
         </tbody>
     </table>
+    <g:if test="${drinks == true}">
+        <div class="pagination">
+            <bs:paginate total="${comandaInstanceTotal}"/>
+        </div>
 
-    <div class="pagination">
-        <bs:paginate total="${comandaInstanceTotal}"/>
-    </div>
+    </g:if>
 </section>
 
 </body>

@@ -11,7 +11,7 @@
 <body>
 
 <section id="list-produs" class="first">
-    <g:render template="list" model="[produsInstanceMap: produsInstanceMap]"/>
+    <g:render template="printable" model="[produsInstanceMap: produsInstanceMap]"/>
 
 </section>
 

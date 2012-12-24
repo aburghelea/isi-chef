@@ -56,17 +56,16 @@ class BootStrap {
     }
 
     private def bootStrapProducts = {
-        for (int i = 0; i < 20; i++) {
-
-            def produs = new Produs(
-                    name: i + " Yummy",
-                    price: i * 100,
-                    description: "Produsul " + i,
-                    preparationTime: i * 13,
-                    code: i * Math.sqrt(i),
-                    type: 'COMESTIBIL').save(failOnError: true, flush: true);
-        }
-
+//        for (int i = 0; i < 20; i++) {
+//
+//            def produs = new Produs(
+//                    name: i + " Yummy",
+//                    price: i * 100,
+//                    description: "Produsul " + i,
+//                    preparationTime: i * 13,
+//                    code: i * Math.sqrt(i),
+//                    type: 'COMESTIBIL').save(failOnError: true, flush: true);
+//        }
     }
 
     private def bootStrapTables = {

@@ -12,8 +12,14 @@ import javax.servlet.http.HttpServletResponse
 class ProdusController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    def produsService;
+
     def index() {
         redirect(action: "list", params: params)
+    }
+
+    def printable() {
+        [produsInstanceMap: produsService.getProductMap()]
     }
 
     def list() {

@@ -16,25 +16,46 @@ class ProductBootStrap {
     }
 
     def addDeserts() {
-        new Produs(name: "Icecream" , price: 4, description: "Strawberry, Chocolate etc " , preparationTime: 3,
-                code: codeGenerator.getNextCode("DESERT"), type: "DESERTS")
+        new Produs(name: "Icecream", price: 4, description: "Strawberry, Chocolate etc ", preparationTime: 3,
+                code: codeGenerator.getNextCode("DESERT"), type: "Deserts")
                 .save(failOnError: true, flush: true)
-        new Produs(name: "Cookies" , price: 4, description: "Strawberry, Chocolate etc " , preparationTime: 1,
-                code: codeGenerator.getNextCode("DESERT"), type: "DESERTS")
+
+        new Produs(name: "Snow White", price: 3, description: "White as in fairy tales", preparationTime: 1,
+                code: codeGenerator.getNextCode("DESERT"), type: "Deserts")
+                .save(failOnError: true, flush: true)
+
+        new Produs(name: "Diplomatic", price: 4, description: "Clean and elegant as the embassador",
+                preparationTime: 3, code: codeGenerator.getNextCode("DESERT"), type: "Deserts")
+                .save(failOnError: true, flush: true)
+
+        new Produs(name: "Fruit Salad", price: 7, description: "All the fruits you want and some rum for taste",
+                preparationTime: 3, code: codeGenerator.getNextCode("DESERT"), type: "Deserts")
+                .save(failOnError: true, flush: true)
+
+        new Produs(name: "Cookies", price: 4, description: "Strawberry, Chocolate etc ", preparationTime: 1,
+                code: codeGenerator.getNextCode("DESERT"), type: "Deserts")
                 .save(failOnError: true, flush: true)
     }
 
     def addFirstDishes() {
 
-        new Produs(name: "Steak" , price: 15 , description: "Steak 0.25Kg" , preparationTime: 25,
+        new Produs(name: "Pork steak", price: 15, description: "Steak 0.25Kg", preparationTime: 25,
                 code: codeGenerator.getNextCode("FIRST"), type: "First dishes")
                 .save(failOnError: true, flush: true)
 
-        new Produs(name: "French Fries" , price: 3 , description: "French Fries 0.3" , preparationTime: 14,
+        new Produs(name: "Chicken Breast", price: 12, description: "Chicken Little 0.25Kg", preparationTime: 18,
                 code: codeGenerator.getNextCode("FIRST"), type: "First dishes")
                 .save(failOnError: true, flush: true)
 
-        new Produs(name: "Bolognese pasta" , price: 9 , description: "Bolognese pasta" , preparationTime: 12,
+        new Produs(name: "Vegetables Saute", price: 12, description: "Vegetables Saute 0.25Kg", preparationTime: 18,
+                code: codeGenerator.getNextCode("FIRST"), type: "First dishes")
+                .save(failOnError: true, flush: true)
+
+        new Produs(name: "French Fries", price: 3, description: "French Fries 0.3", preparationTime: 14,
+                code: codeGenerator.getNextCode("FIRST"), type: "First dishes")
+                .save(failOnError: true, flush: true)
+
+        new Produs(name: "Bolognese pasta", price: 9, description: "Bolognese pasta", preparationTime: 12,
                 code: codeGenerator.getNextCode("FIRST"), type: "First dishes")
                 .save(failOnError: true, flush: true)
 

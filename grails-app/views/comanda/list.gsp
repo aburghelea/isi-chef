@@ -37,6 +37,8 @@
                 <td>${fieldValue(bean: comandaInstance, field: "waiter")}</td>
                 <td><g:link class="btn btn-small btn-info" action="show"
                             id="${comandaInstance.id}">${message(code: 'comada.operations.show', default: 'Show')}</g:link></td>
+                <td><g:link class="btn btn-small btn-info" action="nota"
+                                            id="${comandaInstance.id}">${message(code: 'nota.label', default: 'Nota')}</g:link></td>
             </tr>
         </g:each>
         </tbody>

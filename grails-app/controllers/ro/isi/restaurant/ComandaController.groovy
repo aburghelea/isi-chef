@@ -61,7 +61,43 @@ class ComandaController {
 
         [comandaInstance: comandaInstance]
     }
+    def nota() {
+        def comandaInstance = Comanda.get(params.id)
+        def listProduses=comandaInstance.produses
+        def produsesMap=[:]
+        def produsesCost=[:]
 
+        for (i in listProduses){
+            String id=i.name
+            java.lang.Long pr=i.price
+            if(!produsesMap.containsKey(id)) {
+                produsesMap[id]=1
+                produsesCost[pr]=i.price
+            }
+            else {
+                def contor= produsesMap.get(id)+1
+                def newval=i.price*contor
+                produsesMap[id]= contor
+                produsesCost[pr]=newval
+
+            }
+
+        }
+
+        if (!comandaInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'comanda.label', default: 'Comanda'), params.id])
+            redirect(action: "list")
+            return
+        }
+        def costTotal=0
+        for(i in produsesCost){
+            def key= i.key
+            def value=produsesCost[key]
+            costTotal=costTotal+value
+        }
+        def masa=comandaInstance.masa
+        [comandaInstance: comandaInstance,listProduses:produsesMap,produsesCost:produsesCost,costTotal:costTotal,masa:masa]
+    }
     def edit() {
         def comandaInstance = Comanda.get(params.id)
         if (!comandaInstance) {
@@ -72,6 +108,7 @@ class ComandaController {
 
         [comandaInstance: comandaInstance]
     }
+
 
     def update() {
         def comandaInstance = Comanda.get(params.id)

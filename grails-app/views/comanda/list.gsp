@@ -42,7 +42,6 @@
                         </g:link>
                     </div>
                     <g:if test="${drinks == true}">
-                    %{--<div style="margin: 0 0 0 10px;">--}%
                         <div class="left">
                             <g:form controller="comanda" action="deliverDrink" style="margin: 0px">
                                 <input type="hidden" name="orderId" value="${comandaInstance.id}">
@@ -52,9 +51,12 @@
                             </g:form>
                         </div>
                     </g:if>
+					<g:link class="btn btn-small btn-info" action="nota" id="${comandaInstance.id}">
+						${message(code: 'nota.label', default: 'Nota')}
+					</g:link>
 
                 </td>
-
+                
             </tr>
         </g:each>
         </tbody>

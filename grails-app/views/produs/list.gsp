@@ -26,7 +26,12 @@
             <g:sortableColumn property="preparationTime"
                               title="${message(code: 'produs.preparationTime.label', default: 'Preparation Time')}"/>
 
+            <g:sortableColumn property="stock"
+                              title="${message(code: 'produs.stock.label', default: 'stock')}"/>
+
             <g:sortableColumn property="code" title="${message(code: 'produs.code.label', default: 'Code')}"/>
+
+            <g:sortableColumn property="type" title="${message(code: 'produs.type.label', default: 'Type')}"/>
 
             <g:sortableColumn property="type" title="${message(code: 'produs.type.label', default: 'Type')}"/>
 
@@ -44,6 +49,8 @@
                 <td>${fieldValue(bean: produsInstance, field: "description")}</td>
 
                 <td>${fieldValue(bean: produsInstance, field: "preparationTime")}</td>
+
+                <td>${fieldValue(bean: produsInstance, field: "stock")}</td>
 
                 <td>${fieldValue(bean: produsInstance, field: "code")}</td>
 

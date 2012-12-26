@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse
 class ProdusController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    def produsService
+
     def index() {
         redirect(action: "list", params: params)
     }
@@ -107,23 +109,14 @@ class ProdusController {
         }
     }
 
-
     def listJSON() {
         response.setStatus HttpServletResponse.SC_OK
         response.setContentType "application/json"
 
-        def result = Produs.list().collect() {
-            Produs it ->
-                [
-                        code: it.code,
-                        description: it.description,
-                        id: it.id,
-                        name: it.name,
-                        preparationTime: it.preparationTime,
-                        price: it.price,
-                        type: it.type,
-                ]
-        }
+        Closure criteria = { gt 'stock', 0L }
+        def result = produsService.productsByCriteria criteria
         render result as JSON
     }
+
+
 }

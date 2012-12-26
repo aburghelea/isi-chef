@@ -40,6 +40,17 @@
     </div>
 </div>
 
+<div class="control-group fieldcontain ${hasErrors(bean: produsInstance, field: 'stock', 'error')} ">
+    <label for="preparationTime" class="control-label">
+        <g:message code="produs.stock.label" default="Stock"/>
+    </label>
+
+    <div class="controls">
+        <g:field type="number" name="stock" value="${produsInstance.stock}"/>
+        <span class="help-inline">${hasErrors(bean: produsInstance, field: 'stock', 'error')}</span>
+    </div>
+</div>
+
 <div class="control-group fieldcontain ${hasErrors(bean: produsInstance, field: 'code', 'error')} ">
     <label for="code" class="control-label"><g:message code="produs.code.label" default="Code"/></label>
 

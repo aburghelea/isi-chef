@@ -9,6 +9,7 @@ var Produs = kendo.data.Model.define({
         description: {type: 'string'},
         name: {type: 'string'},
         price: {type: 'number'},
+        stock: {type: 'number'},
         '"type"': {type: 'string'},
         table: {type: 'number'},
         preparationTime: {type: 'number'}
@@ -113,7 +114,7 @@ var buildProdusKendoGrid = function (container, dataSource, toDelete) {
                 field: 'name', filterable: true, title: "Name", width: '15%'
             },
             {
-                field: 'code', filterable: true, title: "code", width: '15%'
+                field: 'code', filterable: true, title: "Code", width: '15%'
             },
             {
                 field: 'description', filterable: true, title: 'Description'
@@ -125,6 +126,9 @@ var buildProdusKendoGrid = function (container, dataSource, toDelete) {
                 field: 'preparationTime', filterable: true, title: "Prep. time", width: '10%'
             },
             {
+                field: 'stock', filterable: true, title: "Stock"
+            },
+                          {
                 field: 'type', filterable: true, title: 'Category', width: '15%'
             },
             {
@@ -162,10 +166,13 @@ var addProductToOrderTemplate = function (productId) {
         .addClass("btn btn-small btn-info")
         .attr('onClick', 'addProductToOrder(' + productId + ')');
     var badge = '<span id="badge' + productId + '" class="badge badge-warn">0</span>';
+
+
     return $('<div class="row"></div>')
         .append($("<div class='span1'></div> ").append(link))
         .append($("<div class='span1'></div> ").append(badge))
         .html();
+
 };
 
 //noinspection JSUnusedGlobalSymbols
@@ -179,6 +186,9 @@ var removeProductFromOrderTemplate = function (productId) {
 
 var addProductToOrder = function (productId) {
     $("#ok" + productId).show();
+    console.log($("#ok" + productId));
+    if (!validStock(productId))
+        return false;
 
     productsForNow.push(allProductsDataSource.get(productId).data);
     updateBadge(productId);
@@ -187,6 +197,13 @@ var addProductToOrder = function (productId) {
 
     $("#ok" + productId).fadeOut("slow");
 };
+
+var validStock = function(productId){
+    var added = parseInt($("#badge" + productId).html());
+    var stock = parseInt(allProductsDataSource.get(productId).data.stock);
+
+    return stock > added;
+}
 
 var removeProductFromOrder = function (productId) {
     var element = allProductsDataSource.get(productId).data;

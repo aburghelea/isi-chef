@@ -17,7 +17,7 @@ class ComandaService {
         def user = null;
         try {
             for (def role : waiter.authorities) {
-                if (role?.authority?.equals(Roles.ROLE_WAITER)) {
+                if (role?.authority?.equals(Roles.WAITER)) {
                     user = User.findById(waiter.id)
                     break;
                 }
@@ -31,7 +31,7 @@ class ComandaService {
         def user = null;
         try {
             for (def role : waiter.authorities) {
-                if (role?.authority?.equals(Roles.ROLE_COOK)) {
+                if (role?.authority?.equals(Roles.COOK)) {
                     user = User.findById(waiter.id)
                     break;
                 }

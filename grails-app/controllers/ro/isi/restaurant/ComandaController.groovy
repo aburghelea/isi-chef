@@ -30,7 +30,7 @@ class ComandaController {
         [comandaInstanceList: list, comandaInstanceTotal: list.size(), drinks: drinks]
     }
 
-    @Secured([Roles.ROLE_WAITER])
+    @Secured([Roles.WAITER])
     def create() {
         def comanda = new Comanda(params)
         comanda.waiter = comandaService.getAuthenticatedWaiter()
@@ -122,12 +122,12 @@ class ComandaController {
         }
     }
 
-    @Secured([Roles.ROLE_COOK])
+    @Secured([Roles.COOK])
     def listTakenOrders() {
         [comandaInstance: comandaService.getOrderAssignedToCurrentCook()]
     }
 
-    @Secured([Roles.ROLE_WAITER])
+    @Secured([Roles.WAITER])
     def listPreparedOrders() {
 
     }

@@ -4,6 +4,8 @@ import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 
 import javax.servlet.http.HttpServletResponse
+import grails.plugins.springsecurity.Secured
+import ro.isi.auth.Roles
 
 /**
  * ProdusController
@@ -17,7 +19,7 @@ class ProdusController {
     def index() {
         redirect(action: "list", params: params)
     }
-
+    @Secured([Roles.ADMINISTRATOR])
     def printable() {
         [produsInstanceMap: produsService.getProductMap()]
     }

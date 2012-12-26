@@ -5,6 +5,7 @@ import ro.isi.restaurant.Comanda
 import ro.isi.restaurant.ComandaStatus
 import ro.isi.restaurant.Masa
 import ro.isi.restaurant.Produs
+import ro.isi.auth.Roles
 
 class BootStrap {
 
@@ -23,9 +24,9 @@ class BootStrap {
 
 
     private def bootStrapUsers = {
-        def cookRole = Role.findByAuthority('ROLE_COOK') ?: new Role(authority: 'ROLE_COOK').save(failOnError: true)
-        def waiterRole = Role.findByAuthority('ROLE_WAITER') ?: new Role(authority: 'ROLE_WAITER').save(failOnError: true)
-        def adminRole = Role.findByAuthority('ROLE_ADMIN') ?: new Role(authority: 'ROLE_ADMIN').save(failOnError: true)
+        def cookRole = Role.findByAuthority(Roles.COOK) ?: new Role(authority: Roles.COOK).save(failOnError: true)
+        def waiterRole = Role.findByAuthority(Roles.WAITER) ?: new Role(authority: Roles.WAITER).save(failOnError: true)
+        def adminRole = Role.findByAuthority(Roles.ADMINISTRATOR) ?: new Role(authority: Roles.ADMINISTRATOR).save(failOnError: true)
 
         def adminUser = User.findByUsername('admin') ?: new User(
                 username: 'admin',

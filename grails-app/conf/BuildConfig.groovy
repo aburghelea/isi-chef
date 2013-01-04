@@ -44,6 +44,7 @@ grails.project.dependency.resolution = {
         runtime ":hibernate:$grailsVersion"
         runtime ":jquery:1.7.1"
         runtime ":resources:1.1.6"
+        compile ":rendering:0.4.3"
 
         build ":tomcat:$grailsVersion"
     }

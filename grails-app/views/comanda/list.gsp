@@ -1,4 +1,4 @@
-<%@ page import="ro.isi.restaurant.Comanda" %>
+<%@ page import="ro.isi.restaurant.ComandaStatus; ro.isi.restaurant.Comanda" %>
 <!doctype html>
 <html>
 <head>
@@ -51,17 +51,19 @@
                             </g:form>
                         </div>
                     </g:if>
-					<g:link class="btn btn-small btn-info" action="nota" id="${comandaInstance.id}">
-						${message(code: 'nota.label', default: 'Nota')}
-					</g:link>
-
+                    <g:if test="${comandaInstance.status.equals(ComandaStatus.DELIVERED)}">
+                        <g:link class="btn btn-small btn-info" action="nota" id="${comandaInstance.id}">
+                            ${message(code: 'nota.label', default: 'Nota')}
+                        </g:link>
+                    </g:if>
                 </td>
-                
+
             </tr>
         </g:each>
         </tbody>
     </table>
-    <g:if test="${drinks == true}">
+
+    <g:if test="${!drinks}">
         <div class="pagination">
             <bs:paginate total="${comandaInstanceTotal}"/>
         </div>

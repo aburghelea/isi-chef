@@ -7,8 +7,9 @@ package ro.isi.auth
  */
 public interface Roles {
 
-    public static final def ROLE_WAITER = "ROLE_WAITER"
-    public static final def ROLE_COOK = "ROLE_COOK"
+    public static final def WAITER = "ROLE_WAITER"
+    public static final def COOK = "ROLE_COOK"
+    public static final def ADMINISTRATOR = "ROLE_ADMIN"
 
 
 }

@@ -157,4 +157,5 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
         '/index': ['IS_AUTHENTICATED_ANONYMOUSLY'],
 ]
 
-ro.isi.auth.refreshTime = 30000 // 3sec
+ro.isi.auth.refreshTime = 30000 // 30sec
+ro.isi.auth.redirectTime = 3000 // 3sec

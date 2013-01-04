@@ -27,12 +27,13 @@ class ComandaController {
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
 
-        def drinks = params.drinks != "false" ? true : false
-        def list = drinks == false ? Comanda.list(params) : Comanda.findAll(params, { drinksServerd == false })
-        [comandaInstanceList: list, comandaInstanceTotal: list.size(), drinks: drinks]
+        def drinks = params.drinks == "true" ? true : false
+        def list = !drinks ? Comanda.list(params) : Comanda.findAll(params, { drinksServerd == false })
+        def comandaInstanceTotal = !drinks ? Comanda.count() : 10
+        [comandaInstanceList: list, comandaInstanceTotal: comandaInstanceTotal, drinks: drinks]
     }
 
-    @Secured([Roles.ROLE_WAITER])
+    @Secured([Roles.WAITER])
     def create() {
         def comanda = new Comanda(params)
         comanda.waiter = userService.getAuthenticatedWaiter()
@@ -162,12 +163,12 @@ class ComandaController {
         }
     }
 
-    @Secured([Roles.ROLE_COOK])
+    @Secured([Roles.COOK])
     def listTakenOrders() {
         [comandaInstance: comandaService.getOrderAssignedToCurrentCook()]
     }
 
-    @Secured([Roles.ROLE_WAITER])
+    @Secured([Roles.WAITER])
     def listPreparedOrders() {
 
     }

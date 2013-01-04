@@ -20,7 +20,7 @@ class ComandaService {
         def user = null;
         try {
             for (def role : waiter.authorities) {
-                if (role?.authority?.equals(Roles.ROLE_COOK)) {
+                if (role?.authority?.equals(Roles.COOK)) {
                     user = User.findById(waiter.id)
                     break;
                 }
@@ -74,7 +74,7 @@ class ComandaService {
         Closure prepared = {
             and {
                 eq 'status', ComandaStatus.PREPARED;
-                eq 'waiter', userServicegetAuthenticatedWaiter()
+                eq 'waiter', userService.getAuthenticatedWaiter()
             }
         }
 

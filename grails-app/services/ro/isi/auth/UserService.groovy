@@ -19,7 +19,7 @@ class UserService {
         def user = null;
         try {
             for (def role : waiter.authorities) {
-                if (role?.authority?.equals(Roles.ROLE_WAITER)) {
+                if (role?.authority?.equals(Roles.WAITER)) {
                     user = User.findById(waiter.id)
                     break;
                 }
@@ -33,7 +33,7 @@ class UserService {
 
         for (User user : User.list()){
             for (Role role : user.authorities){
-                if (role?.authority?.equals(Roles.ROLE_WAITER)){
+                if (role?.authority?.equals(Roles.WAITER)){
                     waiters.add user
                     break;
                 }

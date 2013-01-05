@@ -30,6 +30,7 @@ This menu is used to show function that can be triggered on the content (an obje
             <li class="">
                 <g:render template="/_common/modals/deleteTextLink"/>
             </li>
+
         </g:if>
 
         <g:if test="${params.controller == 'produs'}">
@@ -37,6 +38,15 @@ This menu is used to show function that can be triggered on the content (an obje
                 <g:link action="printable">
                     <i class="icon-print"></i>
                     <g:message code='produs.print.label' default='Print'/>
+                </g:link>
+            </li>
+        </g:if>
+
+        <g:if test="${params.action == 'nota' && params.controller == 'comanda'}">
+            <li>
+                <g:link action="notaPdf" id="${params.id}" target="_blank">
+                    <i class="icon-print"></i>
+                    <g:message code="default.pdf.label" default="Print ${entityName}"/>
                 </g:link>
             </li>
         </g:if>

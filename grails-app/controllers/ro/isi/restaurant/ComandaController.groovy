@@ -16,8 +16,8 @@ class ComandaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    ComandaService comandaService;
-    UserService userService;
+    ComandaService comandaService
+    UserService userService
 
     def index() {
 
@@ -68,7 +68,6 @@ class ComandaController {
 
     def nota() {
         def comandaInstance = Comanda.get(params.id)
-        def produsesQuantityMap = [:]
 
         if (!comandaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'comanda.label', default: 'Comanda'), params.id])
@@ -76,15 +75,29 @@ class ComandaController {
             return
         }
 
-        for (Produs produs in comandaInstance.produses) {
-            if (!produsesQuantityMap.containsKey(produs)) {
-                produsesQuantityMap[produs] = 0
-            }
-            produsesQuantityMap[produs]++;
-        }
+        def produsesQuantityMap = comandaService.productQuantities(comandaInstance)
 
         [comandaInstance: comandaInstance, produsesQuantityMap: produsesQuantityMap]
     }
+
+
+    def notaPdf() {
+        def comandaInstance = Comanda.get(params.id)
+
+        if (!comandaInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'comanda.label', default: 'Comanda'), params.id])
+            redirect(action: "list")
+            return
+        }
+
+        def produsesQuantityMap = comandaService.productQuantities(comandaInstance)
+
+        renderPdf(template: "/comanda/nota",
+                model: [comandaInstance: comandaInstance, produsesQuantityMap: produsesQuantityMap],
+                filename: "test.pdf")
+    }
+
+
 
     def edit() {
         def comandaInstance = Comanda.get(params.id)

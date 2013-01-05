@@ -91,13 +91,11 @@ class ComandaController {
         }
 
         def produsesQuantityMap = comandaService.productQuantities(comandaInstance)
-
+        def name = "Nota " + comandaInstance.id + " " + (new Date()).format("dd-MM-yyyy / HH:mm")
         renderPdf(template: "/comanda/nota",
                 model: [comandaInstance: comandaInstance, produsesQuantityMap: produsesQuantityMap],
-                filename: "test.pdf")
+                filename: name + "pdf")
     }
-
-
 
     def edit() {
         def comandaInstance = Comanda.get(params.id)
@@ -109,7 +107,6 @@ class ComandaController {
 
         [comandaInstance: comandaInstance, waiters: userService.getWaiters()]
     }
-
 
     def update() {
         def comandaInstance = Comanda.get(params.id)

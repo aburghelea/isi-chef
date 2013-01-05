@@ -463,7 +463,7 @@ hr {
 
                 <div class="span2 offset6">
                     <strong>
-                        ...
+                        ......
                     </strong>
                 </div>
             </div>
@@ -483,7 +483,7 @@ hr {
 
                 <div class="span2 offset6">
                     <strong>
-                        ...
+                        ......
                     </strong>
                 </div>
             </div>

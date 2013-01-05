@@ -146,4 +146,15 @@ class ComandaService {
     def decrementStoks(Comanda comanda) {
         produsService.decrementStocks(comanda.produses)
     }
+
+    def productQuantities(Comanda comandaInstance) {
+        def produsesQuantityMap = [:]
+        for (Produs produs in comandaInstance.produses) {
+            if (!produsesQuantityMap.containsKey(produs)) {
+                produsesQuantityMap[produs] = 0
+            }
+            produsesQuantityMap[produs]++;
+        }
+        produsesQuantityMap
+    }
 }

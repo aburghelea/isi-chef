@@ -59,4 +59,11 @@ class Comanda implements Serializable {
 
         return preparationTime;
     }
+
+    def getPrice() {
+        def price = 0;
+        produses.each { Produs it -> price += it.price }
+
+        price
+    }
 }

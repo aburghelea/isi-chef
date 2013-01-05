@@ -19,9 +19,15 @@ class ProdusController {
     def index() {
         redirect(action: "list", params: params)
     }
-    @Secured([Roles.ADMINISTRATOR])
+//    @Secured([Roles.ADMINISTRATOR])
     def printable() {
         [produsInstanceMap: produsService.getProductMap()]
+    }
+
+    def menuPdf() {
+        renderPdf(template: "/produs/printable",
+                model:  [produsInstanceMap: produsService.getProductMap()],
+                filename: "Meniu.pdf")
     }
 
     def list() {

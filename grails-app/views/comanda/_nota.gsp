@@ -1,111 +1,154 @@
-<div id="container" style="width:300px;">
+<g:set var="comandaId" value="${comandaInstance.id}"/>
+<div class="container">
     <section id="intro" style="text-align: center;">
-        <h5><g:message code="nota.info.antet" default="SC MIG-2000 SRL ${'<br>'} CUI: RO3501715"/></h5>
+        <h4>
+            <g:message code="default.restaurant.name.message" default="isi-Chef"/>
+        </h4>
 
-        <h3><g:message code="default.restaurant.name.message" default="isi-Chef"/></h3>
-        <g:set var="comandaId" value="${comandaInstance.toString()}"/>
+        <h5>
+            <g:message code="nota.info.antet" default="SC MIG-2000 SRL ${'<br>'} CUI: RO3501715"/>
+        </h5>
 
-        <p><g:message code="nota.info.message" args="[comandaId]" default="Nota de plata nr. ${comandaId}"/></p>
-        <table cellpadding="5" bgcolor="rgb(0,255,0)" style="text-align: left;" align="center">
-            <thead>
-            <tr>
-                <td><g:message code="nota.masa.label" default="Masa"/></td>
-                <td><g:message code="nota.ospatar.label" default="Ospatar"/></td>
-                <td><g:message code="nota.data.label" default="Data"/></td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>${comandaInstance.masa.number}</td>
-                <td>${comandaInstance.waiter.username}</td>
-                <td><script type="text/javascript">
-                    var currentTime = new Date();
-                    var month = currentTime.getMonth() + 1;
-                    var day = currentTime.getDate();
-                    var year = currentTime.getFullYear();
-                    document.write(month + "/" + day + "/" + year);
-                </script>
-                </td>
-            </tr>
+        <h3>
+            <g:message code="nota.info.message" args="[comandaId]" default="Nota de plata nr. ${comandaId}"/>
+        </h3>
 
-            <tr>
-                <td><g:message code="nota.ora.label" default="Ora"/></td>
-                <td><script type="text/javascript">
-                    var currentTime = new Date();
-                    var hours = currentTime.getHours();
-                    var minutes = currentTime.getMinutes();
-                    if (minutes < 10) {
-                        minutes = "0" + minutes
-                    }
-                    document.write(hours + ":" + minutes + " ");
-                    if (hours > 11) {
-                        document.write("PM");
-                    } else {
-                        document.write("AM");
-                    }
-                </script>
-                </td>
-            </tr>
+        <div class="container">
+            <div class="row-fluid">
 
-            </tbody>
+                <div class="span3 offset3">
+                    <g:message code="nota.masa.label" default="Masa"/>
+                </div>
 
-        </table>
+                <div class="span3">
+                    ${comandaInstance.masa.number}
+                </div>
+            </div>
 
+
+            <div class="row-fluid">
+                <div class="span3 offset3">
+                    <g:message code="nota.ospatar.label" default="Ospatar"/>
+                </div>
+
+                <div class="span3">
+                    ${comandaInstance.waiter.username}
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span3 offset3">
+                    <g:message code="nota.data.label" default="Data"/>
+                </div>
+
+                <div class="span3">
+                    ${(new Date()).format("dd-MM-yyyy")}
+                </div>
+            </div>
+        </div>
     </section>
 
+    <div class="container" id="nota-table">
 
-    <section id="nota-table">
-        <table class="table">
-            <thead>
-            <tr>
-                <th valign="top" class="name"><g:message code="nota.produs.label" default="Produs"/></th>
-                <th valign="top" class="name"><g:message code="nota.cantitate.label" default="Cantitate"/></th>
-                <th valign="top" class="name"><g:message code="nota.pret.label" default="Pret"/></th>
-                <th valign="top" class="name"><g:message code="nota.valoare.label" default="Valoare"/></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr cellpaddinng="0" cellspacing="0">
-                <td valign="top" style="text-align: left;" class="value">
-                    <g:each in="${listProduses}" var="p">
-                        ${p?.key}  <br>
-                    </g:each>
-                </td>
-                <td valign="top" style="text-align: left;" class="value">
-                    <g:each in="${listProduses}" var="p">
-                        ${p?.value}   <br>
-                    </g:each>
-                </td>
-                <td valign="top" style="text-align: left;" class="value">
-                    <g:each in="${produsesCost}" var="p">
-                        ${p?.key} <br>
-                    </g:each>
-                </td>
-                <td valign="top" style="text-align: left;" class="value">
-                    <g:each in="${produsesCost}" var="p">
-                        ${p?.value} <br>
-                    </g:each>
+        <div class="row show-grid">
+            <div class="span3 column">
+                <g:message code="nota.produs.label" default="Produs"/>
+            </div>
 
-                </td>
+            <div class="span3 column">
+                <g:message code="nota.cantitate.label" default="Cantitate"/>
+            </div>
 
-            </tr>
-            <tr class="prop" cellpaddinng="0" cellspacing="0">
-                <td valign="top" style="text-align: left;" class="value"><g:message code="nota.total.plata.label"
-                                                                                    default="TOTAL DE PLATA: ${'<br>'} din care TVA:"/></td>
-                <td valign="top" style="text-align: left;" class="value"></td>
-                <td valign="top" style="text-align: left;" class="value"></td>
-                <td valign="top" style="text-align: left;" class="value">${costTotal} <br><br> ${costTotal * 16 / 100}
-                </td>
+            <div class="span3 column">
+                <g:message code="nota.pret.label" default="Pret"/>
+            </div>
 
-            </tr>
+            <div class="span3 column">
+                <g:message code="nota.valoare.label" default="Valoare"/>
+            </div>
+        </div>
+        <g:each in="${produsesQuantityMap}" var="productEntry">
+            <g:set var="produs" value="${productEntry.key}"/>
+            <g:set var="quantity" value="${productEntry.value}"/>
+            <div class="row show-grid">
+                <div class="span3 column">
+                    ${produs.name}
+                </div>
 
-            </tbody>
-        </table>
+                <div class="span3 column">
+                    ${quantity}
+                </div>
 
-        <p align="center"><g:message code="nota.client.label" args="[comandaId]" default=" Client: ${comandaId}"/></p>
+                <div class="span3 column">
+                    ${produs.price}
+                </div>
 
-        <p align="center"><g:message code="nota.thanks.message"
-                                     default="TIPS NOT INCLUDED ${'<br>'} VA MULTUMIM ${'<br>'} THANK YOU ${'<br>'} REZERVARI LA TELEFON: 0743.061.489"/></p>
-    </section>
+                <div class="span3 column">
+                    ${produs.price * quantity}
+                </div>
+            </div>
+        </g:each>
+    </div>
+    <hr>
+
+    <div class="row-fluid show-grid">
+        <div class="span12 column">
+            <div class="span3">
+                <strong>
+                    <g:message code="nota.total.plata.label" default="TOTAL DE PLATA:"/>
+                </strong>
+            </div>
+
+            <div class="span3 offset6">
+                <strong>
+                    ${comandaInstance.getPrice()}
+                </strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid show-grid">
+        <div class="span12 column">
+            <div class="span3">
+                <strong>
+                    <g:message code="nota.tips.label" default="Tips:"/>
+                </strong>
+            </div>
+
+            <div class="span3 offset6">
+                <strong>
+                    ...
+                </strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid show-grid">
+        <div class="span12 column">
+            <div class="span3">
+                <strong>
+                    <g:message code="nota.total.label" default="Total:"/>
+                </strong>
+            </div>
+
+            <div class="span3 offset6">
+                <strong>
+                    ...
+                </strong>
+            </div>
+        </div>
+    </div>
+
+    <p align="center">
+        <g:message code="nota.client.label" args="[comandaId]" default=" Client: ${comandaId}"/>
+    </p>
+
+    <p align="center">
+        <g:message code="nota.thanks.message" default="Multumiri"/>
+    </p>
+    <p align="center">
+        <g:message code="note.rezervari.message"
+                   args="[message(code:'default.phone.number.message', default: '-')]"/>
+    </p>
 
 </div>

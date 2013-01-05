@@ -1,11 +1,12 @@
 import ro.isi.auth.Role
+import ro.isi.auth.Roles
 import ro.isi.auth.User
 import ro.isi.auth.UserRole
+import ro.isi.bootstrap.ProductBootStrap
 import ro.isi.restaurant.Comanda
 import ro.isi.restaurant.ComandaStatus
 import ro.isi.restaurant.Masa
 import ro.isi.restaurant.Produs
-import ro.isi.auth.Roles
 
 class BootStrap {
 
@@ -57,16 +58,8 @@ class BootStrap {
     }
 
     private def bootStrapProducts = {
-//        for (int i = 0; i < 20; i++) {
-//
-//            def produs = new Produs(
-//                    name: i + " Yummy",
-//                    price: i * 100,
-//                    description: "Produsul " + i,
-//                    preparationTime: i * 13,
-//                    code: i * Math.sqrt(i),
-//                    type: 'COMESTIBIL').save(failOnError: true, flush: true);
-//        }
+        ProductBootStrap productBootStrap = new ProductBootStrap()
+        productBootStrap.addProducts()
     }
 
     private def bootStrapTables = {

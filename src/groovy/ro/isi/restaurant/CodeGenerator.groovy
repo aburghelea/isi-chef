@@ -10,6 +10,7 @@ class CodeGenerator {
     private def map = [:];
 
     def getNextCode(String prefix){
+        prefix = prefix.size()> 4 ? prefix.substring(0,3) : prefix
         Integer suffix = getPreviousSuffix(prefix);
         suffix += 1;
         setPreviousSuffix(prefix,suffix);

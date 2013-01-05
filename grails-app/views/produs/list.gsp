@@ -33,8 +33,6 @@
 
             <g:sortableColumn property="type" title="${message(code: 'produs.type.label', default: 'Type')}"/>
 
-            <g:sortableColumn property="type" title="${message(code: 'produs.type.label', default: 'Type')}"/>
-
         </tr>
         </thead>
         <tbody>

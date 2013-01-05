@@ -1,3 +1,5 @@
+package ro.isi.bootstrap
+
 import ro.isi.restaurant.CodeGenerator
 import ro.isi.restaurant.Produs
 
@@ -5,8 +7,7 @@ class ProductBootStrap {
 
     CodeGenerator codeGenerator = new CodeGenerator()
 
-    private static final String DRINKS = "Drinks"
-    def init = {
+    def addProducts() {
         addDeserts()
         addFirstDishes()
         addSoups()

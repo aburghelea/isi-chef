@@ -10,7 +10,10 @@
 </head>
 
 <body>
-<g:render template="nota" model="[comandaInstance: comandaInstance]"/>
+
+<g:render template="nota"
+          model="[comandaInstance: comandaInstance,
+                  produsesQuantityMap: produsesQuantityMap]"/>
 
 </body>
 

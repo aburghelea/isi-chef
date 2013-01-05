@@ -8,21 +8,24 @@
 <body>
 
 <section id="intro">
-    <h1><g:message code="default.welcome.title" args="[meta(name: 'app.name')]"/></h1>
+    <h1><g:message code="default.about.welcome"/></h1>
 
-    <p class="lead">
-        ${meta(name: 'app.name')}
-        is the hottest System since sliced bread!
+    <p>
+        <g:message code="default.about.message1"/>
+        <g:message code="default.about.message2" />
+        <g:message code="default.about.message3" />
     </p>
 </section>
 
 <section id="additional">
-    <h1><g:message code="default.welcome.title" args="['Kickstart']"/></h1>
-
-    <p>Kickstart is an extension for Grails in order to start with a
-    good looking template for your project. It uses the Bootstrap web
-    page template by Twitter and provides adapted scaffolding templates
-    for standard web pages.</p>
+<div class="pic1" style="float:left; margin-left:20px; margin-bottom:80px;">
+<span style=" font-family: Arial, Helvetica, sans-serif; font-size: 20px; color: #BBBBBB;">Atmosfera deosebita</span><br>
+<img height="300" width="300" src="${resource(dir: 'images', file: 'about1.jpg')}" alt="About1"/>
+</div>
+<div class="pic1" style="float:left; margin-left:60px; margin-bottom:80px;">
+<span style=" font-family: Arial, Helvetica, sans-serif; font-size: 20px; color: #BBBBBB;">Bucatarie internationala</span><br>
+<img height="300" width="300" src="${resource(dir: 'images', file: 'about2.jpg')}" alt="About2"/>
+<div>
 </section>
 
 </body>

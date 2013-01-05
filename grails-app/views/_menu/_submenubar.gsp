@@ -33,9 +33,15 @@ This menu is used to show function that can be triggered on the content (an obje
 
         </g:if>
 
-        <g:if test="${params.controller == 'produs'}">
+        <g:if test="${params.action == 'list' && params.controller == 'produs'}">
             <li>
                 <g:link action="printable">
+                    <i class="icon-print"></i>
+                    <g:message code='produs.print.label' default='Print'/>
+                </g:link>
+            </li>
+            <li>
+                <g:link action="menuPdf">
                     <i class="icon-print"></i>
                     <g:message code='produs.print.label' default='Print'/>
                 </g:link>

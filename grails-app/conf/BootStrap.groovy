@@ -28,6 +28,7 @@ class BootStrap {
         def cookRole = Role.findByAuthority(Roles.COOK) ?: new Role(authority: Roles.COOK).save(failOnError: true)
         def waiterRole = Role.findByAuthority(Roles.WAITER) ?: new Role(authority: Roles.WAITER).save(failOnError: true)
         def adminRole = Role.findByAuthority(Roles.ADMINISTRATOR) ?: new Role(authority: Roles.ADMINISTRATOR).save(failOnError: true)
+        def client = Role.findByAuthority(Roles.CLIENT) ?: new Role(authority: Roles.CLIENT).save(failOnError: true)
 
         def adminUser = User.findByUsername('admin') ?: new User(
                 username: 'admin',

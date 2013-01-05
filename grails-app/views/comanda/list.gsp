@@ -51,19 +51,13 @@
                             </g:form>
                         </div>
                     </g:if>
-                %{--<g:if test="${comandaInstance.status.equals(ComandaStatus.DELIVERED)}">--}%
-                    <div class="left">
-                    <g:link class="btn btn-small btn-info" action="nota" id="${comandaInstance.id}">
-                        ${message(code: 'nota.label', default: 'Nota')}
-                    </g:link>
-                    </div>
-
-                    <div class="left">
-                        <g:link class="btn btn-small btn-info" action="notaPdf" id="${comandaInstance.id}">
-                            ${message(code: 'sd.label', default: 'PDF')}
-                        </g:link>
-                    </div>
-                    %{--</g:if>--}%
+                    <g:if test="${comandaInstance.status.equals(ComandaStatus.DELIVERED)}">
+                        <div class="left">
+                            <g:link class="btn btn-small btn-warning" action="nota" id="${comandaInstance.id}">
+                                ${message(code: 'nota.label', default: 'Nota')}
+                            </g:link>
+                        </div>
+                    </g:if>
                 </td>
 
             </tr>

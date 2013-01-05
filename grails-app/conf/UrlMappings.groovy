@@ -6,10 +6,9 @@ class UrlMappings {
          * Pages without controller
          */
 //		"/"				(view:"/index")
-        "/about"(view: "/siteinfo/about")
+
         "/blog"(view: "/siteinfo/blog")
         "/systeminfo"(view: "/siteinfo/systeminfo")
-        "/contact"(view: "/siteinfo/contact")
         "/terms"(view: "/siteinfo/terms")
         "/imprint"(view: "/siteinfo/imprint")
 
@@ -25,6 +24,8 @@ class UrlMappings {
         "/login/$action?"(controller: "login")
         "/logout/$action?"(controller: "logout")
 
+        "/about"(controller: 'default', action: 'about')
+        "/contact"(controller: 'default', action: 'contact')
         "/$controller/$action?/$id?" {
             constraints {
                 controller(matches: /^((?!(api|mobile|web)).*)$/)

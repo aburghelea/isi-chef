@@ -5,7 +5,7 @@
 
             <a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="#" tabindex="-1">
                 <!-- TODO: integrate Springsource Security etc. and show User's name ... -->
-                <g:message code="user.signin.label" default="Sign in"/><b class="caret"></b>
+                <g:message code="user.signin.label" default="Autentificare"/><b class="caret"></b>
             </a>
 
             <ul class="dropdown-menu" role="menu">

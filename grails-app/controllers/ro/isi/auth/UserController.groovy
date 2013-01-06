@@ -1,6 +1,10 @@
 package ro.isi.auth
 
+import grails.plugins.springsecurity.Secured
+
+@Secured([Roles.ADMINISTRATOR])
 class UserController extends grails.plugins.springsecurity.ui.UserController {
+
     def userService
 
     def index() {
@@ -32,6 +36,5 @@ class UserController extends grails.plugins.springsecurity.ui.UserController {
 
         redirect action: 'emailClients'
     }
-
 
 }

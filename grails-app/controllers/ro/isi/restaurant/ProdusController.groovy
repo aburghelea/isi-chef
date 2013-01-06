@@ -2,6 +2,7 @@ package ro.isi.restaurant
 
 import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.security.access.prepost.PreAuthorize
 
 import javax.servlet.http.HttpServletResponse
 import grails.plugins.springsecurity.Secured
@@ -19,11 +20,11 @@ class ProdusController {
     def index() {
         redirect(action: "list", params: params)
     }
-//    @Secured([Roles.ADMINISTRATOR])
+
     def printable() {
         [produsInstanceMap: produsService.getProductMap()]
     }
-
+    @Secured([Roles.ADMINISTRATOR])
     def menuPdf() {
         renderPdf(template: "/produs/printable",
                 model:  [produsInstanceMap: produsService.getProductMap()],
@@ -35,10 +36,12 @@ class ProdusController {
         [produsInstanceList: Produs.list(params), produsInstanceTotal: Produs.count()]
     }
 
+    @Secured([Roles.ADMINISTRATOR])
     def create() {
         [produsInstance: new Produs(params)]
     }
 
+    @Secured([Roles.ADMINISTRATOR])
     def save() {
         def produsInstance = new Produs(params)
         if (!produsInstance.save(flush: true)) {
@@ -61,6 +64,7 @@ class ProdusController {
         [produsInstance: produsInstance]
     }
 
+    @Secured([Roles.ADMINISTRATOR])
     def edit() {
         def produsInstance = Produs.get(params.id)
         if (!produsInstance) {
@@ -72,6 +76,7 @@ class ProdusController {
         [produsInstance: produsInstance]
     }
 
+    @Secured([Roles.ADMINISTRATOR])
     def update() {
         def produsInstance = Produs.get(params.id)
         if (!produsInstance) {
@@ -102,6 +107,8 @@ class ProdusController {
         redirect(action: "show", id: produsInstance.id)
     }
 
+
+    @Secured([Roles.ADMINISTRATOR])
     def delete() {
         def produsInstance = Produs.get(params.id)
         if (!produsInstance) {
@@ -121,6 +128,7 @@ class ProdusController {
         }
     }
 
+    @Secured(['IS_AUTHENTICATED_FULLY'])
     def listJSON() {
         response.setStatus HttpServletResponse.SC_OK
         response.setContentType "application/json"
@@ -129,6 +137,5 @@ class ProdusController {
         def result = produsService.productsByCriteria criteria
         render result as JSON
     }
-
 
 }

@@ -1,11 +1,13 @@
 package ro.isi.auth
 
+import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
 /**
  * RoleController
  * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
  */
+@Secured([Roles.ADMINISTRATOR])
 class RoleController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse
  * ComandaController
  * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
  */
+@Secured(['IS_AUTHENTICATED_FULLY'])
 class ComandaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -40,7 +41,7 @@ class ComandaController {
 
         [comandaInstance: comanda, waiters: userService.getWaiters()]
     }
-
+    @Secured([Roles.WAITER])
     def save() {
         def comandaInstance = new Comanda(params)
         comandaInstance.status = ComandaStatus.TAKEN;
@@ -65,7 +66,7 @@ class ComandaController {
 
         [comandaInstance: comandaInstance]
     }
-
+    @Secured([Roles.WAITER])
     def nota() {
         def comandaInstance = Comanda.get(params.id)
 

@@ -1,5 +1,6 @@
 package ro.isi.auth
 
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import org.springframework.security.core.context.SecurityContextHolder as SCH
 
 /**
@@ -9,6 +10,9 @@ import org.springframework.security.core.context.SecurityContextHolder as SCH
 class UserService {
 
     static transactional = true
+
+    def mailService
+    def grailsApplication
 
     def getAuthenticatedUser = {
         return SCH.context?.authentication?.principal
@@ -29,18 +33,45 @@ class UserService {
     }
 
     def getWaiters = {
-        def waiters = []
+        getUsers(Roles.WAITER)
+    }
 
-        for (User user : User.list()){
-            for (Role role : user.authorities){
-                if (role?.authority?.equals(Roles.WAITER)){
-                    waiters.add user
+    def getClients = {
+
+        getUsers(Roles.CLIENT)
+    }
+
+    def getUsers(String authority) {
+        def users = []
+
+        for (User user : User.list()) {
+            for (Role role : user.authorities) {
+                if (role?.authority?.equals(authority)) {
+                    users.add user
                     break;
                 }
             }
-
         }
 
-        waiters
+        users
     }
+
+    def sendEmails(def body, def subiect) {
+
+        for (User user : getClients()) {
+            def text = body
+            if (text.contains('#user')) {
+                text = text.replaceAll("#user", user.username)
+            }
+            def conf = SpringSecurityUtils.securityConfig
+            mailService.sendMail {
+                to user.email
+                from conf.ui.register.emailFrom
+                subject subiect ?: "NewsLetter ${grailsApplication.metadata['app.name']}"
+                html text.toString()
+            }
+        }
+
+    }
+
 }

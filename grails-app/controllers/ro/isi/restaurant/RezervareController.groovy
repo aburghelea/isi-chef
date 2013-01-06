@@ -1,6 +1,9 @@
 package ro.isi.restaurant
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
+
+import javax.servlet.http.HttpServletResponse
 
 /**
  * RezervareController
@@ -9,6 +12,8 @@ import org.springframework.dao.DataIntegrityViolationException
 class RezervareController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+
+    def restaurantService
 
     def index() {
         redirect(action: "list", params: params)
@@ -25,6 +30,8 @@ class RezervareController {
 
     def save() {
         def rezervareInstance = new Rezervare(params)
+        rezervareInstance.startDate = restaurantService.getDate(params,"startDate")
+        rezervareInstance.endDate = restaurantService.getDate(params,"endDate")
         if (!rezervareInstance.save(flush: true)) {
             render(view: "create", model: [rezervareInstance: rezervareInstance])
             return
@@ -103,5 +110,12 @@ class RezervareController {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'rezervare.label', default: 'Rezervare'), params.id])
             redirect(action: "show", id: params.id)
         }
+    }
+
+
+    def getFreeTables(){
+        response.setStatus HttpServletResponse.SC_OK
+        response.setContentType "application/json"
+        render restaurantService.getFreeTables(params) as JSON
     }
 }

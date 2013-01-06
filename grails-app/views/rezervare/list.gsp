@@ -24,8 +24,8 @@
 
             <th><g:message code="rezervare.masa.label" default="Masa"/></th>
 
-            <g:sortableColumn property="tableId"
-                              title="${message(code: 'rezervare.tableId.label', default: 'Table Id')}"/>
+            <g:sortableColumn property="name"
+                              title="${message(code: 'rezervare.name.label', default: 'Name')}"/>
 
         </tr>
         </thead>
@@ -40,7 +40,7 @@
 
                 <td>${fieldValue(bean: rezervareInstance, field: "masa")}</td>
 
-                <td>${fieldValue(bean: rezervareInstance, field: "tableId")}</td>
+                <td>${fieldValue(bean: rezervareInstance, field: "name")}</td>
 
             </tr>
         </g:each>

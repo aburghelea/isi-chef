@@ -1,43 +1,123 @@
-<%@ page import="ro.isi.auth.User" %>
-<!doctype html>
 <html>
+<%@ page import="org.codehaus.groovy.grails.plugins.PluginManagerHolder" %>
+
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="layout" content="kickstart"/>
+    <meta name='layout' content='kickstart'/>
     <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}"/>
-    <title><g:message code="default.edit.label" args="[entityName]" default="Edit ${entityName}"/></title>
+    <title><g:message code="default.edit.label" args="[entityName]"/></title>
 </head>
 
 <body>
 
-<section id="edit-user" class="first">
+<h3><g:message code="default.edit.label" args="[entityName]"/></h3>
 
-    <g:hasErrors bean="${userInstance}">
-        <div class="alert alert-error">
-            <g:renderErrors bean="${userInstance}" as="list"/>
-        </div>
-    </g:hasErrors>
+<g:form action="update" name='userEditForm' class="button-style">
+    <g:hiddenField name="id" value="${user?.id}"/>
+    <g:hiddenField name="version" value="${user?.version}"/>
 
-    <g:form method="post" class="form-horizontal">
-        <g:hiddenField name="id" value="${userInstance?.id}"/>
-        <g:hiddenField name="version" value="${userInstance?.version}"/>
-        <fieldset class="form">
-            <g:render template="form"/>
-        </fieldset>
+    <%
+        def tabData = []
+        tabData << [name: 'userinfo', icon: 'icon_user', messageCode: 'spring.security.ui.user.info']
+        tabData << [name: 'roles', icon: 'icon_role', messageCode: 'spring.security.ui.user.roles']
+        boolean isOpenId = PluginManagerHolder.pluginManager.hasGrailsPlugin('springSecurityOpenid')
+        if (isOpenId) {
+            tabData << [name: 'openIds', icon: 'icon_role', messageCode: 'spring.security.ui.user.openIds']
+        }
+    %>
 
-        <div class="form-actions">
-            <g:actionSubmit class="btn btn-primary" action="update"
-                            value="${message(code: 'default.button.update.label', default: 'Update')}"/>
-            <g:actionSubmit class="btn btn-danger" action="delete"
-                            value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
-            <button class="btn" type="reset"><g:message code="default.button.cancel.label" default="Cancel"/></button>
-        </div>
-    </g:form>
+    <s2ui:tabs elementId='tabs' height='375' data="${tabData}">
 
-</section>
+        <s2ui:tab name='userinfo' height='275'>
+            <table>
+                <tbody>
+
+                <s2ui:textFieldRow name='username' labelCode='user.username.label' bean="${user}"
+                                   labelCodeDefault='Username' value="${user?.username}"/>
+
+                <s2ui:passwordFieldRow name='password' labelCode='user.password.label' bean="${user}"
+                                       labelCodeDefault='Password' value="${user?.password}"/>
+
+                <s2ui:checkboxRow name='enabled' labelCode='user.enabled.label' bean="${user}"
+                                  labelCodeDefault='Enabled' value="${user?.enabled}"/>
+
+                <s2ui:checkboxRow name='accountExpired' labelCode='user.accountExpired.label' bean="${user}"
+                                  labelCodeDefault='Account Expired' value="${user?.accountExpired}"/>
+
+                <s2ui:checkboxRow name='accountLocked' labelCode='user.accountLocked.label' bean="${user}"
+                                  labelCodeDefault='Account Locked' value="${user?.accountLocked}"/>
+
+                <s2ui:checkboxRow name='passwordExpired' labelCode='user.passwordExpired.label' bean="${user}"
+                                  labelCodeDefault='Password Expired' value="${user?.passwordExpired}"/>
+                </tbody>
+            </table>
+        </s2ui:tab>
+
+        <s2ui:tab name='roles' height='275'>
+            <g:each var="entry" in="${roleMap}">
+                <div>
+                    <g:checkBox name="${entry.key.authority}" value="${entry.value}"/>
+                    <g:link controller='role' action='edit'
+                            id='${entry.key.id}'>${entry.key.authority.encodeAsHTML()}</g:link>
+                </div>
+            </g:each>
+        </s2ui:tab>
+
+        <g:if test='${isOpenId}'>
+            <s2ui:tab name='openIds' height='275'>
+                <g:if test='${user?.openIds}'>
+                    <ul>
+                        <g:each var="openId" in="${user.openIds}">
+                            <li>${openId.url}</li>
+                        </g:each>
+                    </ul>
+                </g:if>
+                <g:else>
+                    No OpenIDs registered
+                </g:else>
+            </s2ui:tab>
+        </g:if>
+
+    </s2ui:tabs>
+
+    <div class="form-actions">
+        <s2ui:submitButton elementId='update' class='btn btn-primary' form='userEditForm' messageCode='default.button.update.label'/>
+
+        <g:if test='${user}'>
+            <s2ui:deleteButton class='btn btn-danger'/>
+        </g:if>
+
+        <g:if test='${canRunAs}'>
+            <a id="runAsButton">${message(code: 'spring.security.ui.runas.submit')}</a>
+        </g:if>
+
+    </div>
+
+</g:form>
+
+<g:if test='${user}'>
+    <s2ui:deleteButtonForm instanceId='${user.id}'/>
+</g:if>
+
+<g:if test='${canRunAs}'>
+    <form name='runAsForm' action='${request.contextPath}/j_spring_security_switch_user' method='POST'>
+        <g:hiddenField name='j_username' value="${user.username}"/>
+        <input type='submit' class='s2ui_hidden_button'/>
+    </form>
+</g:if>
+
+<script>
+    $(document).ready(function () {
+        $('#username').focus();
+
+        <s2ui:initCheckboxes/>
+
+        $("#runAsButton").button();
+        $('#runAsButton').bind('click', function () {
+            document.forms.runAsForm.submit();
+        });
+    });
+</script>
 
 </body>
-
 </html>

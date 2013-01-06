@@ -25,7 +25,7 @@ Salut  $user.username,<br/>
 <br/>
 Tu (sau cineva pretinzand ca esti tu) a creat un cont cu acest email.<br/>
 <br/>
-Daca nu tu ai facut aceasta solicitare te rugam sa ignori acest mesaj; nu a fost facuta nici p modificare.<br/>
+Daca nu tu ai facut aceasta solicitare te rugam sa ignori acest mesaj; nu a fost facuta nici o modificare.<br/>
 <br>
 Daca vrei sa creezi contul, atunci apasa <a href="$url">aici</a>
 '''

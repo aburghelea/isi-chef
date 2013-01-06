@@ -34,6 +34,24 @@
     </div>
 </section>
 
+<div style="clear:both"/>
+%{--<section  style="padding-top: 0">--}%
+    <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    %{--<div class="pic1" style="float:left; margin-left:20px; margin-bottom:80px;">--}%
+        <div class="fb-comments" data-href="http://isi.arr.com" data-width="600" data-num-posts="4"
+             data-colorscheme="light"></div>
+    %{--</div>--}%
+%{--</section>--}%
+
 </body>
 
 </html>

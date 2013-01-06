@@ -56,6 +56,24 @@ class BootStrap {
         if (!waiterUser.authorities.contains(waiterRole)) {
             UserRole.create waiterUser, waiterRole, true
         }
+
+        def iceman = User.findByUsername('iceman') ?: new User(
+                username: 'iceman',
+                password: 'iceman',
+                email:  'iceman.ftg@gmail.com',
+                enabled: true).save(failOnError: true)
+        def cougar = User.findByUsername('cougar') ?: new User(
+                username: 'cougar',
+                password: 'cougar',
+                email:  'cougar_ftg@yahoo.com',
+                enabled: true).save(failOnError: true)
+
+        if (!iceman.authorities.contains(client)) {
+            UserRole.create iceman, client, true
+        }
+        if (!cougar.authorities.contains(client)) {
+            UserRole.create cougar, client, true
+        }
     }
 
     private def bootStrapProducts = {

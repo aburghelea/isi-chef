@@ -16,11 +16,13 @@
         <thead>
         <tr>
 
-            <th><g:message code="comanda.cook.label" default="Cook"/></th>
+            <th><g:message code="comanda.label" default="Order"/></th>
 
             <th><g:message code="comanda.masa.label" default="Masa"/></th>
 
             <th><g:message code="comanda.waiter.label" default="Waiter"/></th>
+
+            <th><g:message code="comanda.cook.label" default="Cook"/></th>
 
             <th><g:message code="comanda.operations.label" default="Operations"/></th>
 
@@ -29,16 +31,21 @@
         <tbody>
         <g:each in="${comandaInstanceList}" status="i" var="comandaInstance">
             <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                <td>
+                    <g:link controller="comanda" action="show" id="${comandaInstance.id}">
+                        ${comandaInstance.id}
+                    </g:link>
+                </td>
+                <td>${fieldValue(bean: comandaInstance, field: "masa.number")}</td>
 
-                <td>${fieldValue(bean: comandaInstance, field: "cook")}</td>
+                <td>${fieldValue(bean: comandaInstance, field: "waiter.username")}</td>
 
-                <td>${fieldValue(bean: comandaInstance, field: "masa")}</td>
+                <td>${fieldValue(bean: comandaInstance, field: "cook.username")}</td>
 
-                <td>${fieldValue(bean: comandaInstance, field: "waiter")}</td>
                 <td>
                     <div class="left">
                         <g:link class="btn btn-small btn-info" action="show" id="${comandaInstance.id}">
-                            ${message(code: 'comada.operations.show', default: 'Show')}
+                            ${message(code: 'default.button.show.label', default: 'Show')}
                         </g:link>
                     </div>
                     <g:if test="${drinks == true}">
@@ -46,7 +53,7 @@
                             <g:form controller="comanda" action="deliverDrink" style="margin: 0px">
                                 <input type="hidden" name="orderId" value="${comandaInstance.id}">
                                 <g:submitButton name="submit" class="btn btn-small btn-inverse"
-                                                value="${message(code: 'comada.operations.deliverDrink', default: 'Deliver drink')}"/>
+                                                value="${message(code: 'comanda.drinks.label', default: 'Deliver drink')}"/>
 
                             </g:form>
                         </div>

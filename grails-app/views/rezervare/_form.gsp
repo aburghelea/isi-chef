@@ -7,7 +7,7 @@
                                                             default="Start Date"/></label>
 
     <div class="controls">
-        <bs:datePicker name="startDate" precision="day" value="${rezervareInstance?.startDate}" default="none"
+        <g:datePicker name="startDate" precision="minute" value="${rezervareInstance?.startDate}" default="none"
                        noSelection="['': '']"/>
         <span class="help-inline">${hasErrors(bean: rezervareInstance, field: 'startDate', 'error')}</span>
     </div>

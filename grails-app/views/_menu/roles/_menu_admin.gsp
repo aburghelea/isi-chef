@@ -1,6 +1,6 @@
-<div style="color: #e32556">
-    EU SUNT ALPHA SI OMEGA
-</div>
+%{--<div style="color: #e32556">--}%
+    %{--EU SUNT ALPHA SI OMEGA--}%
+%{--</div>--}%
 %{--<g:each status="i" var="c" in="${grailsApplication.controllerClasses.sort { it.logicalPropertyName }}">--}%
 %{--<li class="controller${params.controller == c.logicalPropertyName ? " active" : ""}">--}%
 %{--<g:link controller="${c.logicalPropertyName}" action="index">--}%

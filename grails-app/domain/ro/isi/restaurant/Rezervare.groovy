@@ -1,8 +1,5 @@
 package ro.isi.restaurant
 
-import org.apache.commons.lang.builder.EqualsBuilder
-import org.apache.commons.lang.builder.HashCodeBuilder
-
 class Rezervare implements Serializable {
 
     Long id
@@ -20,7 +17,7 @@ class Rezervare implements Serializable {
     static constraints = {
         startDate nullable: true, maxSize: 19
         endDate nullable: true, maxSize: 19, validator: { val, obj ->
-            if (val <= obj.startDate) return ['end.is.smaller']
+            if (!(obj.endDate > obj.startDate)) return ['end.is.smaller']
         }
     }
 }

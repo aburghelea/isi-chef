@@ -21,6 +21,19 @@ class RezervareController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        def list = Rezervare.createCriteria().list(params) {
+               gt "startDate", Calendar.getInstance().getTime().toTimestamp()
+        }
+        def count = Rezervare.createCriteria().count() {
+
+                gt "startDate", Calendar.getInstance().getTime().toTimestamp()
+
+        }
+        [rezervareInstanceList: list, rezervareInstanceTotal: count]
+    }
+
+    def list_original() {
+        params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [rezervareInstanceList: Rezervare.list(params), rezervareInstanceTotal: Rezervare.count()]
     }
 

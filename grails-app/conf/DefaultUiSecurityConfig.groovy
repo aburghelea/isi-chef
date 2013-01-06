@@ -13,14 +13,15 @@
  * limitations under the License.
  */
 security {
-	ui {
-		register {
-			emailBody = '''\
+    ui {
+        register {
+            emailBody = '''\
 Hi $user.username,<br/>
 <br/>
 You (or someone pretending to be you) created an account with this email address.<br/>
 <br/>
 If you made the request, please click&nbsp;<a href="$url">here</a> to finish the registration.
+<br/><hr/><br/>
 Salut  $user.username,<br/>
 <br/>
 Tu (sau cineva pretinzand ca esti tu) a creat un cont cu acest email.<br/>
@@ -29,14 +30,14 @@ Daca nu tu ai facut aceasta solicitare te rugam sa ignori acest mesaj; nu a fost
 <br>
 Daca vrei sa creezi contul, atunci apasa <a href="$url">aici</a>
 '''
-			emailFrom = 'do.not.reply@localhost'
-			emailSubject = 'New Client/Client nou'
-			defaultRoleNames = ['ROLE_CLIENT']
-			postRegisterUrl = null // use defaultTargetUrl if not set
-		}
+            emailFrom = 'do.not.reply@localhost'
+            emailSubject = 'New Client/Client nou'
+            defaultRoleNames = ['ROLE_CLIENT']
+            postRegisterUrl = null // use defaultTargetUrl if not set
+        }
 
-		forgotPassword {
-			emailBody = '''\
+        forgotPassword {
+            emailBody = '''\
 Hi $user.username,<br/>
 <br/>
 You (or someone pretending to be you) requested that your password be reset.<br/>
@@ -54,9 +55,9 @@ Daca nu tu ai facut aceasta solicitare te rugam sa ignori acest mesaj; nu a fost
 Daca vrei sa resetezi parola, atunci apasa <a href="$url">aici</a>
 
 '''
-			emailFrom = 'do.not.reply@localhost'
-			emailSubject = 'Password Reset/Resetare parola'
-			postResetUrl = null // use defaultTargetUrl if not set
-		}
-	}
+            emailFrom = 'do.not.reply@localhost'
+            emailSubject = 'Password Reset/Resetare parola'
+            postResetUrl = null // use defaultTargetUrl if not set
+        }
+    }
 }

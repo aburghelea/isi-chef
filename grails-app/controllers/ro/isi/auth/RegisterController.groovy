@@ -80,7 +80,7 @@ class RegisterController extends grails.plugins.springsecurity.ui.RegisterContro
             return
         }
 
-        springSecurityService.reauthenticate user.username
+//        springSecurityService.reauthenticate user.username
 
         flash.message = message(code: 'spring.security.ui.register.complete')
         redirect uri: conf.ui.register.postRegisterUrl ?: defaultTargetUrl

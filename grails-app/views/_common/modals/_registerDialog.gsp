@@ -60,7 +60,7 @@
     </g:formRemote>
 </div>
 
-<r:script>
+<script>
     $(document).ready(function () {
         $('#register_form').validate({
             rules: {
@@ -71,20 +71,19 @@
                     email: true,
                     required: true
                 }
-            },
-            highlight: function (label) {
-                $(label).closest('.control-group').addClass('alert alert-error');
-            },
-            success: function (label) {
-                label.addClass('valid').closest('.control-group').addClass('successClass');
             }
         });
     });
 
 
     function hide() {
-        $('#RegisterModal').modal('hide');
+        $(':input', '#register_form')
+                .not(':button, :submit, :reset, :hidden')
+                .val('')
+                .removeAttr('checked')
+                .removeAttr('selected');
+                $('#RegisterModal').modal('hide');
     }
 
-</r:script>
+</script>
 

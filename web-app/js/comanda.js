@@ -79,6 +79,9 @@ var buildOrdersKendoGrid = function (container, dataSource, prepared) {
         },
         columns: [
             {
+               field: 'id', filterable:true, title: "Comanda" , template:"#= comandaShowTemplate(id) #"
+            },
+            {
                 field: 'waiter', filterable: false, title: "Waiter"
             },
             {
@@ -227,6 +230,12 @@ var updateFormParameters = function () {
 var orderProductTemplate = function (prepared) {
     return prepared == false ? "#= assignOrderTemplate(id) #" : "#= deliverOrderTemplate(id) #";
 };
+
+function comandaShowTemplate(id) {
+    var $link = $('<a></a>').attr('href', showUrl+"/"+id).html(id);
+    console.log($link);
+    return $('<div></div>').append($link).html();
+}
 //noinspection JSUnusedGlobalSymbols
 var assignOrderTemplate = function (comandaId) {
     return orderFormTemplate(comandaId, assignUrl);

@@ -17,7 +17,7 @@
         </li>
         <li>
             <sec:ifAllGranted roles="${Roles.WAITER}">
-                <g:link controller="comanda" action="list" params="[drinks: true, sort: 'dateCreated', order: 'desc']">
+                <g:link controller="comanda" action="list" params="[drinks: true, sort: 'dateCreated', order: 'asc']">
                     <g:message code="drinks.label" default="Drinks"/>:
                     <span id="drinksIndicator" class="badge badge-success"></span>
                 </g:link>

@@ -1,7 +1,7 @@
 <div class="modal hide" id="RegisterModal">
     <g:formRemote novalidate="novalidate" class="form-horizontal" method="post" id="register_form" name="register_form"
                   url="[controller: 'register', action: 'registerr']"
-                  onSuccess="alert('success')" onComplete="alert('complete')">
+                  onComplete="hide()">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">x</button>
 
@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <div class="control-group">
+            <div class="hidden control-group">
                 <label class="control-label"
                        for="password"><g:message code="security.password.label" default="Password"/></label>
 
@@ -39,62 +39,51 @@
                 </div>
             </div>
 
-            <div class="control-group">
+            <div class="hidden control-group">
                 <label class="control-label"
-                       for="password2"><g:message code="security.password.confirm.label" default="Confirm"/></label>
+                       for="password2">
+                    <g:message code="security.password.confirm.label" default="Confirm"/>
+                </label>
 
                 <div class="controls">
                     <input type="password" class="span3" name="password2" id="password2"
                            placeholder="${message(code: 'security.password.confirm.label', default: 'Confirm')}">
                 </div>
             </div>
-            %{--<div class="control-group">--}%
-            %{--<%--			<label class="control-label" for="agreement"><g:message code="security.agreement.label" default="I have read and agree with the Terms of Use."/></label>--%>--}%
-            %{--<div class="controls">--}%
-            %{--<label class="checkbox" for="agreement">--}%
-            %{--<input type="checkbox" value="" name="agreement" id="agreement" >--}%
-            %{--<g:message code="security.agreement.label" default="I have read and agree with the Terms of Use."/>--}%
-            %{--</label>--}%
-            %{--</div>--}%
-            %{--</div>--}%
         </div>
 
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary"><g:message code="security.register.label"
-                                                                     default="Register"/></button>
-            <g:submitToRemote class="btn btn-primary"><g:message code="security.register.label"
-                                                                 default="Register"/></g:submitToRemote>
+            <button type="submit" class="btn btn-primary">
+                <g:message code="security.register.label" default="Register"/>
+            </button>
         </div>
     </g:formRemote>
 </div>
 
-<r:script>
+<script>
     $(document).ready(function () {
         $('#register_form').validate({
             rules: {
                 username: {
-                    required: true,
-                    minSize: 5
+                    required: true
                 },
                 email: {
                     email: true,
                     required: true
-                },
-                password: {
-                    required: true
-                },
-                password2: {
-                    required: true
-
                 }
-            },
-            highlight: function (label) {
-                $(label).closest('.control-group').addClass('alert alert-error');
-            },
-            success: function (label) {
-                label.addClass('valid').closest('.control-group').addClass('successClass');
             }
         });
     });
-</r:script>
+
+
+    function hide() {
+        $(':input', '#register_form')
+                .not(':button, :submit, :reset, :hidden')
+                .val('')
+                .removeAttr('checked')
+                .removeAttr('selected');
+                $('#RegisterModal').modal('hide');
+    }
+
+</script>
 

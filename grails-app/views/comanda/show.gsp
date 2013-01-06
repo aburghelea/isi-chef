@@ -12,6 +12,12 @@
 <body>
 <g:render template="show" model="[comandaInstance: comandaInstance]"/>
 
+<div class="form-actions">
+    <g:link class="btn btn-small btn-warning" action="nota" id="${comandaInstance.id}">
+        ${message(code: 'nota.label', default: 'Nota')}
+    </g:link>
+</div>
+
 </body>
 
 </html>

@@ -18,6 +18,7 @@
     <g:javascript src="comanda.js"/>
     <script>
         var assignUrl = "${createLink(controller: 'comanda', action: 'assignOrder')}";
+        var showUrl = "${createLink(controller: 'comanda', action: 'show')}";
         var deliverUrl = "${createLink(controller: 'comanda', action: 'deliver')}";
         $(document).ready(function () {
             var preparedOrders = buildDataSource("${createLink(controller: 'comanda', action: 'listPreparedOrdersAsJson')}");

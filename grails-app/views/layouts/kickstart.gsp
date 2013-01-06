@@ -43,6 +43,7 @@
     </g:else>
 
     <r:require modules="kendo-ui, kendo-bootstrap"/>
+    <r:require module="spring-security-ui"/>
     <r:layoutResources/>
     <g:layoutHead/>
 

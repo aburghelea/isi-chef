@@ -28,6 +28,7 @@ class BootStrap {
         def cookRole = Role.findByAuthority(Roles.COOK) ?: new Role(authority: Roles.COOK).save(failOnError: true)
         def waiterRole = Role.findByAuthority(Roles.WAITER) ?: new Role(authority: Roles.WAITER).save(failOnError: true)
         def adminRole = Role.findByAuthority(Roles.ADMINISTRATOR) ?: new Role(authority: Roles.ADMINISTRATOR).save(failOnError: true)
+        def client = Role.findByAuthority(Roles.CLIENT) ?: new Role(authority: Roles.CLIENT).save(failOnError: true)
 
         def adminUser = User.findByUsername('admin') ?: new User(
                 username: 'admin',
@@ -55,6 +56,24 @@ class BootStrap {
         if (!waiterUser.authorities.contains(waiterRole)) {
             UserRole.create waiterUser, waiterRole, true
         }
+
+        def iceman = User.findByUsername('iceman') ?: new User(
+                username: 'iceman',
+                password: 'iceman',
+                email:  'iceman.ftg@gmail.com',
+                enabled: true).save(failOnError: true)
+        def cougar = User.findByUsername('cougar') ?: new User(
+                username: 'cougar',
+                password: 'cougar',
+                email:  'cougar_ftg@yahoo.com',
+                enabled: true).save(failOnError: true)
+
+//        if (!iceman.authorities.contains(client)) {
+//            UserRole.create iceman, client, true
+//        }
+//        if (!cougar.authorities.contains(client)) {
+//            UserRole.create cougar, client, true
+//        }
     }
 
     private def bootStrapProducts = {

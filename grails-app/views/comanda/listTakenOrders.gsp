@@ -18,6 +18,7 @@
 
     <script>
         var assignUrl = "${createLink(controller: 'comanda', action: 'assignOrder')}";
+        var showUrl = "${createLink(controller: 'comanda', action: 'show')}";
         $(document).ready(function () {
             var takenComandsDataSource = buildDataSource("${createLink(controller: 'comanda', action: 'listTakenOrdersAsJson')}");
             buildOrdersKendoGrid($("#products"), takenComandsDataSource, false);

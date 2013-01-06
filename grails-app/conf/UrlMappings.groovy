@@ -2,10 +2,6 @@ class UrlMappings {
 
     static mappings = {
 
-        /*
-         * Pages without controller
-         */
-//		"/"				(view:"/index")
 
         "/blog"(view: "/siteinfo/blog")
         "/systeminfo"(view: "/siteinfo/systeminfo")
@@ -24,8 +20,8 @@ class UrlMappings {
         "/login/$action?"(controller: "login")
         "/logout/$action?"(controller: "logout")
 
-        "/about"(controller: 'default', action: 'about')
-        "/contact"(controller: 'default', action: 'contact')
+        "/about"(controller: 'home', action: 'about')
+        "/contact"(controller: 'home', action: 'contact')
         "/$controller/$action?/$id?" {
             constraints {
                 controller(matches: /^((?!(api|mobile|web)).*)$/)

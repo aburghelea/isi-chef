@@ -9,4 +9,13 @@ class HomeController {
         render(view:"index")
     }
 
+    def about = {
+
+        render view: "/siteinfo/about"
+    }
+
+    def contact = {
+
+        render view: "/siteinfo/contact"
+    }
 }

@@ -47,7 +47,7 @@ class ComandaController {
         def comandaInstance = new Comanda(params)
         comandaInstance.status = ComandaStatus.TAKEN;
 
-        if (!comandaInstance.save(flush: true)) {
+        if (!comandaService.save(comandaInstance)) {
             comandaService.decrementStoks(comandaInstance)
             render(view: "create", model: [comandaInstance: comandaInstance])
             return
@@ -134,7 +134,7 @@ class ComandaController {
 
         comandaInstance.properties = params
 
-        if (!comandaInstance.save(flush: true)) {
+        if (!comandaService.save(comandaInstance)) {
             render(view: "edit", model: [comandaInstance: comandaInstance])
             return
         }

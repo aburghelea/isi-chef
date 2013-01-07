@@ -1,8 +1,4 @@
-%{--<div style="color: #504c23"><strong>--}%
-    %{--EU SUNT KKT--}%
-%{--</strong></div>--}%
-
-<li class="controller${params.controller == 'reservation' ? " active" : ""}">
+<li class="controller${params.controller == 'rezervare' ? " active" : ""}">
     <g:link controller='rezervare' action="create">
         <g:message code="rezervare.label" default="Rezervare"/>
     </g:link>

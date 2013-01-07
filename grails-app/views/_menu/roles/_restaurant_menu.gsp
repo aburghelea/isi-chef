@@ -1,5 +1,10 @@
 <%@ page import="ro.isi.auth.Roles" %>
 
+<li class="controller${params.controller == 'home' ? " active" : ""}">
+    <g:link controller='home' action="index">
+        <g:message code="default.home.label" default="${'Home'}"/>
+    </g:link>
+</li>
 <sec:ifAllGranted roles="${Roles.ADMINISTRATOR}">
     <g:render template="/_menu/roles/menu_admin"/>
 </sec:ifAllGranted>

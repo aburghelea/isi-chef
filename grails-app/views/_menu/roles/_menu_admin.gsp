@@ -15,6 +15,12 @@
     </g:link>
 </li>
 
+<li class="controller${params.controller == 'masa' ? " active" : ""}">
+    <g:link controller='masa' action="index">
+        <g:message code="masa.label" default="${'masa'.capitalize()}"/>
+    </g:link>
+</li>
+
 
 <li class="controller${params.controller == 'user' && params.action != 'emailClients' ? " active" : ""}">
     <g:link controller='user' action="index">

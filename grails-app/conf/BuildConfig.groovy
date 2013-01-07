@@ -1,4 +1,4 @@
-grails.servlet.version = "2.5" // Change depending on target container compliance (2.5 or 3.0)
+fgrails.servlet.version = "2.5" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
@@ -35,6 +35,7 @@ grails.project.dependency.resolution = {
         compile 'org.grails.plugins:webxml:1.4.1'
         runtime 'postgresql:postgresql:9.1-901-1.jdbc4'
         compile "org.grails.plugins:kendo-ui:1.0.0"
+        compile "org.grails.plugins:joda-time:1.4"
     }
 
     plugins {

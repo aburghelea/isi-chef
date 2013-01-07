@@ -20,28 +20,28 @@
             <td valign="top" class="name"><g:message code="rezervare.startDate.label" default="Start Date"/></td>
 
             <td valign="top" class="value"><g:formatDate date="${rezervareInstance?.startDate}"/></td>
-
         </tr>
 
         <tr class="prop">
             <td valign="top" class="name"><g:message code="rezervare.endDate.label" default="End Date"/></td>
 
             <td valign="top" class="value"><g:formatDate date="${rezervareInstance?.endDate}"/></td>
-
         </tr>
 
         <tr class="prop">
             <td valign="top" class="name"><g:message code="rezervare.masa.label" default="Masa"/></td>
 
-            <td valign="top" class="value"><g:link controller="masa" action="show"
-                                                   id="${rezervareInstance?.masa?.id}">${rezervareInstance?.masa?.encodeAsHTML()}</g:link></td>
-
+            <td valign="top" class="value">
+                <g:link controller="masa" action="show" id="${rezervareInstance?.masa?.id}">
+                    ${rezervareInstance?.masa?.description}
+                </g:link>
+            </td>
         </tr>
 
         <tr class="prop">
-            <td valign="top" class="name"><g:message code="rezervare.tableId.label" default="Table Id"/></td>
+            <td valign="top" class="name"><g:message code="rezervare.name.label" default="name"/></td>
 
-            <td valign="top" class="value">${fieldValue(bean: rezervareInstance, field: "tableId")}</td>
+            <td valign="top" class="value">${fieldValue(bean: rezervareInstance, field: "name")}</td>
 
         </tr>
 

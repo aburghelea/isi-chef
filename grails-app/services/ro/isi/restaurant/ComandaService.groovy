@@ -13,8 +13,6 @@ class ComandaService {
     def userService
     def produsService
 
-
-
     def getAuthenticatedCook = {
         def waiter = userService.getAuthenticatedUser()
         def user = null;

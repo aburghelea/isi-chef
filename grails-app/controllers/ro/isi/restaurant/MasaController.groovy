@@ -1,11 +1,14 @@
 package ro.isi.restaurant
 
+import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
+import ro.isi.auth.Roles
 
 /**
  * MasaController
  * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
  */
+@Secured([Roles.ADMINISTRATOR])
 class MasaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -33,7 +36,7 @@ class MasaController {
         flash.message = message(code: 'default.created.message', args: [message(code: 'masa.label', default: 'Masa'), masaInstance.id])
         redirect(action: "show", id: masaInstance.id)
     }
-
+    @Secured(['IS_AUTHENTICATED_A'])
     def show() {
         def masaInstance = Masa.get(params.id)
         if (!masaInstance) {

@@ -41,6 +41,7 @@ class ComandaController {
 
         [comandaInstance: comanda, waiters: userService.getWaiters()]
     }
+
     @Secured([Roles.WAITER])
     def save() {
         def comandaInstance = new Comanda(params)
@@ -66,6 +67,7 @@ class ComandaController {
 
         [comandaInstance: comandaInstance]
     }
+
     @Secured([Roles.WAITER])
     def nota() {
         def comandaInstance = Comanda.get(params.id)
@@ -81,7 +83,7 @@ class ComandaController {
         [comandaInstance: comandaInstance, produsesQuantityMap: produsesQuantityMap]
     }
 
-
+    @Secured([Roles.WAITER])
     def notaPdf() {
         def comandaInstance = Comanda.get(params.id)
 
@@ -98,6 +100,7 @@ class ComandaController {
                 filename: name + "pdf")
     }
 
+    @Secured([Roles.WAITER])
     def edit() {
         def comandaInstance = Comanda.get(params.id)
         if (!comandaInstance) {
@@ -109,6 +112,7 @@ class ComandaController {
         [comandaInstance: comandaInstance, waiters: userService.getWaiters()]
     }
 
+    @Secured([Roles.WAITER])
     def update() {
         def comandaInstance = Comanda.get(params.id)
         if (!comandaInstance) {
@@ -139,6 +143,7 @@ class ComandaController {
         redirect(action: "show", id: comandaInstance.id)
     }
 
+    @Secured([Roles.ADMINISTRATOR])
     def delete() {
         def comandaInstance = Comanda.get(params.id)
         if (!comandaInstance) {
@@ -168,20 +173,21 @@ class ComandaController {
 
     }
 
+    @Secured([Roles.COOK])
     def takenOrdersCount = {
         def takenOrders = comandaService.getTakenOrdersCount();
 
         response.setStatus HttpServletResponse.SC_OK
         render takenOrders
     }
-
+    @Secured([Roles.WAITER])
     def preparedOrdersCount = {
         def preparedOrders = comandaService.getPreparedOrdersCount();
 
         response.setStatus HttpServletResponse.SC_OK
         render preparedOrders
     }
-
+    @Secured([Roles.WAITER])
     def unservedDrinksCount = {
         def preparedOrders = comandaService.getUnservedDrinksCount();
 
@@ -189,6 +195,7 @@ class ComandaController {
         render preparedOrders
     }
 
+    @Secured([Roles.COOK])
     def listTakenOrdersAsJson() {
         response.setStatus HttpServletResponse.SC_OK
         response.setContentType "application/json"
@@ -196,6 +203,7 @@ class ComandaController {
         render comandaService.getTakenOrders() as JSON
     }
 
+    @Secured([Roles.COOK])
     def assignOrder() {
 
         def alreadyAssignedCommand = comandaService.assignOrder params.orderId
@@ -204,6 +212,7 @@ class ComandaController {
         redirect action: 'listTakenOrders', params: params
     }
 
+    @Secured([Roles.COOK])
     def markAsPrepared() {
         comandaService.markAsPrepared params.id
 
@@ -211,7 +220,7 @@ class ComandaController {
         redirect action: "listTakenOrders"
     }
 
-
+    @Secured([Roles.WAITER])
     def listPreparedOrdersAsJson() {
         response.setStatus HttpServletResponse.SC_OK
         response.setContentType "application/json"
@@ -219,6 +228,7 @@ class ComandaController {
         render comandaService.getPreparedOrders() as JSON
     }
 
+    @Secured([Roles.WAITER])
     def deliver() {
 
         def delivered = comandaService.deliverOrder params.orderId
@@ -229,6 +239,7 @@ class ComandaController {
         redirect action: 'listPreparedOrders', params: params
     }
 
+    @Secured([Roles.WAITER])
     def deliverDrink() {
         def delivered = comandaService.deliverDrink params.orderId
 

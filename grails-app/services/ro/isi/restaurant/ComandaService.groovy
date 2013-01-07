@@ -155,4 +155,16 @@ class ComandaService {
         }
         produsesQuantityMap
     }
+
+    def save(Comanda comanda){
+        def hasDrinks = false;
+        for (Produs produs : comanda.produses){
+            if (produs.type?.contains('rink')){
+                hasDrinks = true;
+            }
+        }
+
+        comanda.drinksServerd = !hasDrinks
+        comanda.save(failOnError: true, flush: true)
+    }
 }

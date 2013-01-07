@@ -17,7 +17,7 @@ class BootStrap {
         bootStrapUsers()
         bootStrapProducts()
         bootStrapTables();
-        bootStrapOrders();
+//        bootStrapOrders();
     }
 
     def destroy = {

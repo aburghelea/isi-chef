@@ -5,18 +5,7 @@
                 <h4><g:message code="default.product.label" default="Product"/></h4>
                 <ul class="unstyled">
                     <li>
-                        <a href="${createLink(uri: '/')}"><g:message code="default.home.label" default="Home"/></a>
-                    </li>
-                    <li>
-                        <a href="${createLink(uri: '/')}"><g:message code="default.tour.label"
-                                                                     default="Feature Tour"/></a>
-                    </li>
-                    <li>
-                        <a href="${createLink(uri: '/')}"><g:message code="default.pricing.label"
-                                                                     default="Pricing"/></a>
-                    </li>
-                    <li>
-                        <a href="${createLink(uri: '/')}"><g:message code="default.faq.label" default="FAQ"/></a>
+                        <a href="${createLink(uri: '/credits')}"><g:message code="default.credits.label" default="Credits"/></a>
                     </li>
                 </ul>
             </div>

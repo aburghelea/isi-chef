@@ -9,6 +9,9 @@ class HomeController {
         render(view:"index")
     }
 
+    def credits = {
+    }
+
     def about = {
 
         render view: "/siteinfo/about"

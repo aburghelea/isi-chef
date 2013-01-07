@@ -21,6 +21,7 @@ class UrlMappings {
         "/logout/$action?"(controller: "logout")
 
         "/about"(controller: 'home', action: 'about')
+        "/credits"(controller: 'home', action: 'credits')
         "/contact"(controller: 'home', action: 'contact')
         "/$controller/$action?/$id?" {
             constraints {

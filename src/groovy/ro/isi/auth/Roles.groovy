@@ -11,6 +11,7 @@ public interface Roles {
     public static final def COOK = "ROLE_COOK"
     public static final def ADMINISTRATOR = "ROLE_ADMIN"
     public static final def CLIENT = "ROLE_CLIENT"
+    public static final def SUPER = "ROLE_SUPER"
 
 
 }

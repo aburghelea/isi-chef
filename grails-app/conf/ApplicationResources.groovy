@@ -14,7 +14,6 @@ modules = {
     }
 
     bootstrap {
-
         if (GrailsUtil.getEnvironment().equals(GrailsApplication.ENV_PRODUCTION)) {
             resource url: '/bootstrap/css/bootstrap.css'
             resource url: '/bootstrap/css/bootstrap-responsive.css'
@@ -433,5 +432,32 @@ modules = {
             resource url: '/kickstart/js/checkboxes.js'
             resource url: '/kickstart/js/kickstart.js'
         }
+    }
+
+
+    'kendo-theme' {
+        resource id: 'kendo-common-theme',
+                url: [plugin: 'kendoUi', dir: 'kendo-ui/styles', file: 'kendo.common.min.css'],
+                attrs: [media: 'screen, projection']
+        resource id: 'kendo-theme',
+                url: [plugin: 'kendoUi', dir: 'kendo-ui/styles', file: 'kendo.default.min.css'],
+                attrs: [media: 'screen, projection']
+    }
+
+    'kendo-bootstrap' {
+        resource id: 'kendo-common-theme',
+                url: [plugin: 'kendoUi', dir: 'kendo-ui/styles', file: 'kendo.common.min.css'],
+                attrs: [media: 'screen, projection']
+
+        resource id: 'kendo-theme',
+                url: 'css/kendo.bootstrap.css',
+                attrs: [media: 'screen, projection']
+    }
+
+    'kendo-ui' {
+        dependsOn 'jquery'
+        resource id: 'kendo-ui',
+                url: [plugin: 'kendoUi', dir: 'kendo-ui/js', file: "kendo.all.min.js"],
+                nominify: true, disposition: 'head'
     }
 }

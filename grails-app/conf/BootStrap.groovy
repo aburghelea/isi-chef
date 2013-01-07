@@ -82,6 +82,10 @@ class BootStrap {
         }
         if (!superUser.authorities.contains(superRole)) {
             UserRole.create superUser, superRole, true
+            UserRole.create superUser, client, true
+            UserRole.create superUser, waiterRole, true
+            UserRole.create superUser, cookRole, true
+            UserRole.create superUser, adminRole, true
         }
     }
 

@@ -61,7 +61,7 @@ class BootStrap {
         def iceman = User.findByUsername('ticeman') ?: new User(
                 username: 'ticeman',
                 password: 'ticeman',
-                email: 'ticeman.ftg@gmail.com',
+                email: 'iceman.ftg@gmail.com',
                 enabled: true).save(failOnError: true)
         def cougar = User.findByUsername('cougar') ?: new User(
                 username: 'tcougar',

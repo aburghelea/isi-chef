@@ -64,11 +64,15 @@ class UserService {
                 text = text.replaceAll("#user", user.username)
             }
             def conf = SpringSecurityUtils.securityConfig
-            mailService.sendMail {
-                to user.email
-                from conf.ui.register.emailFrom
-                subject subiect ?: "NewsLetter ${grailsApplication.metadata['app.name']}"
-                html text.toString()
+            try {
+                mailService.sendMail {
+                    to user.email
+                    from conf.ui.register.emailFrom
+                    subject subiect ?: "NewsLetter ${grailsApplication.metadata['app.name']}"
+                    html text.toString()
+                }
+            } catch(Exception ignore) {
+
             }
         }
 

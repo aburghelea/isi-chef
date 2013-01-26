@@ -1,6 +1,6 @@
 <%@ page import="ro.isi.auth.Roles" %>
 
-<li class="controller${params.controller == 'home' ? " active" : ""}">
+<li class="controller${params.controller == 'home' && (params.action == '' || params.action == 'index') ? " active" : ""}">
     <g:link controller='home' action="index">
         <g:message code="default.home.label" default="${'Home'}"/>
     </g:link>
